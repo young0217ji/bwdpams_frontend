@@ -1,0 +1,1 @@
+<!DOCTYPE cross-domain-policy  SYSTEM "http://www.macromedia.com/xml/dtds/cross-domain-policy.dtd"><cross-domain-policy><allow-access-from domain="*" /><allow-access-from domain="http://172.31.15.7:8580/UBIFORM/" /><site-control permitted-cross-domain-policies="all"/></cross-domain-policy>
