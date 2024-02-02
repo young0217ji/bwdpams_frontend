@@ -91,10 +91,10 @@
         <AlertPop ref="alertPop" :is="'alertPop'" />
         <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
         <WindowPop ref="windowPop" :formName="'Education'"></WindowPop>
-        <SelectEquipmentModal ref="SelectEquipmentModal" v-if="SelectEquipmentModalVisible"
+        <!-- <SelectEquipmentModal ref="SelectEquipmentModal" v-if="SelectEquipmentModalVisible"
             :visibleDialog="SelectEquipmentModalVisible" :title="equipmentModalTitle" :selected-field="selectedField"
             :initData="initData" @visibleDialog="val => (SelectEquipmentModalVisible = val)"
-            @selectedRow="selectedEquipment" />
+            @selectedRow="selectedEquipment" /> -->
         <SelectProcess ref="SelectProcess" v-if="SelectProcessVisible" :visibleDialog="SelectProcessVisible"
             :title="SelectProcessTitle" :selected-field="selectedField" :initData="initData"
             @visibleDialog="val => (SelectProcessVisible = val)" @selectedRow="selectedProcess" />
@@ -112,7 +112,7 @@ import { Button } from '@progress/kendo-vue-buttons';
 import { DropDownList } from "@progress/kendo-vue-dropdowns";
 import WindowPop from '@/components/common/WindowPop';
 import { DatePicker } from "@progress/kendo-vue-dateinputs";
-import SelectEquipmentModal from '@/components/frmPaintingInspection/SelectEquipmentModal.vue';
+// import SelectEquipmentModal from '@/components/frmPaintingInspection/SelectEquipmentModal.vue';
 import SelectProcess from '@/components/frmDailyReport/SelectProcess.vue';
 import DateUtility from '~/plugins/dateUtility';
 import { TabStrip } from "@progress/kendo-vue-layout";
@@ -157,7 +157,7 @@ export default {
         DropDownList,
         WindowPop,
         DatePicker,
-        SelectEquipmentModal,
+        // SelectEquipmentModal,
         SelectProcess,
         DateUtility,
         TabStrip,

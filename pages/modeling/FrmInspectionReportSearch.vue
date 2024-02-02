@@ -76,10 +76,10 @@
     </v-row>
     <AlertPop ref="alertPop" :is="'alertPop'" />
     <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
-    <SelectProductModal ref="SelectProductModal" v-if="SelectProductModalVisible"
+    <!-- <SelectProductModal ref="SelectProductModal" v-if="SelectProductModalVisible"
       :visibleDialog="SelectProductModalVisible" :gridData="SelectProductGridData" :title="productModalTitle"
       :selected-field="selectedField" @visibleDialog="val => (SelectProductModalVisible = val)"
-      @selectedRow="selectedRow" />
+      @selectedRow="selectedRow" /> -->
   </div>
 </template>
 <script>
@@ -92,7 +92,7 @@ import InputText from '@/components/common/input/InputText';
 import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { Button } from '@progress/kendo-vue-buttons';
 import { DropDownList } from "@progress/kendo-vue-dropdowns";
-import SelectProductModal from '@/components/frmInspectionReportDefinition/SelectProductModal.vue';
+// import SelectProductModal from '@/components/frmInspectionReportDefinition/SelectProductModal.vue';
 
 let myTitle;
 let myMenuId;
@@ -123,7 +123,7 @@ export default {
     CardTitle,
     KendoGrid,
     DropDownList,
-    SelectProductModal
+    // SelectProductModal
   },
   props: {},
   data() {

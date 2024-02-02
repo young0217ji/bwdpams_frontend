@@ -50,9 +50,9 @@
         </Dialog>
         <AlertPop ref="alertPop" :is="'alertPop'" />
         <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
-        <CompanyListModal ref="CompanyList" v-if="companyListVisible" :visibleDialog="companyListVisible" :title="'title'"
+        <!-- <CompanyListModal ref="CompanyList" v-if="companyListVisible" :visibleDialog="companyListVisible" :title="'title'"
             :message="'message'" :callBack="() => { }" @visibleDialog="val => (companyListVisible = val)"
-            @companyCode="companyCode" />
+            @companyCode="companyCode" /> -->
     </div>
 </template>
 <script>
@@ -70,7 +70,7 @@ import AlertPop from "../common/modal/AlertPop.vue";
 import { DropDownList } from "@progress/kendo-vue-dropdowns";
 import { DatePicker } from "@progress/kendo-vue-dateinputs";
 import Utility from "~/plugins/utility";
-import CompanyListModal from "@/components/frmInstrument/FrmCompanysearch";
+// import CompanyListModal from "@/components/frmInstrument/FrmCompanysearch";
 
 const d = new Date();
 let year = d.getFullYear(); // 년
@@ -95,7 +95,7 @@ export default {
         DropDownList,
         DatePicker,
         Utility,
-        CompanyListModal
+        // CompanyListModal
     },
     props: {
         visibleDialog: {

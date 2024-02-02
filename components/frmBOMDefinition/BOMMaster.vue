@@ -60,7 +60,7 @@
       />
     </div>
     <AlertPop ref="alertPop" :is="'alertPop'" />
-     <SelectProductModal
+     <!-- <SelectProductModal
       ref="SelectProductModal"
       v-if="selectProductModalVisible"
       :visibleDialog="selectProductModalVisible"
@@ -69,7 +69,7 @@
       :inputVal="inputVal"
       @visibleDialog="val => (selectProductModalVisible = val)"
       @selectedRow="selectedRow"
-    /> 
+    />  -->
     <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
     <BOMDetail ref="BOMDetail" v-show="false" />
   </div>
@@ -85,7 +85,7 @@ import Checkbox from '@/components/common/input/Checkbox';
 import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { DropDownList } from '@progress/kendo-vue-dropdowns';
 import { mapState, mapMutations, mapActions } from 'vuex';
-import SelectProductModal from '@/components/frmInspectionReportDefinition/SelectProductModal.vue';
+// import SelectProductModal from '@/components/frmInspectionReportDefinition/SelectProductModal.vue';
 import utils from '~/plugins/utils2';
 import BOMDetail from '@/components/frmBOMDefinition/BOMDetail.vue';
 
@@ -104,7 +104,7 @@ export default {
     Checkbox,
     MesSelectBox,
     DropDownList,
-    SelectProductModal,
+    // SelectProductModal,
     BOMDetail,
   },
   props: {
