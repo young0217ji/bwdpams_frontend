@@ -8,7 +8,7 @@
           <div class="header-horizontal">
             <div class="lnb-logo">
               <router-link class="home" :to="myHome.root">
-                <h1>DY POWER</h1>
+                <h1>BLWS</h1>
               </router-link>
             </div>
             <!-- <div>
@@ -227,7 +227,7 @@
     >
       <div class="lnb-logo">
         <router-link class="home" :to="myHome.root">
-          <h1 aria-label="DY POWER">DY POWER</h1>
+          <h1 aria-label="BLWS">BLWS</h1>
         </router-link>
       </div>
       <div class="left-menu">
@@ -278,11 +278,6 @@
           </template>
         </TreeView>
       </div>
-      <!-- <template #append>
-        <p class="text-caption" :style="{ letterSpacing: '-0.2px !important' }">
-          &copy; {{ new Date().getFullYear() }}. DY POWER all rights reserved.
-        </p>
-      </template> -->
     </v-navigation-drawer>
     <v-main>
       <v-container fluid>
@@ -492,7 +487,7 @@
       </v-container>
       <div v-if="topMenu" style="text-align: center; height: 29px">
         <p class="text-caption" :style="{ letterSpacing: '-0.2px !important' }">
-          &copy; {{ new Date().getFullYear() }}. DY POWER all rights reserved.
+          &copy; {{ new Date().getFullYear() }}. BLWS all rights reserved.
         </p>
       </div>
       <div v-if="isLoading" class="loading-container">

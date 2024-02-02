@@ -2,7 +2,7 @@
   <v-app :class="`${isDarkMode ? 'dark-mode' : lightTheme}`">
     <nuxt />
     <v-footer>
-      <span>&copy; 2022. DY POWER all rights reserved.</span>
+      <span>&copy; 2022. BLWS all rights reserved.</span>
     </v-footer>
   </v-app>
 </template>

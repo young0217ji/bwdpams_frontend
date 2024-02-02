@@ -1177,9 +1177,9 @@ a {
           flex-basis: 140px;
           height: 50px;
           @if $theme == dark {
-            background-image: url("@/assets/images/icon/logo_b.svg") !important;
+            background-image: url("@/assets/images/icon/logo_b.png") !important;
           } @else {
-            background-image: url("@/assets/images/icon/logo.svg") !important;
+            background-image: url("@/assets/images/icon/logo.png") !important;
           }
           background-position: 50% 50%;
           border-top-width: 0;
@@ -3543,7 +3543,7 @@ a {
       height: 50px;
       background-repeat: no-repeat;
       background-position: 60px 17px;
-      background-image: url("@/assets/images/icon/logo_b.svg");
+      background-image: url("@/assets/images/icon/logo_b.png");
       
       
       font-size: 0;

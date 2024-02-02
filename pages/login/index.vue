@@ -420,12 +420,12 @@ export default {
       }
     }
     .login-img {
-      width: 120px;
-      height: 17px;
+      width: 157px;
+      height: 49px;
       @if $theme == dark {
-        background-image: url("@/assets/images/icon/logo_b.svg");
+        background-image: url("@/assets/images/icon/logo_b.png");
       } @else {
-        background-image: url("@/assets/images/icon/logo.svg");
+        background-image: url("@/assets/images/icon/logo.png");
       }
 
       background-size: 100%;
@@ -471,19 +471,19 @@ export default {
         }
       }
       .img-1 {
-        background: url("@/assets/images/DYP-01.png") no-repeat center center;
+        background: url("@/assets/images/BW-01.png") no-repeat center center;
         background-size: cover;
       }
       .img-2 {
-        background: url("@/assets/images/DYP-02.png") no-repeat center center;
+        background: url("@/assets/images/BW-02.png") no-repeat center center;
         background-size: cover;
       }
       .img-3 {
-        background: url("@/assets/images/DYP-03.png") no-repeat center center;
+        background: url("@/assets/images/BW-03.png") no-repeat center center;
         background-size: cover;
       }
       .img-4 {
-        background: url("@/assets/images/DYP-04.png") no-repeat center center;
+        background: url("@/assets/images/BW-04.png") no-repeat center center;
         background-size: cover;
       }
       .slick-slide {
