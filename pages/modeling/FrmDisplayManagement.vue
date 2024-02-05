@@ -917,7 +917,7 @@ export default {
         return {
           ...item,
           ORIGINALFILEPATH: item.idx === dataItem.idx ? "/프로젝트관리/98. 기타/09.개인폴더/이홍상/TEST/".concat(fileName.concat(".").concat(ext)) : item.ORIGINALFILEPATH,
-          FILEPATH: item.idx === dataItem.idx ? "D:\\DYPOWER\\FILE\\DYP_IMAGE\\".concat(fileName.concat(".").concat(ext)) : item.FILEPATH,
+          FILEPATH: item.idx === dataItem.idx ? "D:\\BLWS\\FILE\\BLWS_IMAGE\\".concat(fileName.concat(".").concat(ext)) : item.FILEPATH,
           UPLOADFILE: item.idx === dataItem.idx ? e.target.files[0] : item.UPLOADFILE,
           FILECHANGE : item.idx === dataItem.idx ? true : item.FILECHANGE,
           rowStat : (item.idx === dataItem.idx) && dataItem.rowStat === 'N' ? 'U' : item.rowStat,
