@@ -420,8 +420,8 @@ export default {
       }
     }
     .login-img {
-      width: 157px;
-      height: 49px;
+      width: 120px;
+      height: 17px;
       @if $theme == dark {
         background-image: url("@/assets/images/icon/logo_b.png");
       } @else {
