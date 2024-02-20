@@ -360,7 +360,7 @@ export default {
       this.toData.WORKORDERQTY = this.initData.WORKORDERQTY; // 계획수량
       this.toData.MAKELOTQTY = this.initData.MAKELOTQTY; // 계획수량
       this.toData.PRODUCTTYPENAME = this.initData.PRODUCTTYPENAME; //생산구분
-      this.toData.PRODUCTQUANTITY = this.initData.PRODUCTQUANTITY; // 기준생산량 >> 작업지시수량 명칭변경 2023.03.28
+      this.toData.PRODUCTQUANTITY = this.initData.PRODUCTQUANTITY; // 기준생산량 >> 작업지시수량 명칭변경 2023.03.28 
       this.toData.WORKORDER = this.initData.WORKORDER; // WORKORDER
       this.toData.WORKCENTER = this.initData.WORKCENTER; // WORKCENTER
       this.toData.LOTTYPE = this.initData.LOTTYPE; // LOTTYPE
