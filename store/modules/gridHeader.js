@@ -9,7 +9,7 @@ const INIT_HEADER = {
     apiKey: "mes/common/getqueryresult",
     queryId: "GetGridInit",
     sendParam: {
-      plantid: "",
+      factoryid: "",
       userid: "manager",
       menugrouptype: "UI",
       gridid: ""

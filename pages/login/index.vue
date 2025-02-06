@@ -218,65 +218,82 @@ export default {
       await this.loginChk();
     },
     async loginChk() {
-      // const form = new FormData();
-      // form.append('userId', this.userId);
-      // form.append('name', this.userId);
-      // form.append('password', this.userPw);
+
       const form = {
-        name: this.userId,
         userId: this.userId,
-        password: this.userPw,
+        pwd: this.userPw,
       };
+      const redirectUri = this.$auth.$state.redirect;
+      const getRedirectUri = (uri) => {
+        return uri ? uri : this.myHome.root
+      }
       await this.$auth
         .loginWith("local", {
           data: form,
         })
-        .then((response) => {
-          this.setUserInfo(response.data);
-          this.$session.start();
-          this.$session.set("userInfo", response.data);
-          // console.log("access - token",response.headers?.authorization)
-          // this.$auth.strategy.token.set(response.headers?.authorization)
+        .then(async(response) => {
 
-          //===========================
-          var value = document.cookie.match(
-            "(^|;) ?" + "accessToken" + "=([^;]*)(;|$)"
-          );
-          const accesstoken = value ? value[2] : null;
+          const accestkn = response.data.accestkn;
+          if (accestkn) {
+            this.$auth.strategy.token.set(accestkn);
+          }
 
-          // this.$auth.setUserToken(accesstoken,'refreshToken');
+          this.$auth.setUser(response.data);
 
-          //===========================
+          await this.$auth.fetchUser();
 
-          this.$auth.onRedirect((to, from) => {
-            return this.myHome.root;
+          console.log("User 정보:", this.$auth.$state.user);
+          // 패스워드 만료일이 지난 경우 로그인 불가
+          // if(response.data.passworddate<=0){
+          //   const err = {response: 'PASSWORDDATEERROR'};
+          //   throw err;
+          // }
+
+          // 비밀번호 만료일 5일 전부터 알람
+          // else if(response.data.passworddate<=5){
+          //   alert(this.$i18n.t("LoginPage.msg5", [response.data.passworddate]));
+          // }
+
+          // 로그인 이력
+          // const sendParam = [{
+          //   USERID : this.userId,
+          //   EQUIPMENTID : 'ALL',
+          //   USERPCNAME : '',
+          //   USERPCIP: '',
+          //   WORKTYPE: 'WEB',
+          //   ACTION: 'LOGIN',
+          // }]
+          // await this.resetPassword({
+          //   apiKey: 'common/auth/reset',
+          //   messagename: 'TxnLoginoutWeb',
+          //   sendParam: sendParam
+          // });
+          
+          await this.$router.push({
+            path: `${getRedirectUri(redirectUri)}`,
           });
-          this.$router.push({ path: this.myHome.root });
+          this.$auth.onRedirect((to, from) => {
+            return `${getRedirectUri(redirectUri)}`;
+          });
+          this.$router.beforeEach((to, from, next) => {
+            if (!to.matched.length) {
+              next(false);
+            } else {
+              next();
+            }
+          });
         })
         .catch((err) => {
           console.log("err", err);
+          console.log(err.response);
           this.$refs["alertPop"].title = this.$i18n.t("CommLang.label.label6");
-          this.$refs["alertPop"].message = this.$i18n.t("LoginPage.msg3");
+          this.$refs["alertPop"].message = err.response=="PASSWORDDATEERROR"? this.$i18n.t("LoginPage.msg6") : this.$i18n.t("LoginPage.msg3");
           this.$refs["alertPop"].modalWidth = "300px";
           this.$refs["alertPop"].visibleDialog = true;
         });
 
-      // let res = await this.$axios.post("/api/signin", form).then((response) => {
-      //   this.$router.push({ path: this.myHome.root });
-      //   console.log(this.myHome.root)
-      //   this.setUserInfo(response.data);
-      //   this.$session.start();
-      //   this.$session.set("userInfo", response.data)
-
-      //   console.log(this.$session.get("userInfo"))
-      // })
-      // .catch((error) => {
-      //   this.$refs['alertPop'].title = this.$i18n.t('CommLang.label.label6');
-      //   this.$refs['alertPop'].message = this.$i18n.t('LoginPage.msg3');
-      //   this.$refs['alertPop'].modalWidth = "300px";
-      //   this.$refs['alertPop'].visibleDialog = true;
-      // });
     },
+
     selectI18(val) {
       localStorage.setItem(
         "i18nVal",

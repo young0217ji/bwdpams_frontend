@@ -98,7 +98,7 @@ export default {
   created() { },
   async mounted() {
     this.writePopupTitle = this.$i18n.t('MES_CommLang.MES_CommLang_00917'); 
-    await this.getGridData();
+    //await this.getGridData();
   },
   computed: {
     areAllSelected() {

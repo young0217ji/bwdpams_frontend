@@ -276,7 +276,7 @@ const getParamForBindV = (QUERYID, param, queryVersion = "00001", user) => {
   return {
     language: "ko",
     queryid: QUERYID,
-    plantid: user.plantId,
+    factoryid: user.factoryId,
     eventuser: user.userId,
     queryversion: queryVersion,
     loadingDisabled: param.loadingDisabled,

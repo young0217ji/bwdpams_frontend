@@ -77,14 +77,14 @@ module.exports = {
       local: {
         scheme: 'refresh',
         token: {
-          property: 'accessToken',
+          property: 'accestkn',
           maxAge: 1800, // 초단위, 토큰만료시간이 없을 경우 사용할 만료시간. 토큰에 있는 만료시간이 우선적용됨.
           required: true,
 
         },
-        refreshToken: {
-          property: 'refreshToken',
-          data: 'refreshToken',
+        refreshTkn: {
+          property: 'refreshTkn',
+          data: 'refreshTkn',
           required: true,
           tokenRequired: true
         },
