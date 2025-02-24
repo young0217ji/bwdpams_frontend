@@ -5,7 +5,8 @@
         <CardBody :style="{ height: '100%' }">
           <v-row no-gutters>
             <v-col cols="6" align="left">
-              <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00427") }}</CardTitle> <!--가능설비목록-->
+              <CardTitle>{{ $t('MES_CommLang.MES_CommLang_00427') }}</CardTitle>
+              <!--가능설비목록-->
             </v-col>
             <v-col cols="6" align="right">
               <kbutton
@@ -13,21 +14,22 @@
                 :size="'small'"
                 :icon="'save'"
                 @click="saveBtn"
-                >{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton
-              > <!-- 저장-->
+                >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
+              >
+              <!-- 저장-->
               <kbutton
                 :theme-color="'secondary'"
                 :size="'small'"
                 :icon="'add'"
                 @click="addBtn"
-                >{{ $t("MES_CommLang.MES_CommLang_00411") }}
-              </kbutton><!--추가-->
+                >{{ $t('MES_CommLang.MES_CommLang_00411') }} </kbutton
+              ><!--추가-->
               <kbutton
                 :theme-color="'secondary'"
                 :size="'small'"
                 :icon="'delete'"
                 @click="confirmDel"
-                >{{ $t("MES_CommLang.MES_CommLang_00412") }}</kbutton
+                >{{ $t('MES_CommLang.MES_CommLang_00412') }}</kbutton
               ><!--삭제-->
               <kbutton
                 :theme-color="'secondary'"
@@ -90,8 +92,6 @@ import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import SelectEquipmentModal from '@/components/frmAvailableEquipment/SelectEquipmentModal.vue';
 import { currencyDisplay } from '@progress/kendo-intl';
-
-
 
 export default {
   name: 'Equipment',
@@ -205,12 +205,15 @@ export default {
       if (dgvEquipmentListData.length > 0) {
         const res = this.mesPost({
           apiKey: 'mes/common/manage',
-          messagename: 'TxnAvailableEquipment',
+          messagename: 'TransAvailEqpt',
           sendParam: dgvEquipmentListData,
         }).then(result => {
           this.$nextTick(() => {
             if (result.returncode !== undefined && result.returncode === '0') {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* ('저장', '저장되었습니다.') */
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); /* ('저장', '저장되었습니다.') */
               this.equipmentGrid();
             } else {
               this.$refs.alertPop.show(
@@ -221,7 +224,10 @@ export default {
           });
         });
       } else {
-        this.openAlert(this.$i18n.t('MES_CommLang.MES_CommLang_00414'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); /* ('저장', '저장할 데이터가 존재하지 않습니다.') */
+        this.openAlert(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00414'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); /* ('저장', '저장할 데이터가 존재하지 않습니다.') */
         return;
       }
     },
@@ -298,16 +304,23 @@ export default {
         });
       if (delData.length > 0) {
         this.$refs['confirmPop'].title = 'info';
-        this.$refs['confirmPop'].message = this.$i18n.t("MES_MsgLang.MES_MsgLang_00089"); /* 선택한 데이터를 삭제 하시겠습니까? */
+        this.$refs['confirmPop'].message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00089'
+        ); /* 선택한 데이터를 삭제 하시겠습니까? */
         if (
           delData.filter(x => x.rowStat !== 'C' && x.EQUIPMENTNAME !== '')
             .length >= 1
         ) {
           var selectedRow = {};
           selectedRow = delData.map(x => x.EQUIPMENTNAME);
-          this.$refs[
-            'confirmPop'
-          ].message = this.$i18n.t("MES_MsgLang.MES_MsgLang_00275") + " (" + `${selectedRow}` + ") "+ this.$i18n.t("MES_MsgLang.MES_MsgLang_00276") /*선택한 데이터, 를 삭제 하시겠습니까? */
+          this.$refs['confirmPop'].message =
+            this.$i18n.t('MES_MsgLang.MES_MsgLang_00275') +
+            ' (' +
+            `${selectedRow}` +
+            ') ' +
+            this.$i18n.t(
+              'MES_MsgLang.MES_MsgLang_00276'
+            ); /*선택한 데이터, 를 삭제 하시겠습니까? */
         }
         this.$refs['confirmPop'].callBack = this.delBtn;
         this.$refs['confirmPop'].modalWidth = '300px';
@@ -315,7 +328,7 @@ export default {
       } else {
         this.$refs.alertPop.show(
           this.$i18n.t('MES_CommLang.MES_CommLang_00409'), // 확인
-           this.$i18n.t('MES_MsgLang.MES_MsgLang_00088') //선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00088') //선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
         );
         return;
       }
@@ -383,16 +396,16 @@ export default {
           a[e.event?.field] < b[e.event?.field]
             ? -1
             : a[e.event?.field] > b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       } else {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] > b[e.event?.field]
             ? -1
             : a[e.event?.field] < b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       }
     },

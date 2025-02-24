@@ -299,7 +299,7 @@
       :title="'title'"
       :message="'message'"
       :callBack="() => {}"
-      @visibleDialog="(val) => (routeSearchModalVisible = val)"
+      @visibleDialog="val => (routeSearchModalVisible = val)"
       @popupRouteData="popupRouteData"
     />
     <DetailView
@@ -311,45 +311,44 @@
   </div>
 </template>
 <script>
-import DetailView from "@/components/common/DetailView";
-import mixinGlobal from "@/mixin/global.js";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import Utility from "~/plugins/utility";
+import DetailView from '@/components/common/DetailView';
+import mixinGlobal from '@/mixin/global.js';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import Utility from '~/plugins/utility';
 import {
   Card,
   CardBody,
   CardTitle,
   TabStrip,
-} from "@progress/kendo-vue-layout";
-import { TreeView, processTreeViewItems } from "@progress/kendo-vue-treeview";
-import KendoGrid from "@/components/common/KendoGrid";
-import KendoTree from "@/components/common/KendoTree";
-import DateUtility from "~/plugins/dateUtility";
-import { Button } from "@progress/kendo-vue-buttons";
-import { Input, TextArea } from "@progress/kendo-vue-inputs";
-import InputText from "../../components/common/input/InputText.vue";
-import Checkbox from "@/components/common/input/Checkbox";
-import AlertPop from "../../components/common/modal/AlertPop.vue";
-import lotIdSearch from "@/components/frmReWork/lotIdSearch";
-import selectReworkRoute from "@/components/frmReWork/selectReworkRoute";
+} from '@progress/kendo-vue-layout';
+import { TreeView, processTreeViewItems } from '@progress/kendo-vue-treeview';
+import KendoGrid from '@/components/common/KendoGrid';
+import KendoTree from '@/components/common/KendoTree';
+import DateUtility from '~/plugins/dateUtility';
+import { Button } from '@progress/kendo-vue-buttons';
+import { Input, TextArea } from '@progress/kendo-vue-inputs';
+import InputText from '../../components/common/input/InputText.vue';
+import Checkbox from '@/components/common/input/Checkbox';
+import AlertPop from '../../components/common/modal/AlertPop.vue';
+import lotIdSearch from '@/components/frmReWork/lotIdSearch';
+import selectReworkRoute from '@/components/frmReWork/selectReworkRoute';
 import SelectLotID from '../../components/popup/SelectLotID.vue';
-import utils2 from "~/plugins/utils2";
+import utils2 from '~/plugins/utils2';
 
-import ConfirmPop from "../../components/common/modal/ConfirmPop.vue";
-import { booleanFilterValues } from "@progress/kendo-vue-data-tools";
+import ConfirmPop from '../../components/common/modal/ConfirmPop.vue';
+import { booleanFilterValues } from '@progress/kendo-vue-data-tools';
 let myTitle;
 let myMenuId;
 let saveData;
 let processItem;
 
-
 export default {
-  name: "LotProcessHistory",
+  name: 'LotProcessHistory',
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
@@ -385,7 +384,7 @@ export default {
   props: {
     gridHeight1: {
       type: String,
-      defaultData: "150px",
+      defaultData: '150px',
     },
   },
 
@@ -405,37 +404,37 @@ export default {
       searchModalVisible: false,
       routeSearchModalVisible: false,
       selectedID: null,
-      lotid: "",
-      productid: "",
-      reasoncodetype: "",
-      processid: "",
-      reasoncode: "",
-      processName: "",
+      lotid: '',
+      productid: '',
+      reasoncodetype: '',
+      processid: '',
+      reasoncode: '',
+      processName: '',
       plantid: this.$auth.$state.user.plantId,
-      processroutetype: "",
-      gridHeight: "100px",
-      selectedReasonCode: "",
-      selectedReasonProcess: "",
-      selectedReasonProcessSeq: "",
+      processroutetype: '',
+      gridHeight: '100px',
+      selectedReasonCode: '',
+      selectedReasonProcess: '',
+      selectedReasonProcessSeq: '',
       selectPopup: false,
       selectedLot: {},
 
-      disabledCheckHeaderArr: ["GOINORDERREQUIRED"], //순차진행여부
-      selectedField: "selected",
+      disabledCheckHeaderArr: ['GOINORDERREQUIRED'], //순차진행여부
+      selectedField: 'selected',
       headerParam: {
-        gridid: "dgvLotList_Rework",
+        gridid: 'dgvLotList_Rework',
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
       },
       headerParam2: {
-        gridid: "dgvReasonProcess",
+        gridid: 'dgvReasonProcess',
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
       },
       headerParam3: {
-        gridid: "dgvReasonCode",
+        gridid: 'dgvReasonCode',
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
@@ -443,22 +442,22 @@ export default {
       headerParam4: {
         gridHeader: [
           {
-            field: "PROCESSROUTENAME",
+            field: 'PROCESSROUTENAME',
             editable: false,
-            title: "라우팅명 ",
+            title: '라우팅명 ',
             minWidth: 40,
-            cell: "PRIMARYKEYFLAG",
-            className: "gridTextCenter",
-            VISIBLEFLAG: "Yes",
+            cell: 'PRIMARYKEYFLAG',
+            className: 'gridTextCenter',
+            VISIBLEFLAG: 'Yes',
           },
           {
-            field: "PROCESSROUTEID",
+            field: 'PROCESSROUTEID',
             editable: false,
-            title: "라우팅코드",
+            title: '라우팅코드',
             minWidth: 40,
-            cell: "PRIMARYKEYFLAG",
-            className: "gridTextCenter",
-            VISIBLEFLAG: "Yes",
+            cell: 'PRIMARYKEYFLAG',
+            className: 'gridTextCenter',
+            VISIBLEFLAG: 'Yes',
           },
         ],
       },
@@ -478,19 +477,19 @@ export default {
 
   computed: {
     items() {
-      return this.gridData.map((item) => ({
+      return this.gridData.map(item => ({
         ...item,
         selected: item.LOTID === this.lotid,
       }));
     },
     items2() {
-      return this.ReasonProcessData.map((item) => ({
+      return this.ReasonProcessData.map(item => ({
         ...item,
         selected: item.PROCESSID === this.processid,
       }));
     },
     items3() {
-      return this.ReasonCodeData.map((item) => ({
+      return this.ReasonCodeData.map(item => ({
         ...item,
         selected: item.REASONCODE === this.reasoncode,
       }));
@@ -503,16 +502,16 @@ export default {
     //그리드데이터 가져오기 (Lot정보)
     async getGridData() {
       this.treeData2 = []; // ReWork 트리 초기화
-      processItem = ""; // lot 조회시 마다 공정 재작업 트리 값 초기화
+      processItem = ''; // lot 조회시 마다 공정 재작업 트리 값 초기화
       let result = false;
       await this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetLotSearchList_Rework",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetLotSearchList_Rework',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           lotid: this.lotid,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
@@ -525,16 +524,16 @@ export default {
         // Lot 정보 있을때
         if (data.length > 0) {
           result = true;
-          this.$nuxt.$emit("iccReset");
+          this.$nuxt.$emit('iccReset');
 
           this.gridData = data;
           this.processName = data[0].PROCESSROUTETYPE;
           this.initTree();
           this.selectedLot = data[0];
-        } else if (data.length === 0){
+        } else if (data.length === 0) {
           result = false;
-          console.log("##")
-          this.$refs.alertPop.show("", "Lot ID 선택 후 조회하세요.");
+          console.log('##');
+          this.$refs.alertPop.show('', 'Lot ID 선택 후 조회하세요.');
           return;
         }
       });
@@ -543,24 +542,24 @@ export default {
     //그리드 데이터 가져오기 (원인공정)
     getGridData2() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetReworkReasonProcessList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetReworkReasonProcessList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           lotid: this.lotid,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
           };
         });
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.ReasonProcessData = data;
         if (data[0] != undefined) {
           this.selectedReasonProcess = data[0].PROCESSID;
@@ -571,27 +570,27 @@ export default {
     //그리드 데이터 가져오기 (사유코드)
     getGridData3() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetReasoncodeList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetRsncodeList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          REASONCODE: "",
-          reasoncodetype: "REWORK",
+          REASONCODE: '',
+          reasoncodetype: 'REWORK',
           lotid: this.lotid,
           productid: this.productid,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
           };
         });
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.ReasonCodeData = data;
         this.selectedReasonCode = data[0].DESCRIPTION;
       });
@@ -610,8 +609,8 @@ export default {
     //트리 데이터 가져오기 (현재진행정보)
     async initTree() {
       const res = await this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetProcessRouteReworkProgressList ",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetProcessRouteReworkProgressList ',
         sendParam: {
           lotid: this.lotid,
           plantid: this.$auth.$state.user.plantId,
@@ -619,30 +618,30 @@ export default {
       });
 
       res.unshift({
-        LOTID: "",
+        LOTID: '',
         PROCESSID: this.lotid,
         PROCESSNAME: this.processName,
-        PROCESSROUTEID: "",
-        PROCESSDESC: "", // PROCESSROUTETYPENAME
-        PROCESSSEQUENCE: "1",
-        PROCESSCOMPLETESTATUS: "",
-        PROCESSSTATUS: "PROCESSROUTE",
+        PROCESSROUTEID: '',
+        PROCESSDESC: '', // PROCESSROUTETYPENAME
+        PROCESSSEQUENCE: '1',
+        PROCESSCOMPLETESTATUS: '',
+        PROCESSSTATUS: 'PROCESSROUTE',
         PLANTID: this.$auth.$state.user.plantId,
         //LEVELVALUE: "PROCESSROUTE",
-        icon: "PROCESSROUTE",
+        icon: 'PROCESSROUTE',
       });
-      const res2 = res.map((x) => {
-        let PN = "";
-        let PNicon = "";
-        if (x.PROCESSNAME === "Main") {
-          PN = "Main";
-          PNicon = "PROCESSROUTE";
-        } else if (x.PROCESSNAME === "Rework") {
-          PN = "Rework";
-          PNicon = "PROCESSROUTE";
+      const res2 = res.map(x => {
+        let PN = '';
+        let PNicon = '';
+        if (x.PROCESSNAME === 'Main') {
+          PN = 'Main';
+          PNicon = 'PROCESSROUTE';
+        } else if (x.PROCESSNAME === 'Rework') {
+          PN = 'Rework';
+          PNicon = 'PROCESSROUTE';
         } else {
-          PN = x.PROCESSNAME + "[" + x.PROCESSCOMPLETESTATUS + "]";
-          PNicon = "PROCESS";
+          PN = x.PROCESSNAME + '[' + x.PROCESSCOMPLETESTATUS + ']';
+          PNicon = 'PROCESS';
         }
         return {
           LOTID: x.LOTID,
@@ -654,14 +653,14 @@ export default {
           PROCESSCOMPLETESTATUS: x.PROCESSCOMPLETESTATUS,
           PROCESSSTATUS: x.PROCESSSTATUS,
           PLANTID: x.PLANTID,
-          LEVELVALUE: "PROCESS",
+          LEVELVALUE: 'PROCESS',
           icon: PNicon,
         };
       });
 
       this.processName = this.gridData[0].PROCESSROUTETYPE;
-      const data = res2.map((x) => ({ ...x, expanded: true }));
-      this.treeData = utils2.makeTreeData(data, "PROCESSID", "LOTID");
+      const data = res2.map(x => ({ ...x, expanded: true }));
+      this.treeData = utils2.makeTreeData(data, 'PROCESSID', 'LOTID');
       this.routeReworkProgressTree = this.treeData;
     },
 
@@ -670,10 +669,10 @@ export default {
       const chkData = this.checkTreeData; // 선택값
 
       if (
-        chkData.PROCESSCOMPLETESTATUS === "대기" ||
-        chkData.PROCESSCOMPLETESTATUS === "진행중"
+        chkData.PROCESSCOMPLETESTATUS === '대기' ||
+        chkData.PROCESSCOMPLETESTATUS === '진행중'
       ) {
-        this.$refs.alertPop.show("", "미진행 공정은 재작업 할 수 없습니다.");
+        this.$refs.alertPop.show('', '미진행 공정은 재작업 할 수 없습니다.');
         return false;
       }
 
@@ -681,33 +680,33 @@ export default {
         this.routeChangeCheck = false;
         this.RoutingData = [];
         this.treeData2 = [];
-        processItem = "";
+        processItem = '';
         this.treeInsert();
         return;
       }
 
       if (Object.keys(chkData).length === 0) {
-        this.$refs.alertPop.show("", "항목을 선택하세요.");
+        this.$refs.alertPop.show('', '항목을 선택하세요.');
         return;
       }
       if (this.treeData2.length === 0) {
         const res = [
           {
-            LOTID: "",
+            LOTID: '',
             PROCESSID: this.lotid,
-            PROCESSNAME: "Rework",
-            PROCESSROUTEID: "",
-            PROCESSDESC: "", // PROCESSROUTETYPENAME
-            PROCESSSEQUENCE: "1",
-            PROCESSCOMPLETESTATUS: "",
-            PROCESSSTATUS: "PROCESSROUTE",
-            icon: "PROCESSROUTE",
+            PROCESSNAME: 'Rework',
+            PROCESSROUTEID: '',
+            PROCESSDESC: '', // PROCESSROUTETYPENAME
+            PROCESSSEQUENCE: '1',
+            PROCESSCOMPLETESTATUS: '',
+            PROCESSSTATUS: 'PROCESSROUTE',
+            icon: 'PROCESSROUTE',
             PLANTID: this.$auth.$state.user.plantId,
           },
         ];
 
-        const data = res.map((x) => ({ ...x, expanded: true }));
-        this.treeData2 = utils2.makeTreeData(data, "PROCESSID", "LOTID");
+        const data = res.map(x => ({ ...x, expanded: true }));
+        this.treeData2 = utils2.makeTreeData(data, 'PROCESSID', 'LOTID');
       }
       const childData = this.treeData2[0].children; // 재작업 tree
       const parentData = this.treeData[0].children; // 현재진행정보 tree
@@ -720,9 +719,9 @@ export default {
 
       // 최초 배열 push
       //console.log(processItem);
-      if (chkData.PROCESSCOMPLETESTATUS == "완료") {
-        if (processItem == "") {
-          processItem += chkData.PROCESSID + ",";
+      if (chkData.PROCESSCOMPLETESTATUS == '완료') {
+        if (processItem == '') {
+          processItem += chkData.PROCESSID + ',';
           childData.push(chkData);
         }
         reWorkFirstSeq = Number(childData[0].PROCESSSEQUENCE);
@@ -733,14 +732,14 @@ export default {
           reWorkLastSeq = Number(childData[lastIndex - 1].PROCESSSEQUENCE);
           parentData.forEach(function reWorkCellChk(list) {
             // 현재진행정보 리스트 반복
-            if (list.PROCESSCOMPLETESTATUS == "완료") {
+            if (list.PROCESSCOMPLETESTATUS == '완료') {
               // ▶▶ 버튼 클릭시 체크한 값, 배열 마지막 값 사이 중간데이터들 조회
               if (chkProcessSeq > reWorkLastSeq) {
                 if (
                   list.PROCESSSEQUENCE > reWorkLastSeq &&
                   list.PROCESSSEQUENCE < chkProcessSeq
                 ) {
-                  processItem += list.PROCESSID + ",";
+                  processItem += list.PROCESSID + ',';
                   childData.splice(lastIndex + plusIdx, 0, list);
                   plusIdx++;
                 }
@@ -750,7 +749,7 @@ export default {
                   list.PROCESSSEQUENCE >= chkProcessSeq
                 ) {
                   // ◀◀ 버튼 클릭시 체크한 값, 배열 첫번째 값 사이 중간데이터들 조회
-                  processItem += list.PROCESSID + ",";
+                  processItem += list.PROCESSID + ',';
                   childData.splice(plusIdx, 0, list);
                   plusIdx++;
                   spliceLastData = true;
@@ -762,7 +761,7 @@ export default {
           if (spliceLastData) {
             childData.splice(childData.length - 1, 1);
           } else {
-            processItem += chkData.PROCESSID + ",";
+            processItem += chkData.PROCESSID + ',';
           }
         }
       }
@@ -781,10 +780,10 @@ export default {
 
       const childData = this.treeData2[0].children;
       const index = childData.indexOf(chkData);
-      processItem = processItem.replaceAll(chkData.PROCESSID + ",", "");
+      processItem = processItem.replaceAll(chkData.PROCESSID + ',', '');
 
       if (index > 0 && index < childData.length - 1) {
-        this.$refs.alertPop.show("", "가운데 공정은 삭제가 불가능합니다.");
+        this.$refs.alertPop.show('', '가운데 공정은 삭제가 불가능합니다.');
         return false;
       }
       if (index > -1) {
@@ -859,19 +858,19 @@ export default {
     //라우팅변경버튼
     routeChangeBefore() {
       if (this.gridData.length === 0) {
-        this.$refs.alertPop.show("", "Lot ID 선택 후 조회하세요.");
+        this.$refs.alertPop.show('', 'Lot ID 선택 후 조회하세요.');
         return false;
       } else {
-        this.$refs["confirmPop"].title = "Info";
-        this.$refs["confirmPop"].message =
-          "재진행 정보 라우팅 변경시 현재 설정된" +
-          "<br><br>" +
-          "재진행 정보가 초기화 됩니다." +
-          "<br><br>" +
-          " 진행하시겠습니까?";
-        this.$refs["confirmPop"].callBack = this.routeChangeBtn;
-        this.$refs["confirmPop"].modalWidth = "330px";
-        this.$refs["confirmPop"].visibleDialog = true;
+        this.$refs['confirmPop'].title = 'Info';
+        this.$refs['confirmPop'].message =
+          '재진행 정보 라우팅 변경시 현재 설정된' +
+          '<br><br>' +
+          '재진행 정보가 초기화 됩니다.' +
+          '<br><br>' +
+          ' 진행하시겠습니까?';
+        this.$refs['confirmPop'].callBack = this.routeChangeBtn;
+        this.$refs['confirmPop'].modalWidth = '330px';
+        this.$refs['confirmPop'].visibleDialog = true;
       }
     },
     routeChangeBtn() {
@@ -881,12 +880,12 @@ export default {
     //저장버튼
     saveBefore() {
       if (this.treeData2[0] == undefined) {
-        this.$refs.alertPop.show("", "재작업 할 공정을 선택해주세요.");
+        this.$refs.alertPop.show('', '재작업 할 공정을 선택해주세요.');
         return false;
       } else {
         saveData = this.gridData
-          .filter((x) => x.LOTID === this.lotid)
-          .map((x) => {
+          .filter(x => x.LOTID === this.lotid)
+          .map(x => {
             return {
               ...x,
               _ROWSTATUS: x.rowStat,
@@ -898,53 +897,54 @@ export default {
               REASONCODE: this.selectedReasonCode,
               ENDPROCESSSEQUENCE:
                 this.treeData2[0].children.at(-1).PROCESSSEQUENCE,
-              REASONCODETYPE: "REWORK",
+              REASONCODETYPE: 'REWORK',
             };
           });
-        this.$refs["confirmPop2"].title = "저장";
-        this.$refs["confirmPop2"].message =
-          "Lot : " +
+        this.$refs['confirmPop2'].title = '저장';
+        this.$refs['confirmPop2'].message =
+          'Lot : ' +
           this.lotid +
-          "<br><br>" +
-          "시작공정 : " +
+          '<br><br>' +
+          '시작공정 : ' +
           this.treeData2[0].children[0].PROCESSNAME +
-          "<br><br>" +
-          "종료공정 : " +
+          '<br><br>' +
+          '종료공정 : ' +
           this.treeData2[0].children.at(-1).PROCESSNAME +
-          "<br><br>" +
-          "사유코드 : " +
+          '<br><br>' +
+          '사유코드 : ' +
           this.selectedReasonCode +
-          "<br><br>" +
-          "원인공정 : " +
+          '<br><br>' +
+          '원인공정 : ' +
           this.selectedReasonProcess +
-          "<br><br>" +
-          "Rework 하시겠습니까?";
-        this.$refs["confirmPop2"].callBack = this.saveBtn;
-        this.$refs["confirmPop2"].modalWidth = "330px";
-        this.$refs["confirmPop2"].visibleDialog = true;
+          '<br><br>' +
+          'Rework 하시겠습니까?';
+        this.$refs['confirmPop2'].callBack = this.saveBtn;
+        this.$refs['confirmPop2'].modalWidth = '330px';
+        this.$refs['confirmPop2'].visibleDialog = true;
       }
     },
 
     saveBtn() {
-
       if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnLotRework",
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnLotRework',
           sendParam: saveData,
-        }).then((result) => {
+        }).then(result => {
           this.$nextTick(() => {
-            if (result.returncode !== undefined && result.returncode === "0") {
-              this.$refs.alertPop.show("알림", "저장되었습니다.");
+            if (result.returncode !== undefined && result.returncode === '0') {
+              this.$refs.alertPop.show('알림', '저장되었습니다.');
               //this.getGridData();
-              this.selectedReasonProcess = "";
+              this.selectedReasonProcess = '';
               this.searchBtn();
-            } else if(this.treeData[0].children[0] === undefined){
-              this.$refs.alertPop.show("알림", "기존에 등록된 공정이 없습니다.");
-            } 
-            else {
+            } else if (this.treeData[0].children[0] === undefined) {
               this.$refs.alertPop.show(
-                "ERROR : " + result.code,
+                '알림',
+                '기존에 등록된 공정이 없습니다.'
+              );
+            } else {
+              this.$refs.alertPop.show(
+                'ERROR : ' + result.code,
                 result.message
               );
             }
@@ -965,7 +965,7 @@ export default {
 
     selectLotId(data) {
       this.lotid = data.LOTID;
-      this.$nuxt.$emit("iccReset");
+      this.$nuxt.$emit('iccReset');
       //this.searchBtn();
     },
 
@@ -1001,42 +1001,42 @@ export default {
 
     async initTree2() {
       let res = await this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetModelingDetailProcessList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetModelingDetailProcessList',
         sendParam: {
           processrouteid: this.RoutingData[0].PROCESSROUTEID,
           plantid: this.$auth.$state.user.plantId,
         },
-        queryVersion: "00002",
+        queryVersion: '00002',
       });
 
       res = res.map((x, idx) => {
         return {
           ...x,
-          icon: x.PROCESSSTATUS ? null : "PROCESS",
+          icon: x.PROCESSSTATUS ? null : 'PROCESS',
         };
       });
 
       res.unshift({
-        LOTID: "",
+        LOTID: '',
         PROCESSID: this.RoutingData[0].PROCESSROUTEID,
-        PROCESSNAME: "ReworkRoute",
-        PROCESSROUTEID: "",
-        PROCESSDESC: "", // PROCESSROUTETYPENAME
-        PROCESSSEQUENCE: "1",
-        PROCESSCOMPLETESTATUS: "",
-        PROCESSSTATUS: "PROCESSROUTE",
-        icon: "PROCESSROUTE",
+        PROCESSNAME: 'ReworkRoute',
+        PROCESSROUTEID: '',
+        PROCESSDESC: '', // PROCESSROUTETYPENAME
+        PROCESSSEQUENCE: '1',
+        PROCESSCOMPLETESTATUS: '',
+        PROCESSSTATUS: 'PROCESSROUTE',
+        icon: 'PROCESSROUTE',
         PLANTID: this.$auth.$state.user.plantId,
       });
-      const data = res.map((x) => ({ ...x, expanded: true }));
+      const data = res.map(x => ({ ...x, expanded: true }));
 
-      this.treeData2 = utils2.makeTreeData(data, "PROCESSID", "PROCESSROUTEID");
+      this.treeData2 = utils2.makeTreeData(data, 'PROCESSID', 'PROCESSROUTEID');
     },
     //Lot상세보기
     popDetailView() {
       this.selectedLot = this.gridData[0];
-      this.$refs.detailView.show("Lot 상세보기");
+      this.$refs.detailView.show('Lot 상세보기');
     },
   },
 };

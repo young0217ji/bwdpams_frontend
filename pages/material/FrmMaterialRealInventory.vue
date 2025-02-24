@@ -5,7 +5,7 @@
       <li>자재관리</li>
       <li>재고실사</li>
     </ol>
-    <v-row ref="searchFilter" >
+    <v-row ref="searchFilter">
       <v-col :cols="12">
         <Card>
           <CardBody>
@@ -22,7 +22,7 @@
                       :ref="'comboArea'"
                       :allYN="true"
                       :dataNm="'areaid'"
-                      :queryId="'GetWarehouseList'"
+                      :queryId="'GetWhouseList'"
                       :inputcol="inputcol"
                       :defaultvalue="defaultvalue"
                       :sendParam="{
@@ -44,7 +44,6 @@
                   </div>
                 </div>
               </v-col>
-
             </v-row>
             <v-row>
               <v-col :sm="9" :lg="10">
@@ -56,7 +55,7 @@
                       :dataNm="'materialid'"
                       :disabled="false"
                       :searchOption="true"
-                      :searchFunc="searchBtn"  
+                      :searchFunc="searchBtn"
                       @input-text-set="searchInput"
                     />
                   </div>
@@ -67,26 +66,32 @@
                       :dataNm="'materialname'"
                       :disabled="false"
                       :searchOption="true"
-                      :searchFunc="searchBtn"  
+                      :searchFunc="searchBtn"
                       @input-text-set="searchInput"
                     />
                   </div>
                   <div class="form-group">
                     <label>자재LotID</label>
                     <InputText
-                        ref="materiallotid"
-                        :dataNm="'materiallotid'"
-                        :disabled="false"
-                        :searchOption="true"
-                        :searchFunc="searchBtn"  
-                        @input-text-set="searchInput"
-                      />
+                      ref="materiallotid"
+                      :dataNm="'materiallotid'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                 </div>
               </v-col>
               <v-row no-gutters justify="end">
                 <v-col :cols="12" align="right">
-                  <Button :theme-color="'primary'" :size="'medium'" icon="search" @click="searchBtn">조회</Button>
+                  <Button
+                    :theme-color="'primary'"
+                    :size="'medium'"
+                    icon="search"
+                    @click="searchBtn"
+                    >조회</Button
+                  >
                 </v-col>
               </v-row>
             </v-row>
@@ -103,16 +108,38 @@
                 <CardTitle>재고실사</CardTitle>
               </v-col>
               <v-col cols="6" align="right">
-                <Button :theme-color="'primary'" :size="'small'" icon="save" @click="saveBtn">저장</Button>
-                <Button :theme-color="'primary'" :size="'small'" @click="downloadExcel()">엑셀저장</Button>
-                <Button class="file-upload-btn" :theme-color="'primary'" :size="'small'" @click="$refs.fileInput.click()">엑셀업로드</Button>
-                <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;">
-                <kendo-grid :data-source="this.gridData" style="display: none;">
+                <Button
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  icon="save"
+                  @click="saveBtn"
+                  >저장</Button
+                >
+                <Button
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  @click="downloadExcel()"
+                  >엑셀저장</Button
+                >
+                <Button
+                  class="file-upload-btn"
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  @click="$refs.fileInput.click()"
+                  >엑셀업로드</Button
+                >
+                <input
+                  type="file"
+                  ref="fileInput"
+                  @change="handleFileUpload"
+                  style="display: none"
+                />
+                <kendo-grid :data-source="this.gridData" style="display: none">
                 </kendo-grid>
               </v-col>
             </v-row>
             <div ref="divWrapper" :style="{ height: 'calc(100% - 33px)' }">
-              <KendoGrid 
+              <KendoGrid
                 ref="rowGrid"
                 :gridHeight="gridHeight"
                 :gridItems="gridData"
@@ -130,303 +157,295 @@
                 @sortChangeHandler="sortChangeHandler"
               />
             </div>
-        </CardBody>
-      </Card>
-    </v-col>
-  </v-row>
-    <AlertPop 
-      ref="alertPop"
-      :is="'alertPop'"
-    />
+          </CardBody>
+        </Card>
+      </v-col>
+    </v-row>
+    <AlertPop ref="alertPop" :is="'alertPop'" />
     <SearchModal
       ref="SearchModal"
       v-if="searchModalVisible"
       :visibleDialog="searchModalVisible"
       :title="'title'"
       :message="'message'"
-      :screenType="'frmWarehouseStockManagement'"
+      :screenType="'frmWhouseStockMgmt'"
       :data="data"
       :callBack="() => {}"
-      @visibleDialog="(val) => (searchModalVisible = val)"
+      @visibleDialog="val => (searchModalVisible = val)"
     />
   </div>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid"
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
+import mixinGlobal from '@/mixin/global.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 import { TreeView, processTreeViewItems } from '@progress/kendo-vue-treeview';
-import { Button } from "@progress/kendo-vue-buttons";
+import { Button } from '@progress/kendo-vue-buttons';
 import InputText from '../../components/common/input/InputText.vue';
-import { AutoComplete, ComboBox, DropDownList, MultiSelect } from '@progress/kendo-vue-dropdowns';
-import { Dialog, DialogActionsBar, Window } from "@progress/kendo-vue-dialogs";
-import MesSelectBox from "@/components/common/select/MesSelectBox";
-import MesVariableSelectBox from "@/components/common/select/MesVariableSelectBox";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
+import {
+  AutoComplete,
+  ComboBox,
+  DropDownList,
+  MultiSelect,
+} from '@progress/kendo-vue-dropdowns';
+import { Dialog, DialogActionsBar, Window } from '@progress/kendo-vue-dialogs';
+import MesSelectBox from '@/components/common/select/MesSelectBox';
+import MesVariableSelectBox from '@/components/common/select/MesVariableSelectBox';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
 import XLSX from 'xlsx';
 import { saveAs, encodeBase64 } from '@progress/kendo-file-saver';
-import SearchModal from "@/components/frmWarehouseStockManagement/SearchModal";
-
+import SearchModal from '@/components/frmWhouseStockMgmt/SearchModal';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
     title: () => {
       return myTitle;
     },
-    menuId : myMenuId,
-    closable: true
+    menuId: myMenuId,
+    closable: true,
   },
   components: {
     Utility,
     Card,
     Button,
-    CardBody, 
+    CardBody,
     window: Window,
     CardTitle,
     TreeView,
     KendoGrid,
     InputText,
-    'dropdownlist': DropDownList,
-    'kbutton': Button,
+    dropdownlist: DropDownList,
+    kbutton: Button,
     MesSelectBox,
     MesVariableSelectBox,
     XLSX,
     saveAs,
-    SearchModal,    
+    SearchModal,
   },
   data() {
     return {
       gridHeader: [
         { field: 'yyyymm', headerName: '마감기준일', width: 150 },
         { field: 'materialid', headerName: '자재코드', width: 150 },
-        { field: 'materialname', headerName: '자재명', width: 300 }
+        { field: 'materialname', headerName: '자재명', width: 300 },
       ],
-      columns: [ ],
-      gridOriData : [],
-      gridHeight : '100px',
-      gridData : [],
+      columns: [],
+      gridOriData: [],
+      gridHeight: '100px',
+      gridData: [],
       selectedField: 'selected',
-      checkHeaderArr: ["ACTIVESTATE"], 
+      checkHeaderArr: ['ACTIVESTATE'],
       headerParam: {
-      gridid: "dgvMaterialRealInventory", // 그리드 ID
-      rowStat: "", //rowStat 표시 여부
-      noFirstCheck: true,
-      noRowstat: false,
-      gridHeader: []
+        gridid: 'dgvMaterialRealInventory', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
+        noFirstCheck: true,
+        noRowstat: false,
+        gridHeader: [],
       },
       visibleWindow: false,
       show: false,
-      gridDropDownList:[
-      {dataVal : 'WAREHOUSENAME', dataItem: []},
-      {dataVal : 'MATERIALTYPE', dataItem: []},
+      gridDropDownList: [
+        { dataVal: 'WAREHOUSENAME', dataItem: [] },
+        { dataVal: 'MATERIALTYPE', dataItem: [] },
       ],
-      warehouseid: "",
-      warehousename: "",
-      materialid : "",
-      materialname : "",
-      materialtype: "",
-      realqty: "",
-      materiallotid: "",
-      intputStockqty: "",
-      intputRealqty: "",
-      inputcol: ["WAREHOUSEID", "WAREHOUSENAME"],
+      warehouseid: '',
+      warehousename: '',
+      materialid: '',
+      materialname: '',
+      materialtype: '',
+      realqty: '',
+      materiallotid: '',
+      intputStockqty: '',
+      intputRealqty: '',
+      inputcol: ['WAREHOUSEID', 'WAREHOUSENAME'],
       stockMonth: [],
-      stockMonthStr: "",
+      stockMonthStr: '',
       searchModalVisible: false,
-      defaultvalue: "",
-      loginInfo: "",
-      plantID: this.$auth.$state.user.plantId
+      defaultvalue: '',
+      loginInfo: '',
+      plantID: this.$auth.$state.user.plantId,
     };
-
   },
-  created() {
-  },
+  created() {},
   async mounted() {
     await this.getHeaderMulti(this.headerParam, this.$refs.divWrapper);
     this.areaid = this.$refs.comboArea.value; // 창고콤보 첫번째 고정
     await this.getStockMonth();
     //this.headerParam.gridHeader[1].hidden = true;
     await this.getGridData();
-    
-  }
-  ,
+  },
   computed: {
-    buttonText: function(){
-       return this.show ? 'Hide' : 'Show';
-     }
-
+    buttonText: function () {
+      return this.show ? 'Hide' : 'Show';
+    },
   },
-  watch: {
-  },
+  watch: {},
   methods: {
-
     handleUploadClick() {
-      this.$refs.fileInput.click()
+      this.$refs.fileInput.click();
     },
     //검색 인풋 변경시
-    searchInput(nm, val){
-        this[nm] = val;
+    searchInput(nm, val) {
+      this[nm] = val;
     },
-    searchBtn(){
-     this.$refs.rowGrid.sortField = [{}];
-     this.$refs.rowGrid.skip = 0;
-     this.getGridData();
+    searchBtn() {
+      this.$refs.rowGrid.sortField = [{}];
+      this.$refs.rowGrid.skip = 0;
+      this.getGridData();
     },
-    saveBtn(data){
-      const saveData = this.gridData.filter(x => x.rowStat !== "N")
-      .map(x => {
-        return { 
-          _ROWSTATUS: x._ROWSTATUS,
-          WAREHOUSEID: x.WAREHOUSEID,
-          HOLDQTY: x.HOLDQTY,
-          MATERIALID: x.MATERIALID,
-          CONSUMEQTY: x.CONSUMEQTY,
-          RECEIPTDATE: x.RECEIPTDATE,
-          PLANTID: x.PLANTID,
-          MATERIALNAME: x.MATERIALNAME,
-          STOCKQTY: x.STOCKQTY,
-          MATERIALTYPE: x.MATERIALTYPE,
-          COMPANYNAME: x.COMPANYNAME,
-          REALQTY: x.REALQTY,
-          VENDOR: x.VENDOR,
-          RETURNDETAILMESSAGE: x.RETURNDETAILMESSAGE,
-          LASTEVENTTIMEKEY: x.LASTEVENTTIMEKEY,
-          SCRAPQTY: x.SCRAPQTY,
-          OPENINGQTY: x.OPENINGQTY,
-          _ROWSTATUSIMAGE: x._ROWSTATUSIMAGE,
-          BONUSQTY: x.BONUSQTY,
-          MATERIALTYPENAME: x.MATERIALTYPENAME,
-          YYYYMM: x.YYYYMM,
-          MATERIALLOTID: x.MATERIALLOTID,
-          OUTQTY: x.OUTQTY,
-          INQTY: x.INQTY,
-          WAREHOUSENAME: x.WAREHOUSENAME
-        }
-      });
-      
-      if(saveData.length > 0){
-        console.log(saveData)
+    saveBtn(data) {
+      const saveData = this.gridData
+        .filter(x => x.rowStat !== 'N')
+        .map(x => {
+          return {
+            _ROWSTATUS: x._ROWSTATUS,
+            WAREHOUSEID: x.WAREHOUSEID,
+            HOLDQTY: x.HOLDQTY,
+            MATERIALID: x.MATERIALID,
+            CONSUMEQTY: x.CONSUMEQTY,
+            RECEIPTDATE: x.RECEIPTDATE,
+            PLANTID: x.PLANTID,
+            MATERIALNAME: x.MATERIALNAME,
+            STOCKQTY: x.STOCKQTY,
+            MATERIALTYPE: x.MATERIALTYPE,
+            COMPANYNAME: x.COMPANYNAME,
+            REALQTY: x.REALQTY,
+            VENDOR: x.VENDOR,
+            RETURNDETAILMESSAGE: x.RETURNDETAILMESSAGE,
+            LASTEVENTTIMEKEY: x.LASTEVENTTIMEKEY,
+            SCRAPQTY: x.SCRAPQTY,
+            OPENINGQTY: x.OPENINGQTY,
+            _ROWSTATUSIMAGE: x._ROWSTATUSIMAGE,
+            BONUSQTY: x.BONUSQTY,
+            MATERIALTYPENAME: x.MATERIALTYPENAME,
+            YYYYMM: x.YYYYMM,
+            MATERIALLOTID: x.MATERIALLOTID,
+            OUTQTY: x.OUTQTY,
+            INQTY: x.INQTY,
+            WAREHOUSENAME: x.WAREHOUSENAME,
+          };
+        });
+
+      if (saveData.length > 0) {
+        console.log(saveData);
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnMaterialRealInventory",
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnMaterialRealInventory',
           sendParam: saveData,
-        }).then( result => {
+        }).then(result => {
           this.$nextTick(() => {
             if (result.returncode !== undefined && result.returncode === '0') {
-            this.getGridData();
-            this.$refs.alertPop.show("알림", "저장되었습니다.");
+              this.getGridData();
+              this.$refs.alertPop.show('알림', '저장되었습니다.');
             } else {
               this.$refs.alertPop.show(
                 'ERROR : ' + result.code,
                 result.message
               );
             }
-          })
-        })
+          });
+        });
       }
     },
-    onClick () {
-        this.show = !this.show;
+    onClick() {
+      this.show = !this.show;
     },
 
     //재고실사 그리드 데이터 가져오기
     async getGridData() {
-      
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetMaterialRealInventory",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetMaterialRealInventory',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          yyyymm: "202201",
+          yyyymm: '202201',
           warehouseid: this.areaid,
           materialid: this.materialid,
           materialname: this.materialname,
           materialtype: this.materialtype,
           materiallotid: this.materiallotid,
-        }
-      }).then((res) => {
-         const data = res.map((x, idx) => {
-          console.log("----------",x,idx)
+        },
+      }).then(res => {
+        const data = res.map((x, idx) => {
+          console.log('----------', x, idx);
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
-            newRow: false
-          }
+            newRow: false,
+          };
         });
-        console.log("data ====== ", data)
-        this.$nuxt.$emit('iccReset')
+        console.log('data ====== ', data);
+        this.$nuxt.$emit('iccReset');
         // gridHeader Customations
         //this.headerParam.gridHeader[1].hidden = true;
         this.gridOriData = data;
         this.gridData = data;
-      })
+      });
     },
- 
+
     //그리드 로우 클릭
-    onRowClick (event) {
-      console.log("===========onRowClick==============");
+    onRowClick(event) {
+      console.log('===========onRowClick==============');
       //그리드 로우 클릭시 라인표시 유무 확인필요
-       this.gridData.forEach(x => x.selected = false);
+      this.gridData.forEach(x => (x.selected = false));
       event.dataItem[this.selectedField] = true;
     },
     //맨앞 checkBox 클릭
-    onSelectionchange (event) {
-      console.log("===========onSelectionchange==============")
+    onSelectionchange(event) {
+      console.log('===========onSelectionchange==============');
       event.dataItem[this.selectedField] = !event.dataItem[this.selectedField];
     },
     //그리드 콤보박스 리스트가져오기
-    async getGridComboList(){
+    async getGridComboList() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetEnumValue",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEnumValue',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          enumid: "WarehouseName"
-        }
-      }).then((data) => {
+          enumid: 'WarehouseName',
+        },
+      }).then(data => {
         this.gridDropDownList[0].dataItem = data;
-      })
+      });
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetEnumValue",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEnumValue',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          enumid: "MATERIALTYPE"
-        }
-      }).then((data) => {
+          enumid: 'MATERIALTYPE',
+        },
+      }).then(data => {
         this.gridDropDownList[1].dataItem = data;
-      })
-
+      });
     },
-    comboChange(nm, val){
+    comboChange(nm, val) {
       this[nm] = val;
     },
     //그리드 인풋 제외 데이터 변경시
     rowDdChange(e, name, dataItem) {
-      const idx = this.gridData.findIndex((x) => x.idx === dataItem.idx);
+      const idx = this.gridData.findIndex(x => x.idx === dataItem.idx);
       const data = JSON.parse(JSON.stringify(this.gridData));
 
       data[idx] = { ...data[idx], [name]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.chkOriginalData(data, idx)) {
-        data[idx].rowStat = "N";
+      if (data[idx].rowStat === 'U' && !this.chkOriginalData(data, idx)) {
+        data[idx].rowStat = 'N';
       }
 
       this.gridData = data;
@@ -434,39 +453,39 @@ export default {
     //그리드 인풋 데이터 변경시
     griditemchange(e) {
       const data = JSON.parse(JSON.stringify(this.gridData));
-      const idx = data.findIndex((x) => x.idx === e.dataItem.idx);
-      console.log(idx)
+      const idx = data.findIndex(x => x.idx === e.dataItem.idx);
+      console.log(idx);
       data[idx] = { ...data[idx], [e.field]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.chkOriginalData(data, idx)) {
-        data[idx].rowStat = "N";
+      if (data[idx].rowStat === 'U' && !this.chkOriginalData(data, idx)) {
+        data[idx].rowStat = 'N';
       }
-        this.gridData = data;
-      },
+      this.gridData = data;
+    },
     //데이터 원상복구시 "수정" 항목 제거
     chkOriginalData(gridData, idx) {
       const data = JSON.parse(JSON.stringify(gridData));
       const keys = Object.keys(data[idx]);
-      const chkArr = keys.filter((x) => {
-        return data[idx][x] !== this.gridOriData[idx][x] && x !== "rowStat";
+      const chkArr = keys.filter(x => {
+        return data[idx][x] !== this.gridOriData[idx][x] && x !== 'rowStat';
       });
       return chkArr.length > 0;
     },
     // 년월목록
     async getStockMonth() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetStockMonth",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetStockMonth',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: false,
@@ -476,39 +495,39 @@ export default {
 
         console.log(this.stockMonth);
         this.stockMonthStr =
-          this.stockMonth[0].YYYYMM + "-" + this.stockMonth[0].STATENAME;
+          this.stockMonth[0].YYYYMM + '-' + this.stockMonth[0].STATENAME;
       });
     },
     downloadExcel() {
       const header = {
-        'PLANTID': '공장코드',
-        'YYYYMM': '마감기준일',
-        'MATERIALID': '자재코드',
-        'MATERIALNAME': '자재명',
-        'MATERIALLOTID': '자재LotID',
-        'WAREHOUSEID': '창고코드',
-        'WAREHOUSENAME': '창고이름',
-        'MATERIALTYPE': '자재구분',
-        'MATERIALTYPENAME': '자재구분명',
-        'VENDOR': '공급업체코드',
-        'LASTEVENTTIMEKEY': '마지막 EventTimekey',
-        'RECEIPTDATE': '입고일자',
-        'OPENINGQTY': '초기재고수량',
-        'STOCKQTY': '현재고수량',    
-        'REALQTY': '실사수량',
-        'INQTY': '입고수량',
-        'BONUSQTY': 'Bonus수량',
-        'CONSUMEQTY': '사용수량',
-        'SCRAPQTY': 'Scrap수량',
-        'OUTQTY': '출고수량',
-        'HOLDQTY': '보류수량',
-        'COMPANYNAME': '공급업체',
-        'ERRORMESSAGE': '오류메시지',
+        PLANTID: '공장코드',
+        YYYYMM: '마감기준일',
+        MATERIALID: '자재코드',
+        MATERIALNAME: '자재명',
+        MATERIALLOTID: '자재LotID',
+        WAREHOUSEID: '창고코드',
+        WAREHOUSENAME: '창고이름',
+        MATERIALTYPE: '자재구분',
+        MATERIALTYPENAME: '자재구분명',
+        VENDOR: '공급업체코드',
+        LASTEVENTTIMEKEY: '마지막 EventTimekey',
+        RECEIPTDATE: '입고일자',
+        OPENINGQTY: '초기재고수량',
+        STOCKQTY: '현재고수량',
+        REALQTY: '실사수량',
+        INQTY: '입고수량',
+        BONUSQTY: 'Bonus수량',
+        CONSUMEQTY: '사용수량',
+        SCRAPQTY: 'Scrap수량',
+        OUTQTY: '출고수량',
+        HOLDQTY: '보류수량',
+        COMPANYNAME: '공급업체',
+        ERRORMESSAGE: '오류메시지',
       };
 
       // Header의 Key 값으로 배열 생성
       const headerKeys = Object.keys(header).slice(0, 22);
-      
+
       // Header의 Key 값으로 Header 객체 새로 생성
       const newHeader = headerKeys.reduce((acc, key) => {
         acc[key] = header[key];
@@ -526,14 +545,21 @@ export default {
         return newRow;
       });
 
-    // 시트 생성
-    const sheet = XLSX.utils.json_to_sheet(newGridData, { header: Object.values(header) });
+      // 시트 생성
+      const sheet = XLSX.utils.json_to_sheet(newGridData, {
+        header: Object.values(header),
+      });
 
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, sheet, '현황리스트');
 
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      const excelBlob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      const excelBlob = new Blob([excelBuffer], {
+        type: 'application/octet-stream',
+      });
       saveAs(excelBlob, '재고실사 현황리스트.xlsx');
     },
 
@@ -541,48 +567,48 @@ export default {
     handleFileUpload(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const data = e.target.result;
         const workbook = XLSX.read(data, { type: 'binary' });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-        const gridData = json.slice(1).map((row,idx) => {
-        return {
-          PLANTID: row[0],
-          YYYYMM: row[1],
-          MATERIALID: row[2],
-          MATERIALNAME: row[3],
-          MATERIALLOTID: row[4],
-          WAREHOUSEID: row[5],
-          WAREHOUSENAME: row[6],
-          MATERIALTYPE: row[7],
-          MATERIALTYPENAME: row[8],
-          VENDOR:row[9],
-          LASTEVENTTIMEKEY:row[10],
-          RECEIPTDATE: row[11],
-          OPENINGQTY: row[12],
-          STOCKQTY: row[13],
-          REALQTY: row[14],
-          INQTY: row[15],
-          BONUSQTY: row[16],
-          CONSUMEQTY: row[17],
-          SCRAPQTY: row[18],
-          OUTQTY: row[19],
-          HOLDQTY: row[20],
-          COMPANYNAME: row[21],
-          ERRORMESSAGE: row[22],
+        const gridData = json.slice(1).map((row, idx) => {
+          return {
+            PLANTID: row[0],
+            YYYYMM: row[1],
+            MATERIALID: row[2],
+            MATERIALNAME: row[3],
+            MATERIALLOTID: row[4],
+            WAREHOUSEID: row[5],
+            WAREHOUSENAME: row[6],
+            MATERIALTYPE: row[7],
+            MATERIALTYPENAME: row[8],
+            VENDOR: row[9],
+            LASTEVENTTIMEKEY: row[10],
+            RECEIPTDATE: row[11],
+            OPENINGQTY: row[12],
+            STOCKQTY: row[13],
+            REALQTY: row[14],
+            INQTY: row[15],
+            BONUSQTY: row[16],
+            CONSUMEQTY: row[17],
+            SCRAPQTY: row[18],
+            OUTQTY: row[19],
+            HOLDQTY: row[20],
+            COMPANYNAME: row[21],
+            ERRORMESSAGE: row[22],
 
-          rowStat : "N",
-           selected: false,
+            rowStat: 'N',
+            selected: false,
             inEdit: true,
             newRow: false,
-            idx:idx
-        };
-      });
-         if (gridData.length > 0) {
-        this.gridData = gridData;
-         }
+            idx: idx,
+          };
+        });
+        if (gridData.length > 0) {
+          this.gridData = gridData;
+        }
       };
       reader.readAsBinaryString(file);
     },
@@ -603,25 +629,21 @@ export default {
     //     this.gridData.stock = this.gridData.stock.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
     //   }
     // }
-    sortChangeHandler(e){
+    sortChangeHandler(e) {
       this.gfn_sortChangeHandler(this.gridData, e);
-    }
+    },
   },
-
-  }
-
-
-
-const defaultData = {
 };
+
+const defaultData = {};
 </script>
 <style lang="scss">
-    .windowContent {
-        width: 1300px !important;
-        height: 1300px !important;
-    }
-    .calendar-info {
-    display: inline-block;  /* inline-block으로 변경 */
-    width: 166px;  /* 원하는 가로 넓이 설정 */
-    }
+.windowContent {
+  width: 1300px !important;
+  height: 1300px !important;
+}
+.calendar-info {
+  display: inline-block; /* inline-block으로 변경 */
+  width: 166px; /* 원하는 가로 넓이 설정 */
+}
 </style>

@@ -124,23 +124,21 @@
   </div>
 </template>
 <script>
-import Utility from "~/plugins/utility";
-import { Dialog, DialogActionsBar } from "@progress/kendo-vue-dialogs";
-import { Button } from "@progress/kendo-vue-buttons";
-import mixinGlobal from "@/mixin/global.js";
-import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import KendoGrid from "@/components/common/KendoGrid";
-import InputText from "@/components/common/input/InputText";
-import { DatePicker } from "@progress/kendo-vue-dateinputs";
-import FadeLoader from "vue-spinner/src/FadeLoader.vue";
-import Checkbox from "@/components/common/input/Checkbox";
-import moment from "moment";
-import { orderBy } from "@progress/kendo-data-query";
-
-
+import Utility from '~/plugins/utility';
+import { Dialog, DialogActionsBar } from '@progress/kendo-vue-dialogs';
+import { Button } from '@progress/kendo-vue-buttons';
+import mixinGlobal from '@/mixin/global.js';
+import gridHeaderMinin from '@/mixin/gridHeaderMinin.js';
+import KendoGrid from '@/components/common/KendoGrid';
+import InputText from '@/components/common/input/InputText';
+import { DatePicker } from '@progress/kendo-vue-dateinputs';
+import FadeLoader from 'vue-spinner/src/FadeLoader.vue';
+import Checkbox from '@/components/common/input/Checkbox';
+import moment from 'moment';
+import { orderBy } from '@progress/kendo-data-query';
 
 export default {
-  name: "LotSearchModal",
+  name: 'LotSearchModal',
   mixins: [mixinGlobal, gridHeaderMinin],
   components: {
     Utility,
@@ -167,38 +165,38 @@ export default {
     return {
       gridHeader: [],
       gridData: [],
-      gridHeight: "400px",
-      selectedField: "selected",
+      gridHeight: '400px',
+      selectedField: 'selected',
       headerParam: {
-        gridid: "dgvLotList", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvLotList', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
       },
-      disabledCheckHeaderArr: ["ACTIVESTATE", "CONFIRMFLAG", "COMMONFLAG"],
+      disabledCheckHeaderArr: ['ACTIVESTATE', 'CONFIRMFLAG', 'COMMONFLAG'],
       noFirstCheck: true,
       noRowstat: true,
       selectedID: null,
-      lotid: "",
-      productid: "",
+      lotid: '',
+      productid: '',
       isLoading: true,
       chkLot: true,
       chkDate: false,
 
-      fromdate: moment().subtract(1, "weeks").format("YYYY-MM-DD"),
-      todate: moment().format("YYYY-MM-DD"),
+      fromdate: moment().subtract(1, 'weeks').format('YYYY-MM-DD'),
+      todate: moment().format('YYYY-MM-DD'),
       sortField: [{}],
     };
   },
   computed: {
     items() {
-      return this.gridData.map((item) => ({
+      return this.gridData.map(item => ({
         ...item,
         selected: item.LOTID === this.selectedID,
       }));
     },
   },
   async mounted() {
-    this.fromdate = Utility.setFormatDate(this.fromdate, "YYYYMMDD");
-    this.todate = Utility.setFormatDate(this.todate, "YYYYMMDD");
+    this.fromdate = Utility.setFormatDate(this.fromdate, 'YYYYMMDD');
+    this.todate = Utility.setFormatDate(this.todate, 'YYYYMMDD');
     await this.getGridData();
   },
   methods: {
@@ -210,34 +208,34 @@ export default {
     //그리드 데이터 가져오기
     async getGridData() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetLotSearchList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetLotSrchList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           lotid: this.lotid,
-          lotstate: this.chkLot ? "Released" : "",
+          lotstate: this.chkLot ? 'Released' : '',
           productid: this.productid,
           fromdate: this.fromdate,
           todate: this.todate,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
           };
         });
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.gridData = data;
         this.isLoading = false;
       });
     },
     toggleDialog() {
-      this.$emit("visibleDialog", !this.visibleDialog);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     //그리드 로우 클릭
     onRowClick(event) {
@@ -245,34 +243,34 @@ export default {
     },
     //그리드 더블 클릭
     rowdblclick(event) {
-      this.$emit("selectLotId", event.dataItem);
-      this.$emit("searchBtn", event.dataItem);
-      this.$emit("visibleDialog", !this.visibleDialog);
+      this.$emit('selectLotId', event.dataItem);
+      this.$emit('searchBtn', event.dataItem);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     //row 선택
     selectRow(event) {
-      const returnData = this.items.filter((x) => x.selected);
-      this.$emit("selectLotId", returnData[0]);
-      this.$emit("searchBtn", returnData[0]);
-      this.$emit("visibleDialog", !this.visibleDialog);
+      const returnData = this.items.filter(x => x.selected);
+      this.$emit('selectLotId', returnData[0]);
+      this.$emit('searchBtn', returnData[0]);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     searchInput(nm, val) {
       this[nm] = val;
     },
     toChange(e) {
-      this.todate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.todate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     fromChange(e) {
-      this.fromdate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.fromdate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     chkVal(nm, val) {
-      this[nm] = val ? "Released" : "";
+      this[nm] = val ? 'Released' : '';
     },
     // 필터 정렬
     // sortChangeHandler(e) {
     //   this.gridData = orderBy(this.gridData, e.sort);
     // },
-    sortChangeHandler(e){
+    sortChangeHandler(e) {
       this.gfn_sortChangeHandler(this.gridData, e);
     },
   },

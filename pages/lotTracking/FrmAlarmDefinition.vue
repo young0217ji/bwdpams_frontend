@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00665") }}</li> <!-- 공정관리 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00663") }}</li> <!-- 이상발생기준정보관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00665') }}</li>
+      <!-- 공정관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00663') }}</li>
+      <!-- 이상발생기준정보관리 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -16,8 +19,9 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</kbutton
-                >   <!-- 조회 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</kbutton
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -25,11 +29,7 @@
       </v-col>
     </v-row>
     <v-row ref="contents">
-      <v-col
-        :cols="3"
-        :class="'divListWapper'"
-        :style="{ height: '100%' }"
-      >
+      <v-col :cols="3" :class="'divListWapper'" :style="{ height: '100%' }">
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%' }">
             <v-row>
@@ -37,7 +37,13 @@
                 <CardTitle></CardTitle>
               </v-col>
               <v-col align="right">
-                <kbutton :style="{ width:'25px' }" :theme-color="'primary'" :size="'small'" @click="maximizeTree">{{this.treeBtn}}</kbutton>
+                <kbutton
+                  :style="{ width: '25px' }"
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  @click="maximizeTree"
+                  >{{ this.treeBtn }}</kbutton
+                >
               </v-col>
             </v-row>
             <div ref="divWrapper" :style="{ height: '96%' }">
@@ -54,16 +60,15 @@
           </CardBody>
         </Card>
       </v-col>
-      <v-col
-        :cols="9"
-        :class="'divListWapper'"
-        :style="{ height: '100%' }"
-      >
+      <v-col :cols="9" :class="'divListWapper'" :style="{ height: '100%' }">
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ height: '100%' }">
             <v-row>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00664") }}</CardTitle> <!-- 이상발생 목록 -->
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00664')
+                }}</CardTitle>
+                <!-- 이상발생 목록 -->
               </v-col>
               <v-col cols="6" align="right">
                 <kbutton
@@ -71,22 +76,25 @@
                   :size="'small'"
                   :icon="'save'"
                   @click="saveBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton
-                > <!-- 저장 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
+                >
+                <!-- 저장 -->
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'add'"
                   @click="addBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00411") }}</kbutton
-                > <!-- 추가 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00411') }}</kbutton
+                >
+                <!-- 추가 -->
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'delete'"
                   @click="confirmDel"
-                  >{{ $t("MES_CommLang.MES_CommLang_00412") }}</kbutton
-                > <!-- 삭제 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00412') }}</kbutton
+                >
+                <!-- 삭제 -->
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
@@ -110,7 +118,7 @@
                 :checkHeaderArr="headerParam.checkBox"
                 :isPaging="true"
                 :reSetPage="this.reSetPage"
-                :customCell="customCell" 
+                :customCell="customCell"
                 @gridddchang="rowDdChange"
                 @griditemchange="griditemchange"
                 @gridrowclick="onRowClick"
@@ -149,7 +157,7 @@
       </v-col> -->
       </v-col>
 
-        <!-- 하단 그리드 추가 끝-->
+      <!-- 하단 그리드 추가 끝-->
     </v-row>
     <AlertPop ref="alertPop" :is="'alertPop'" />
     <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
@@ -157,7 +165,7 @@
 </template>
 <script>
 import mixinGlobal from '@/mixin/global.js';
-import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
+import gridHeaderMinin from '@/mixin/gridHeaderMinin.js';
 //   import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
 import Utility from '~/plugins/utility';
 import KendoGrid from '@/components/common/KendoGrid';
@@ -168,7 +176,6 @@ import utils from '~/plugins/utils';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -193,7 +200,7 @@ export default {
     CardTitle,
     KendoGrid,
     KendoTree,
-    gridHeaderMinin
+    gridHeaderMinin,
   },
   data() {
     return {
@@ -237,16 +244,16 @@ export default {
         checkBox: [],
         gridDropDownList: [
           {
-              dataVal: "ALARMID",
-              dataItem: [],
-              disable: false,
+            dataVal: 'ALARMID',
+            dataItem: [],
+            disable: false,
           },
           {
-              dataVal: "ROLEID",
-              dataItem: [],
-              disable: false,
+            dataVal: 'ROLEID',
+            dataItem: [],
+            disable: false,
           },
-          ],
+        ],
       },
       treeActiveItem: {},
       reSetPage: false,
@@ -255,21 +262,19 @@ export default {
 
       maximize: true,
       treeBtn: '-',
-      currTreeData:{},
-     
-        customCell: ['ALARMID', 'ROLEID'],
-        selectedEquipmentId: '',
-        gridOriDataEquipment:[],
-        gridDataEquipment: [],
+      currTreeData: {},
 
-      
+      customCell: ['ALARMID', 'ROLEID'],
+      selectedEquipmentId: '',
+      gridOriDataEquipment: [],
+      gridDataEquipment: [],
     };
   },
   created() {},
   async mounted() {
     this.gridHeight = this.$refs.contents.offsetHeight - 180 + 'px';
-  //   await this.getHeaderMulti(this.headerParam, this.$refs.divWrapper);
-  //   await this.getHeaderMulti(this.sparePartHeaderParam, this.$refs.divWrapper2);
+    //   await this.getHeaderMulti(this.headerParam, this.$refs.divWrapper);
+    //   await this.getHeaderMulti(this.sparePartHeaderParam, this.$refs.divWrapper2);
     await this.initTree();
     await this.getGridComboList();
     // await this.getGridComboList();
@@ -315,7 +320,10 @@ export default {
         this.gridData
       );
       if (!validate.isValidate) {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), validate.msg); // 알림
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          validate.msg
+        ); // 알림
         return;
       }
 
@@ -331,7 +339,8 @@ export default {
             if (result.returncode !== undefined && result.returncode === '0') {
               this.$refs.alertPop.show(
                 this.$i18n.t('MES_CommLang.MES_CommLang_00456'), //알림
-                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); //저장되었습니다.
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); //저장되었습니다.
             } else {
               this.$refs.alertPop.show(
                 'ERROR : ' + result.code,
@@ -343,7 +352,8 @@ export default {
       } else {
         this.$refs.alertPop.show(
           this.$i18n.t('MES_CommLang.MES_CommLang_00456'), //알림
-          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); //저장할 데이터가 없습니다.
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); //저장할 데이터가 없습니다.
         return;
       }
     },
@@ -355,13 +365,12 @@ export default {
       );
       this.selected = event.dataItem;
       this.selectedEquimentId = event.dataItem.EQUIPMENTID;
-      console.log("selectedEquimentId",this.selectedEquimentId);
+      console.log('selectedEquimentId', this.selectedEquimentId);
       this.getEquipmentBomData(this.selectedEquimentId);
-
     },
 
     //이상발생목록 그리드 데이터 가져오기
-        async getEquipmentBomData(res) {
+    async getEquipmentBomData(res) {
       // this.gridOriDataEquipment = [];
       // this.gridDataEquipment = [];
       // this.mesGet({
@@ -392,7 +401,6 @@ export default {
       // });
     },
 
-
     //이상발생목록 그리드 데이터 가져오기
     async getGridData(treeId = '') {
       this.gridOriData = [];
@@ -407,17 +415,17 @@ export default {
       }).then(res => {
         const data = res.map((x, idx) => {
           const customCell = {
-          ALARMID: {
-            type: 'combo',
-            dataItem: this.headerParam.gridDropDownList[0].dataItem,
-            disable: false,
-          },
-          ROLEID: {
-            type: 'combo',
-            dataItem: this.headerParam.gridDropDownList[1].dataItem,
-            disable: false,
-          },
-        };
+            ALARMID: {
+              type: 'combo',
+              dataItem: this.headerParam.gridDropDownList[0].dataItem,
+              disable: false,
+            },
+            ROLEID: {
+              type: 'combo',
+              dataItem: this.headerParam.gridDropDownList[1].dataItem,
+              disable: false,
+            },
+          };
           return {
             ...x,
             rowStat: 'N',
@@ -426,7 +434,7 @@ export default {
             inEdit: true,
             newRow: false,
             resizable: true,
-            customCell
+            customCell,
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
@@ -467,44 +475,42 @@ export default {
     },
     async getGridComboList() {
       this.mesGet({
-      apiKey: 'mes/common/getqueryresult',
-      queryId: 'GetAlarmComboList',
-      sendParam: {
-        plantid: this.$auth.$state.user.plantId,
-      },
-    }).then(data => {
-      const combo = data.map(x => {
-        return {
-          ENUMVALUE: x.ALARMID,
-          ENUMVALUENAME: x.ALARMNAME,
-        }
-      })
-      console.log(combo);
-      this.headerParam.gridDropDownList[0].dataItem = combo;
-    });
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetAlarmComboList',
+        sendParam: {
+          plantid: this.$auth.$state.user.plantId,
+        },
+      }).then(data => {
+        const combo = data.map(x => {
+          return {
+            ENUMVALUE: x.ALARMID,
+            ENUMVALUENAME: x.ALARMNAME,
+          };
+        });
+        console.log(combo);
+        this.headerParam.gridDropDownList[0].dataItem = combo;
+      });
       this.getGridComboList2();
-    
-  },
+    },
 
-  async getGridComboList2(){
+    async getGridComboList2() {
       this.mesGet({
-          apiKey: 'mes/common/getqueryresult',
-          queryId: 'GetSFRoleList',
-          sendParam: {
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetSFRoleList',
+        sendParam: {
           plantid: this.$auth.$state.user.plantId,
           ROLETYPE: 'ALARM',
-          },
+        },
       }).then(data => {
-          const combo = data.map(x => {
+        const combo = data.map(x => {
           return {
-              ENUMVALUE: x.ROLEID,
-              ENUMVALUENAME: x.ROLENAME,
-          }
-          })
-          this.headerParam.gridDropDownList[1].dataItem = combo;
+            ENUMVALUE: x.ROLEID,
+            ENUMVALUENAME: x.ROLENAME,
+          };
+        });
+        this.headerParam.gridDropDownList[1].dataItem = combo;
       });
-      
-  },
+    },
     //그리드 인풋 데이터 변경시
     griditemchange(e) {
       const data = JSON.parse(JSON.stringify(this.gridData));
@@ -552,11 +558,10 @@ export default {
           plantid: this.$auth.$state.user.plantId,
         },
       });
-      const data = res
-        .map(x => ({ ...x, expanded: true }));
-        // .sort((a, b) => (a.POSITION || '').localeCompare(b.POSITION || ''));
-      data.map(x=> {
-        if(x.AREATYPE==='WorkCenter'){
+      const data = res.map(x => ({ ...x, expanded: true }));
+      // .sort((a, b) => (a.POSITION || '').localeCompare(b.POSITION || ''));
+      data.map(x => {
+        if (x.AREATYPE === 'WorkCenter') {
           x.icon = 'WORKCENTER';
         }
         this.currTreeData = data;
@@ -575,24 +580,29 @@ export default {
     // 트리 클릭
     onItemClick(event) {
       console.log(this.gridData);
-      if(event.item.AREATYPE === "WorkCenter") {
+      if (event.item.AREATYPE === 'WorkCenter') {
         this.getGridData(event.item.AREAID); // 데이터 없을경우 NullPointerException
         this.gridTitle = event.item.AREANAME;
       }
       this.treeActiveItem = event.item;
       this.selectedWorkcenter = event.item.AREAID;
-      
     },
     // 트리 클릭 시 그리드 타이틀
     setGridTitle() {
       let title = '';
       if (this.curTree.PARENTEQUIPMENTID === '') {
-        title = '[' + this.curTree.EQUIPMENTID + ']' + this.$i18n.t('MES_CommLang.MES_CommLang_00172'); //설비목록
+        title =
+          '[' +
+          this.curTree.EQUIPMENTID +
+          ']' +
+          this.$i18n.t('MES_CommLang.MES_CommLang_00172'); //설비목록
       } else {
         title =
           '[' +
           this.curTree.PARENTEQUIPMENTID +
-          ']'+this.$i18n.t('MES_CommLang.MES_CommLang_00172')+'[' + //설비목록
+          ']' +
+          this.$i18n.t('MES_CommLang.MES_CommLang_00172') +
+          '[' + //설비목록
           this.curTree.EQUIPMENTID +
           '] ' +
           this.curTree.EQUIPMENTNAME;
@@ -600,7 +610,7 @@ export default {
 
       this.gridTitle = title;
     },
-  
+
     //unbo 버튼 클릭
     undoBtn() {
       this.gridData = this.gridOriData.filter(x => x.newRow !== true);
@@ -608,10 +618,11 @@ export default {
     },
     //추가 버튼 클릭
     addBtn() {
-      if(this.treeActiveItem.AREATYPE!=='WorkCenter'){
+      if (this.treeActiveItem.AREATYPE !== 'WorkCenter') {
         this.$refs.alertPop.show(
           this.$i18n.t('MES_CommLang.MES_CommLang_00456'), //알림
-          this.$i18n.t('MES_MsgLang.MES_MsgLang_00225')); //설비를 추가할 WorkCenter를 선택해주세요.
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00225')
+        ); //설비를 추가할 WorkCenter를 선택해주세요.
         return;
       }
 
@@ -653,13 +664,18 @@ export default {
         });
       if (delData.length > 0) {
         this.$refs['confirmPop'].title = 'info';
-        this.$refs['confirmPop'].message = this.$i18n.t('MES_MsgLang.MES_MsgLang_00089'); //선택한 데이터를 삭제 하시겠습니까?
+        this.$refs['confirmPop'].message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00089'
+        ); //선택한 데이터를 삭제 하시겠습니까?
         if (delData.filter(x => x.rowStat !== 'C').length >= 1) {
           var selectedRow = {};
           selectedRow = delData.map(x => x.EQUIPMENTID);
-          this.$refs[
-            'confirmPop'
-          ].message = selectedRow + ' - ' +  this.$i18n.t('MES_MsgLang.MES_MsgLang_00089'); /* 선택한 데이터를 삭제 하시겠습니까? */
+          this.$refs['confirmPop'].message =
+            selectedRow +
+            ' - ' +
+            this.$i18n.t(
+              'MES_MsgLang.MES_MsgLang_00089'
+            ); /* 선택한 데이터를 삭제 하시겠습니까? */
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;
@@ -667,7 +683,7 @@ export default {
       } else {
         this.$refs.alertPop.show(
           this.$i18n.t('MES_CommLang.MES_CommLang_00409'), //확인
-          this.$i18n.t('MES_MsgLang.MES_MsgLang_00088')//선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00088') //선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
         );
         return;
       }
@@ -696,13 +712,16 @@ export default {
       );
     },
 
-        //트리 전체접기 버튼
-    maximizeTree(){
-      this.treeBtn = this.treeBtn==='-'?'+':'-';
+    //트리 전체접기 버튼
+    maximizeTree() {
+      this.treeBtn = this.treeBtn === '-' ? '+' : '-';
       this.maximize = !this.maximize;
-      this.currTreeData = this.currTreeData.map(x => ({ ...x, expanded: this.maximize}));
+      this.currTreeData = this.currTreeData.map(x => ({
+        ...x,
+        expanded: this.maximize,
+      }));
       this.treeData = utils.makeTreeData(this.currTreeData);
-    }
+    },
   },
 };
 

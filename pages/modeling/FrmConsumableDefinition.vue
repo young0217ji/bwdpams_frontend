@@ -1,9 +1,9 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00074") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00232") }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00074') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00232') }}</li>
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,7 +13,7 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00229") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00229') }}</label>
                     <InputText
                       ref="consumableId"
                       :dataNm="'consumableId'"
@@ -24,7 +24,7 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00220") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00220') }}</label>
                     <InputText
                       ref="consumablename"
                       :dataNm="'consumablename'"
@@ -35,7 +35,7 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00225") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00225') }}</label>
                     <MesSelectBox
                       :enumID="'ConsumableType'"
                       :allYN="true"
@@ -51,7 +51,7 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</kbutton 
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</kbutton
                 >
               </v-col>
             </v-row>
@@ -65,7 +65,9 @@
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00221") }}</CardTitle> 
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00221')
+                }}</CardTitle>
               </v-col>
               <v-col cols="6" align="right">
                 <kbutton
@@ -73,21 +75,21 @@
                   :size="'small'"
                   :icon="'save'"
                   @click="saveBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton 
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'add'"
                   @click="addBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00411") }}</kbutton
+                  >{{ $t('MES_CommLang.MES_CommLang_00411') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'delete'"
                   @click="confirmDel"
-                  >{{ $t("MES_CommLang.MES_CommLang_00412") }}</kbutton 
+                  >{{ $t('MES_CommLang.MES_CommLang_00412') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
@@ -140,7 +142,6 @@ import { Button } from '@progress/kendo-vue-buttons';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -242,7 +243,10 @@ export default {
 
       const validate = this.mesValidation(this.gridHeader, this.gridData);
       if (!validate.isValidate) {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), validate.msg);
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          validate.msg
+        );
         return;
       }
 
@@ -255,7 +259,10 @@ export default {
           this.$nextTick(() => {
             this.getGridData();
             if (result.returncode !== undefined && result.returncode === '0') {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140'));
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              );
             } else {
               this.$refs.alertPop.show(
                 'ERROR : ' + result.code,
@@ -265,7 +272,10 @@ export default {
           });
         });
       } else {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143'));
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        );
         return;
       }
     },
@@ -414,7 +424,7 @@ export default {
         }),
         await this.mesGet({
           apiKey: 'mes/common/getqueryresult',
-          queryId: 'GetCompanyDefinitionList',
+          queryId: 'GetCorpDefineList',
           sendParam: {
             plantid: this.$auth.$state.user.plantId,
           },
@@ -470,15 +480,16 @@ export default {
         });
       if (delData.length > 0) {
         this.$refs['confirmPop'].title = 'info';
-        this.$refs['confirmPop'].message = this.$i18n.t('MES_MsgLang.MES_MsgLang_00089');
+        this.$refs['confirmPop'].message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00089'
+        );
         if (delData.filter(x => x.rowStat !== 'C').length >= 1) {
           var selectedRow = {};
           selectedRow = delData
             .filter(x => x.rowStat !== 'C')
             .map(x => x.CONSUMABLEID);
-          this.$refs[
-            'confirmPop'
-          ].message = `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
+          this.$refs['confirmPop'].message =
+            `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;

@@ -1,9 +1,9 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00162") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00023") }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00162') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00023') }}</li>
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,7 +13,7 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00263") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00263') }}</label>
                     <InputText
                       ref="productid"
                       :dataNm="'productid'"
@@ -33,12 +33,12 @@
                       :theme-color="'primary'"
                       :size="'medium'"
                       @click="modelingSearchModalVisible = true"
-                      >{{ $t("MES_CommLang.MES_CommLang_00169") }}</Button
+                      >{{ $t('MES_CommLang.MES_CommLang_00169') }}</Button
                     >
                   </div>
 
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00168") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00168') }}</label>
                     <div class="form-datepicker">
                       <DatePicker
                         ref="fromdate"
@@ -59,7 +59,7 @@
                       />
                     </div>
 
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00148") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00148') }}</label>
                     <div class="form-selectBox">
                       <MesSelectBox
                         :enumID="'LotStateStart'"
@@ -77,7 +77,7 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</Button
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
                 >
               </v-col>
             </v-row>
@@ -88,23 +88,25 @@
     <v-row ref="contents">
       <v-col :cols="12" :style="{ height: '100%' }">
         <Card ref="gridCard" :style="{ height: '100%' }">
-          <CardBody :style="{ width: '100%', height:'100%' }">
+          <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row>
               <v-col :sm="9" :lg="9" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00022") }}</CardTitle>
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00022')
+                }}</CardTitle>
               </v-col>
               <v-col :sm="3" :lg="3" align="right">
                 <Button
                   :theme-color="this.startBtnColor"
                   :size="'small'"
                   @click="btnClick('start')"
-                  >{{ $t("MES_CommLang.MES_CommLang_00158") }}</Button
+                  >{{ $t('MES_CommLang.MES_CommLang_00158') }}</Button
                 >
                 <Button
                   :theme-color="this.cancelBtnColor"
                   :size="'small'"
                   @click="btnClick('cancel')"
-                  >{{ $t("MES_CommLang.MES_CommLang_00202") }}</Button
+                  >{{ $t('MES_CommLang.MES_CommLang_00202') }}</Button
                 >
               </v-col>
             </v-row>
@@ -150,7 +152,7 @@
       :title="'title'"
       :message="'message'"
       :callBack="() => {}"
-      @visibleDialog="(val) => (searchModalVisible = val)"
+      @visibleDialog="val => (searchModalVisible = val)"
       @productCode="productCode"
     />
     <ModelingSearchModal
@@ -161,34 +163,34 @@
       :message="'message'"
       :callBack="() => {}"
       :selected-field="selectedField"
-      @visibleDialog="(val) => (modelingSearchModalVisible = val)"
+      @visibleDialog="val => (modelingSearchModalVisible = val)"
       @productCode="productCode"
       @modelingInfo="modelingInfo"
     />
   </div>
 </template>
 <script>
-import ModelingSearchModal from "@/components/frmAvailableEquipment/ModelingSearchModal";
-import SelectModelingConfirm from "@/pages/lotTracking/SelectModelingConfirm";
-import mixinGlobal from "@/mixin/global.js";
-import InputText from "@/components/common/input/InputText";
-import { DatePicker } from "@progress/kendo-vue-dateinputs";
-import Checkbox from "@/components/common/input/Checkbox";
-import MesSelectBox from "@/components/common/select/MesSelectBox";
-import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid";
-import { Dialog, DialogActionsBar, Window } from "@progress/kendo-vue-dialogs";
+import ModelingSearchModal from '@/components/frmAvailableEquipment/ModelingSearchModal';
+import SelectModelingConfirm from '@/pages/lotTracking/SelectModelingConfirm';
+import mixinGlobal from '@/mixin/global.js';
+import InputText from '@/components/common/input/InputText';
+import { DatePicker } from '@progress/kendo-vue-dateinputs';
+import Checkbox from '@/components/common/input/Checkbox';
+import MesSelectBox from '@/components/common/select/MesSelectBox';
+import gridHeaderMinin from '@/mixin/gridHeaderMinin.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Dialog, DialogActionsBar, Window } from '@progress/kendo-vue-dialogs';
 import {
   AutoComplete,
   ComboBox,
   DropDownList,
   MultiSelect,
-} from "@progress/kendo-vue-dropdowns";
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-import { Button } from "@progress/kendo-vue-buttons";
-import ConfirmPop from "../../components/common/modal/ConfirmPop.vue";
-import { orderBy } from "@progress/kendo-data-query";
+} from '@progress/kendo-vue-dropdowns';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
+import { Button } from '@progress/kendo-vue-buttons';
+import ConfirmPop from '../../components/common/modal/ConfirmPop.vue';
+import { orderBy } from '@progress/kendo-data-query';
 
 let myTitle;
 let myMenuId;
@@ -199,13 +201,12 @@ let day = d.getDate(); // 일
 let fromdate = new Date(year, month, day - 7);
 let todate = d;
 
-
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
@@ -239,43 +240,43 @@ export default {
   props: {
     gridHeight: {
       type: String,
-      defaultData: "500px",
+      defaultData: '500px',
     },
   },
   data() {
     return {
       modelingSearchModalVisible: false,
-      startBtnColor: "secondary",
-      cancelBtnColor: "secondary",
+      startBtnColor: 'secondary',
+      cancelBtnColor: 'secondary',
       columns: [],
       gridHeader: [],
       gridData: [],
       gridOriData: [],
       gridLastModIdx: null,
       searchModalVisible: false,
-      gridDropDownList: [ ],
-      selectedField: "selected",
+      gridDropDownList: [],
+      selectedField: 'selected',
       expand: {
         ids: [],
-        idField: "LOTID",
+        idField: 'LOTID',
       },
-      disabledCheckHeaderArr: ["GOINORDERREQUIRED"], //순차진행여부
-      lotid: "",
-      lotstate: "",
-      productid: "",
+      disabledCheckHeaderArr: ['GOINORDERREQUIRED'], //순차진행여부
+      lotid: '',
+      lotstate: '',
+      productid: '',
       fromdate: Utility.setFormatDate(
         fromdate.toLocaleDateString(),
-        "YYYY-MM-DD"
+        'YYYY-MM-DD'
       ),
-      todate: Utility.setFormatDate(todate, "YYYY-MM-DD"),
+      todate: Utility.setFormatDate(todate, 'YYYY-MM-DD'),
       headerParam: {
-        gridid: "dgvLotList_Start", // 그리드 ID
-        gridHeader:[],
+        gridid: 'dgvLotList_Start', // 그리드 ID
+        gridHeader: [],
         noRowstat: true,
       },
 
       visibleWindow: false,
-      lotidMessage: "",
+      lotidMessage: '',
       selectLots: 0,
       selectPopup: false,
       sortField: [{}],
@@ -283,14 +284,14 @@ export default {
   },
   created() {},
   async mounted() {
-    this.fromdate = Utility.setFormatDate(this.fromdate, "YYYYMMDD");
-    this.todate = Utility.setFormatDate(this.todate, "YYYYMMDD");
+    this.fromdate = Utility.setFormatDate(this.fromdate, 'YYYYMMDD');
+    this.todate = Utility.setFormatDate(this.todate, 'YYYYMMDD');
     await this.getGridData();
   },
   computed: {
     areAllSelected() {
       return (
-        this.gridData.findIndex((x) => x.checked === false) === -1 &&
+        this.gridData.findIndex(x => x.checked === false) === -1 &&
         this.gridData.length !== 0
       );
     },
@@ -300,65 +301,72 @@ export default {
     // 생산시작,시작취소 click 이벤트
     btnClick(type) {
       this.selectPopup = false;
-      let impossibleIds = ""; // 시작,취소 불가능한 lot ID
-      let possibleIds = ""; // 시작,취소 가능한 lot ID
+      let impossibleIds = ''; // 시작,취소 불가능한 lot ID
+      let possibleIds = ''; // 시작,취소 가능한 lot ID
       if (this.selectLots > 0) {
-        if (type == "start") {
+        if (type == 'start') {
           // 생산시작
           this.gridData.forEach(function e(lot) {
             if (lot.selected) {
-              possibleIds += lot.LOTID + ",";
-              if (lot.LOTSTATE != "Created") {
-                impossibleIds += lot.LOTID + ",";
+              possibleIds += lot.LOTID + ',';
+              if (lot.LOTSTATE != 'Created') {
+                impossibleIds += lot.LOTID + ',';
               }
             }
           });
           impossibleIds = impossibleIds.slice(0, -1);
           if (impossibleIds.length > 0) {
-            this.$refs.alertPop.title = "";
+            this.$refs.alertPop.title = '';
             this.$refs.alertPop.message =
-              "Lot ID " + "[" + impossibleIds + "] 는 시작할 수 없습니다.";
+              'Lot ID ' + '[' + impossibleIds + '] 는 시작할 수 없습니다.';
             this.$refs.alertPop.modalWidth =
-              150 * impossibleIds.split(",").length;
+              150 * impossibleIds.split(',').length;
             this.$refs.alertPop.visibleDialog = true;
             return false;
           }
 
-          this.$refs["confirmPop"].title = this.$i18n.t('MES_CommLang.MES_CommLang_00414'); 
-          this.$refs["confirmPop"].message =
-            "LotID : " + possibleIds + " 를 시작하시겠습니까?";
-          this.$refs["confirmPop"].callBack = this.startBtn;
-          this.$refs["confirmPop"].modalWidth = "330px";
-          this.$refs["confirmPop"].visibleDialog = true;
+          this.$refs['confirmPop'].title = this.$i18n.t(
+            'MES_CommLang.MES_CommLang_00414'
+          );
+          this.$refs['confirmPop'].message =
+            'LotID : ' + possibleIds + ' 를 시작하시겠습니까?';
+          this.$refs['confirmPop'].callBack = this.startBtn;
+          this.$refs['confirmPop'].modalWidth = '330px';
+          this.$refs['confirmPop'].visibleDialog = true;
         } else {
           // 시작 취소
           this.gridData.forEach(function e(lot) {
             if (lot.selected) {
-              possibleIds += lot.LOTID + ",";
-              if (lot.LOTSTATE != "Released") {
-                impossibleIds += lot.LOTID + ",";
+              possibleIds += lot.LOTID + ',';
+              if (lot.LOTSTATE != 'Released') {
+                impossibleIds += lot.LOTID + ',';
               }
             }
           });
           impossibleIds = impossibleIds.slice(0, -1);
           if (impossibleIds.length > 0) {
-            this.$refs.alertPop.title = "";
+            this.$refs.alertPop.title = '';
             this.$refs.alertPop.message =
-              "Lot ID " + "[" + impossibleIds + "] 는 시작취소할 수 없습니다.";
+              'Lot ID ' + '[' + impossibleIds + '] 는 시작취소할 수 없습니다.';
             this.$refs.alertPop.modalWidth =
-              150 * impossibleIds.split(",").length;
+              150 * impossibleIds.split(',').length;
             this.$refs.alertPop.visibleDialog = true;
             return false;
           }
-          this.$refs["confirmPop"].title = this.$i18n.t('MES_CommLang.MES_CommLang_00414');
-          this.$refs["confirmPop"].message =
-            "LotID : " + possibleIds + " 를 시작 취소하시겠습니까?";
-          this.$refs["confirmPop"].callBack = this.startCancelBtn;
-          this.$refs["confirmPop"].modalWidth = "330px";
-          this.$refs["confirmPop"].visibleDialog = true;
+          this.$refs['confirmPop'].title = this.$i18n.t(
+            'MES_CommLang.MES_CommLang_00414'
+          );
+          this.$refs['confirmPop'].message =
+            'LotID : ' + possibleIds + ' 를 시작 취소하시겠습니까?';
+          this.$refs['confirmPop'].callBack = this.startCancelBtn;
+          this.$refs['confirmPop'].modalWidth = '330px';
+          this.$refs['confirmPop'].visibleDialog = true;
         }
       } else {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00083'));
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00083')
+        );
         return false;
       }
     },
@@ -368,23 +376,26 @@ export default {
       const saveData = [];
       // 생성인 lot만 생산시작 가능
       this.gridData.forEach(function e(lot) {
-        if (lot.LOTSTATE == "Created" && lot.selected) {
+        if (lot.LOTSTATE == 'Created' && lot.selected) {
           saveData.push(lot);
         }
       });
       if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnLotStart",
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnLotStart',
           sendParam: saveData,
-        }).then((result) => {
+        }).then(result => {
           this.$nextTick(() => {
-            if (result.returncode !== undefined && result.returncode === "0") {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140'));
+            if (result.returncode !== undefined && result.returncode === '0') {
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              );
               this.getGridData();
             } else {
               this.$refs.alertPop.show(
-                "ERROR : " + result.code,
+                'ERROR : ' + result.code,
                 result.message
               );
             }
@@ -397,23 +408,26 @@ export default {
     startCancelBtn() {
       const saveData = [];
       this.gridData.forEach(function e(lot) {
-        if (lot.LOTSTATE == "Released" && lot.selected) {
+        if (lot.LOTSTATE == 'Released' && lot.selected) {
           saveData.push(lot);
         }
       });
       if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnLotStartCancel",
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnLotStartCancel',
           sendParam: saveData,
-        }).then((result) => {
+        }).then(result => {
           this.$nextTick(() => {
-            if (result.returncode === "0") {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140'));
+            if (result.returncode === '0') {
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              );
               this.getGridData();
             } else {
               this.$refs.alertPop.show(
-                "Error : " + result.returnmessage,
+                'Error : ' + result.returnmessage,
                 result.returndetailmessage
               );
             }
@@ -428,17 +442,19 @@ export default {
       this.$refs.rowGrid.sortField = [{}];
       if (!this.validateDates()) return;
       // 제품코드 값 체크
-      if (productid == "") {
-        this.$refs.alertPop.title = "";
-        this.$refs.alertPop.message = this.$i18n.t('MES_MsgLang.MES_MsgLang_00149');
-        this.$refs.alertPop.modalWidth = "330px";
+      if (productid == '') {
+        this.$refs.alertPop.title = '';
+        this.$refs.alertPop.message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00149'
+        );
+        this.$refs.alertPop.modalWidth = '330px';
         this.$refs.alertPop.visibleDialog = true;
         this.selectPopup = true;
         return false;
       } else {
         this.getGridData();
-        this.startBtnColor = "secondary";
-        this.cancelBtnColor = "secondary";
+        this.startBtnColor = 'secondary';
+        this.cancelBtnColor = 'secondary';
       }
     },
 
@@ -449,17 +465,17 @@ export default {
     },
 
     toChange(e) {
-      this.todate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.todate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     fromChange(e) {
-      this.fromdate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.fromdate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     //그리드 데이터 가져오기
     async getGridData() {
-      console.log("getGridData");
+      console.log('getGridData');
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetLotInfoStartAndCancelList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetLotInfoStartAndCancelList',
         sendParam: {
           lotid: this.lotid,
           lotstate: this.lotstate,
@@ -468,11 +484,11 @@ export default {
           todate: this.todate,
           plantid: this.$auth.$state.user.plantId,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -480,13 +496,16 @@ export default {
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.gridOriData = data;
         this.gridData = data;
         this.selectLots = 0;
-        
+
         if (this.gridData[0] === undefined) {
-          this.$refs.alertPop.show( "", this.$i18n.t('MES_MsgLang.MES_MsgLang_00008'));
+          this.$refs.alertPop.show(
+            '',
+            this.$i18n.t('MES_MsgLang.MES_MsgLang_00008')
+          );
         }
       });
     },
@@ -513,34 +532,34 @@ export default {
       let hasReleased = false;
       let hasCreated = false;
       for (let i = 0; i < saveData.length; i++) {
-        if (saveData[i].LOTSTATE === "Released") {
+        if (saveData[i].LOTSTATE === 'Released') {
           hasReleased = true;
-        } else if (saveData[i].LOTSTATE === "Created") {
+        } else if (saveData[i].LOTSTATE === 'Created') {
           hasCreated = true;
         }
       }
 
       if (hasReleased) {
-        this.cancelBtnColor = "primary";
+        this.cancelBtnColor = 'primary';
       } else {
-        this.cancelBtnColor = "secondary";
+        this.cancelBtnColor = 'secondary';
       }
 
       if (hasCreated) {
-        this.startBtnColor = "primary";
+        this.startBtnColor = 'primary';
       } else {
-        this.startBtnColor = "secondary";
+        this.startBtnColor = 'secondary';
       }
 
       if (saveData.length === 0) {
-        this.cancelBtnColor = "secondary";
-        this.startBtnColor = "secondary";
+        this.cancelBtnColor = 'secondary';
+        this.startBtnColor = 'secondary';
       }
     },
 
     //맨앞 checkBox 클릭
     onSelectionchange(event) {
-      console.log("===========onSelectionchange==============");
+      console.log('===========onSelectionchange==============');
       event.dataItem[this.selectedField] = !event.dataItem[this.selectedField];
       // 그리드 체크박스 선택시 선택한 row 만큼 count ++
       if (event.dataItem[this.selectedField]) {
@@ -552,7 +571,7 @@ export default {
     },
     //header checkbox 클릭
     onHeaderSelectionChange(event) {
-      console.log("===========onHeaderSelectionChange==============");
+      console.log('===========onHeaderSelectionChange==============');
       let checked = event.event.target.checked;
       // 전체 체크시에 count를 gridData 수 만큼 +
       if (checked) {
@@ -561,14 +580,14 @@ export default {
         this.selectLots = 0;
       }
       console.log(this.selectLots);
-      this.gridData = this.gridData.map((item) => {
+      this.gridData = this.gridData.map(item => {
         return { ...item, selected: checked };
       });
     },
 
     //row 선택
     selectRow() {
-      const returnData = this.items.filter((x) => x.selected);
+      const returnData = this.items.filter(x => x.selected);
     },
 
     //검색 인풋 변경시
@@ -579,21 +598,24 @@ export default {
       this[nm] = val;
     },
     chkVal(nm, val) {
-      this[nm] = val ? "Yes" : "";
+      this[nm] = val ? 'Yes' : '';
     },
     productCode(data) {
       this.productid = data.PRODUCTID;
       this.getGridData();
     },
     modelingInfo(data) {
-      this.$nuxt.$emit("iccReset");
+      this.$nuxt.$emit('iccReset');
       this.productid = data.PRODUCTID;
       this.getGridData();
     },
 
     validateDates() {
       if (this.todate && this.fromdate > this.todate) {
-        this.$refs.alertPop.show("", this.$i18n.t('MES_MsgLang.MES_MsgLang_00003'));
+        this.$refs.alertPop.show(
+          '',
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00003')
+        );
         return false;
       }
       return true;

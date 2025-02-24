@@ -83,8 +83,6 @@ import { DropDownList } from '@progress/kendo-vue-dropdowns';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import SelectConsumableModal from '@/components/frmBOMDefinition/SelectConsumableModal';
 
-
-
 export default {
   name: 'BOMDetail',
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -257,9 +255,8 @@ export default {
           selectedRow = delData
             .filter(x => x.rowStat !== 'C')
             .map(x => x.CONSUMABLEID);
-          this.$refs[
-            'confirmPop'
-          ].message = `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
+          this.$refs['confirmPop'].message =
+            `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;

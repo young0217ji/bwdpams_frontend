@@ -60,7 +60,7 @@
       />
     </div>
     <AlertPop ref="alertPop" :is="'alertPop'" />
-     <!-- <SelectProductModal
+    <!-- <SelectProductModal
       ref="SelectProductModal"
       v-if="selectProductModalVisible"
       :visibleDialog="selectProductModalVisible"
@@ -88,8 +88,6 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 // import SelectProductModal from '@/components/frmInspectionReportDefinition/SelectProductModal.vue';
 import utils from '~/plugins/utils2';
 import BOMDetail from '@/components/frmBOMDefinition/BOMDetail.vue';
-
-
 
 export default {
   name: 'BOMMaster',
@@ -426,9 +424,8 @@ export default {
           selectedRow = delData
             .filter(x => x.rowStat !== 'C')
             .map(x => x.PRODUCTID);
-          this.$refs[
-            'confirmPop'
-          ].message = `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
+          this.$refs['confirmPop'].message =
+            `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;

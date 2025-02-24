@@ -1,8 +1,8 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00492") }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00492') }}</li>
       <li>EnumValue</li>
     </ol>
     <v-row ref="searchFilter">
@@ -142,7 +142,6 @@ import KendoTree from '@/components/common/KendoTree';
 let myTitle;
 let myMenuId;
 
-
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
   async asyncData(context) {
@@ -190,7 +189,7 @@ export default {
         gridid: 'dgvEnumGroupDefinition',
         rowStat: '',
       },
-      queryId: 'GetEnumGroupDefinition',
+      queryId: 'GetEnumGrpDefine',
       params: { plantid: this.$auth.$state.user.plantId },
       gridHeader: [],
       gridTitle: '',
@@ -231,7 +230,7 @@ export default {
         gridid: 'dgvEnumGroupDefinition',
         rowStat: '',
       };
-      this.queryId = 'GetEnumGroupDefinition';
+      this.queryId = 'GetEnumGrpDefine';
       this.params = { plantid: this.$auth.$state.user.plantId };
       this.getHeader();
       await this.initTree();
@@ -242,10 +241,17 @@ export default {
     saveBtn() {
       const saveData = this.gridData
         .filter(x => x.rowStat !== 'N')
-        .map(x => ({ ...x, _ROWSTATUS: x.rowStat, PLANTID: this.$auth.$state.user.plantId }));
+        .map(x => ({
+          ...x,
+          _ROWSTATUS: x.rowStat,
+          PLANTID: this.$auth.$state.user.plantId,
+        }));
 
       if (saveData.length === 0) {
-        this.$refs['alertPop'].show('', this.$i18n.t('MES_MsgLang.MES_MsgLang_00143'));
+        this.$refs['alertPop'].show(
+          '',
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        );
         return;
       }
       const validate = this.mesValidation(this.gridHeader, this.gridData);
@@ -255,9 +261,12 @@ export default {
       }
 
       const messagename = {
-        PLANT: 'TxnEnumGroupDefinition',
-        ENUMGROUP: 'TxnEnumDefinition',
-        ENUMID: 'TxnEnumValue',
+        PLANT:
+          '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
+        ENUMGROUP:
+          '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
+        ENUMID:
+          '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
       }[this.curTree.LEVELMEMBER];
 
       const params = {
@@ -268,7 +277,10 @@ export default {
 
       this.mesPost(params).then(res => {
         if (res.returncode !== undefined && res.returncode === '0') {
-          this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140'));
+          this.$refs.alertPop.show(
+            this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+            this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+          );
         } else {
           this.$refs.alertPop.show(`ERROR : ${res.code}`, res.message);
         }
@@ -440,10 +452,10 @@ export default {
 
       if (LEVELMEMBER === 'PLANT') {
         gridid = 'dgvEnumGroupDefinition';
-        this.queryId = 'GetEnumGroupDefinition';
+        this.queryId = 'GetEnumGrpDefine';
       } else if (LEVELMEMBER === 'ENUMGROUP') {
         gridid = 'dgvEnumDefinition';
-        this.queryId = 'GetEnumDefinition';
+        this.queryId = 'GetEnumDefine';
         this.params.enumgroupid = VALUEMEMBER;
       } else {
         gridid = 'dgvEnumValue';
@@ -454,9 +466,12 @@ export default {
       this.headerParam = { gridid, rowStat: '' };
 
       if (this.isChanged()) {
-        this.$refs['confirmPop'].title = this.$i18n.t('MES_CommLang.MES_CommLang_00456');
-        this.$refs['confirmPop'].message =
-        this.$i18n.t('MES_MsgLang.MES_MsgLang_00141');
+        this.$refs['confirmPop'].title = this.$i18n.t(
+          'MES_CommLang.MES_CommLang_00456'
+        );
+        this.$refs['confirmPop'].message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00141'
+        );
         this.$refs['confirmPop'].callBack = this.onchangeTree;
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;
@@ -585,14 +600,13 @@ export default {
       );
     },
     async pageChangeEvent(skip = 0, take = 20) {
-            this.gridPageData = {
-                skip: skip,
-                take: take
-            }
-            this.reSetPage = false;
-            this.getGridData();
-
-        },
+      this.gridPageData = {
+        skip: skip,
+        take: take,
+      };
+      this.reSetPage = false;
+      this.getGridData();
+    },
   },
 };
 

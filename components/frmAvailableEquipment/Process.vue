@@ -2,7 +2,8 @@
   <v-col :cols="12" :class="'divList1'" :style="{ height: '50%' }">
     <Card ref="gridCard" :style="{ height: '100%' }">
       <CardBody :style="{ height: '100%' }">
-        <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00056") }}</CardTitle> <!-- 공정목록 -->
+        <CardTitle>{{ $t('MES_CommLang.MES_CommLang_00056') }}</CardTitle>
+        <!-- 공정목록 -->
         <div ref="divWrapper" :style="{ height: 'calc(100% - 33px)' }">
           <KendoGrid
             ref="rowGrid"
@@ -25,21 +26,19 @@
   </v-col>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
+import mixinGlobal from '@/mixin/global.js';
 //import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import KendoGrid from "@/components/common/KendoGrid";
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-import { Button } from "@progress/kendo-vue-buttons";
-import InputText from "@/components/common/input/InputText";
-import Checkbox from "@/components/common/input/Checkbox";
-import MesSelectBox from "@/components/common/select/MesSelectBox";
-import { mapState, mapMutations, mapActions } from "vuex";
-
-
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
+import { Button } from '@progress/kendo-vue-buttons';
+import InputText from '@/components/common/input/InputText';
+import Checkbox from '@/components/common/input/Checkbox';
+import MesSelectBox from '@/components/common/select/MesSelectBox';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 export default {
-  name: "Process",
+  name: 'Process',
   mixins: [mixinGlobal, multiGridHeaderMinin],
   components: {
     Card,
@@ -54,7 +53,7 @@ export default {
   props: {
     gridHeight: {
       type: String,
-      defaultData: "250px",
+      defaultData: '250px',
     },
     gridOriData: {
       type: Array,
@@ -67,18 +66,18 @@ export default {
     return {
       columns: [],
       gridHeader: [],
-      selectedField: "selected",
-      disabledCheckHeaderArr: ["ACTIVESTATE"],
+      selectedField: 'selected',
+      disabledCheckHeaderArr: ['ACTIVESTATE'],
       headerParam: {
-        gridid: "dgvProcessList_Available", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvProcessList_Available', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         noFirstCheck: true,
         noRowstat: true,
       },
       noFirstCheck: true,
-      inputVal: "",
+      inputVal: '',
       btnClickRow: {},
-      defaultDescription: "",
+      defaultDescription: '',
       reSetPage: false,
     };
   },
@@ -88,19 +87,19 @@ export default {
   },
   computed: {
     ...mapState({
-      gridData: (state) => state.modules.frmAE.dgvProcessList_Available,
-      selectedProduct: (state) => state.modules.frmAE.selectedProduct,
-      processData: (state) => state.modules.frmAE.selectedProcess,
-      equipmentData: (state) => state.modules.frmAE.dgvEquipmentList_Available,
+      gridData: state => state.modules.frmAE.dgvProcessList_Available,
+      selectedProduct: state => state.modules.frmAE.selectedProduct,
+      processData: state => state.modules.frmAE.selectedProcess,
+      equipmentData: state => state.modules.frmAE.dgvEquipmentList_Available,
     }),
   },
   watch: {},
   methods: {
     ...mapActions({
-      setDgvProcessListAction: "modules/frmAE/setDgvProcessListAction",
-      setDgvEquipmentListAction: "modules/frmAE/setDgvEquipmentListAction",
-      setModelingSetSaveAction: "modules/frmAE/setModelingSetSaveAction",
-      setSelectedProcessAction: "modules/frmAE/setSelectedProcessAction",
+      setDgvProcessListAction: 'modules/frmAE/setDgvProcessListAction',
+      setDgvEquipmentListAction: 'modules/frmAE/setDgvEquipmentListAction',
+      setModelingSetSaveAction: 'modules/frmAE/setModelingSetSaveAction',
+      setSelectedProcessAction: 'modules/frmAE/setSelectedProcessAction',
     }),
     notPageReset(flag) {
       // flag : false
@@ -108,7 +107,7 @@ export default {
     },
     //그리드 로우 클릭
     onRowClick(event) {
-      const gridData = this.gridData.map((item) => {
+      const gridData = this.gridData.map(item => {
         if (item === event.dataItem) {
           return { ...item, selected: true };
         } else {
@@ -121,32 +120,32 @@ export default {
       this.setSelectedProcessAction(event.dataItem);
 
       this.equipmentGrid();
-      this.$nuxt.$emit("iccReset");
+      this.$nuxt.$emit('iccReset');
     },
     initGrid() {
-      this.$nuxt.$emit("iccReset");
+      this.$nuxt.$emit('iccReset');
     },
     async equipmentGrid() {
       if (this.processData !== undefined && this.processData !== {}) {
         this.mesGet({
-          apiKey: "mes/common/getqueryresult",
-          queryId: "GetAvailableEquipment",
+          apiKey: 'mes/common/getqueryresult',
+          queryId: 'GetAvailEqpt',
           sendParam: {
             plantid: this.$auth.$state.user.plantId,
             productid: this.selectedProduct.PRODUCTID, // 제품코드
             processid: this.processData.PROCESSID,
           },
-        }).then((res) => {
+        }).then(res => {
           const equipmentData = res.map((x, idx) => {
             return {
               ...x,
-              rowStat: "N",
+              rowStat: 'N',
               selected: false,
               idx: idx,
               inEdit: true,
               newRow: false,
               resizable: true,
-              EQUIPMENTBUTTON: "",
+              EQUIPMENTBUTTON: '',
             };
           });
           this.setDgvEquipmentListAction(equipmentData);
@@ -154,22 +153,22 @@ export default {
       }
     },
     sortChangeHandler(e) {
-      const isAscending = e.sort[0]?.dir == "asc";
+      const isAscending = e.sort[0]?.dir == 'asc';
       if (isAscending) {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] < b[e.event?.field]
             ? -1
             : a[e.event?.field] > b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       } else {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] > b[e.event?.field]
             ? -1
             : a[e.event?.field] < b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       }
     },
@@ -179,4 +178,4 @@ export default {
 
 const defaultData = {};
 </script>
-<style lang="scss"></style> 
+<style lang="scss"></style>

@@ -13,9 +13,7 @@
               <v-col cols="3" align="left">
                 <v-row class="search-box" align="center" no-gutters>
                   <v-col :cols="4">
-                    <Label>
-                      기준 Durable ID
-                    </Label>
+                    <Label> 기준 Durable ID </Label>
                   </v-col>
                   <v-col :cols="6">
                     <InputText
@@ -28,13 +26,24 @@
                     />
                   </v-col>
                   <v-col :cols="2">
-                    <Button :theme-color="'primary'" :size="'medium'" @click="durableSearchModalVisible = true">선택</Button>
+                    <Button
+                      :theme-color="'primary'"
+                      :size="'medium'"
+                      @click="durableSearchModalVisible = true"
+                      >선택</Button
+                    >
                   </v-col>
                 </v-row>
-                </v-col>
-                <v-col cols="9" align="right">
-                  <Button :theme-color="'primary'" :size="'medium'" icon="search" @click="durableInfo(initData)">조회</Button>
-                </v-col>
+              </v-col>
+              <v-col cols="9" align="right">
+                <Button
+                  :theme-color="'primary'"
+                  :size="'medium'"
+                  icon="search"
+                  @click="durableInfo(initData)"
+                  >조회</Button
+                >
+              </v-col>
             </v-row>
           </CardBody>
         </Card>
@@ -42,21 +51,27 @@
     </v-row>
 
     <v-row ref="contents">
-      <v-col :cols="12" :style="{height : '100%'}">
+      <v-col :cols="12" :style="{ height: '100%' }">
         <v-row :style="{ height: '100%' }">
           <v-col :cols="12" :class="'divList1'" :style="{ height: '40%' }">
-            <Card ref="gridCard" :style="{height : '100%'}">
-              <CardBody :style="{width:'100%', height : '100%'}">
+            <Card ref="gridCard" :style="{ height: '100%' }">
+              <CardBody :style="{ width: '100%', height: '100%' }">
                 <v-row>
                   <v-col cols="6" align="left">
                     <CardTitle>기준Durable</CardTitle>
                   </v-col>
                   <v-col cols="6" align="right">
-                    <Button :theme-color="'primary'" :size="'small'" icon="undo"  @click="createBtn">생성</Button>
+                    <Button
+                      :theme-color="'primary'"
+                      :size="'small'"
+                      icon="undo"
+                      @click="createBtn"
+                      >생성</Button
+                    >
                   </v-col>
                 </v-row>
                 <div ref="divWrapper1" :style="{ height: 'calc(100% - 33px)' }">
-                  <KendoGrid 
+                  <KendoGrid
                     ref="rowGrid"
                     :gridItems="gridData"
                     :sortable="true"
@@ -75,15 +90,15 @@
             </Card>
           </v-col>
           <v-col :cols="12" :class="'divList2'" :style="{ height: '60%' }">
-            <Card ref="gridCard2" :style="{height : '100%'}">
-              <CardBody :style="{width:'100%', height : '100%'}">
+            <Card ref="gridCard2" :style="{ height: '100%' }">
+              <CardBody :style="{ width: '100%', height: '100%' }">
                 <v-row>
                   <v-col cols="12" align="left">
                     <CardTitle>Durable 목록</CardTitle>
                   </v-col>
                 </v-row>
                 <div ref="divWrapper2" :style="{ height: 'calc(100% - 33px)' }">
-                  <KendoGrid 
+                  <KendoGrid
                     ref="rowGrid2"
                     :gridItems="gridData2"
                     :sortable="true"
@@ -104,10 +119,10 @@
       </v-col>
     </v-row>
 
-    <AlertPop 
+    <AlertPop
       ref="alertPop"
       :is="'alertPop'"
-      :callBack="() => durableSearchModalVisible = true"
+      :callBack="() => (durableSearchModalVisible = true)"
     />
     <DurableSearchModal
       ref="DurableSearchModal"
@@ -116,138 +131,135 @@
       :title="'title'"
       :message="'message'"
       :callBack="() => {}"
-      @visibleDialog="(val) => (durableSearchModalVisible = val)"
+      @visibleDialog="val => (durableSearchModalVisible = val)"
       @durableInfo="durableInfo"
     />
   </div>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
-import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid"
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
+import mixinGlobal from '@/mixin/global.js';
+import gridHeaderMinin from '@/mixin/gridHeaderMinin.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 import { TreeView, processTreeViewItems } from '@progress/kendo-vue-treeview';
-import { Button } from "@progress/kendo-vue-buttons";
-import utils from "~/plugins/utils";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import DurableSearchModal from "@/components/frmWarehouseStockManagement/DurableSearchModal";
-import { mapState, mapMutations, mapActions } from "vuex";
-import RoutingSearchModal from "@/components/frmProcessRouteComposition/RoutingSearchModal";
-import InputText from "@/components/common/input/InputText";
+import { Button } from '@progress/kendo-vue-buttons';
+import utils from '~/plugins/utils';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import DurableSearchModal from '@/components/frmWhouseStockMgmt/DurableSearchModal';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import RoutingSearchModal from '@/components/frmProcRouteCompo/RoutingSearchModal';
+import InputText from '@/components/common/input/InputText';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
     title: () => {
       return myTitle;
     },
-    menuId : myMenuId,
-    closable: true
+    menuId: myMenuId,
+    closable: true,
   },
   components: {
     Utility,
     Card,
     Button,
-    CardBody, 
+    CardBody,
     CardTitle,
     TreeView,
     KendoGrid,
     DurableSearchModal,
     RoutingSearchModal,
-    InputText
+    InputText,
   },
   data() {
     return {
       treeData: [],
       columns: [],
-      gridHeight : '400px',
-      gridHeight2 : '100px',
-      gridData : [],
-      gridData2 : [],
-      gridOriData : [],
+      gridHeight: '400px',
+      gridHeight2: '100px',
+      gridData: [],
+      gridData2: [],
+      gridOriData: [],
       initData: {},
-      standardDurableData:[],
+      standardDurableData: [],
       duralbeListData: [],
-      standarddurableid: "",
+      standarddurableid: '',
       durableSearchModalVisible: false,
       searchModalVisible: false,
       gridLastModIdx: null,
-      gridDropDownList:[{
-        dataVal : 'AREATYPE',
-        dataItem: []
-      }],
+      gridDropDownList: [
+        {
+          dataVal: 'AREATYPE',
+          dataItem: [],
+        },
+      ],
       selectedField: 'selected',
       expand: {
         ids: [],
         idField: 'AREANAME',
       },
-      checkHeaderArr: ["ACTIVESTATE"],
-      parentAreaId: "",
+      checkHeaderArr: ['ACTIVESTATE'],
+      parentAreaId: '',
       gridHeader: [],
       headerParam: {
-      gridid: "dgvDurableDefinition_View", // 그리드 ID
-      gridHeader: [],
-      noFirstCheck: true,
-      noRowstat: true,
-      disabledCheckHeaderArr: ['ACTIVESTATE'],
+        gridid: 'dgvDurableDefinition_View', // 그리드 ID
+        gridHeader: [],
+        noFirstCheck: true,
+        noRowstat: true,
+        disabledCheckHeaderArr: ['ACTIVESTATE'],
       },
       headerParam2: {
-      gridid: "dgvDurableInfo", // 그리드 ID
-      gridHeader: [],
-      noFirstCheck: true,
-      noRowstat: true,
-      searchBtn: false,
-      disabledCheckHeaderArr: [ "ACTIVESTATE", "CONFIRMFLAG", "COMMONFLAG" ],
-      visibleDialog: false,
-
+        gridid: 'dgvDurableInfo', // 그리드 ID
+        gridHeader: [],
+        noFirstCheck: true,
+        noRowstat: true,
+        searchBtn: false,
+        disabledCheckHeaderArr: ['ACTIVESTATE', 'CONFIRMFLAG', 'COMMONFLAG'],
+        visibleDialog: false,
       },
     };
   },
-  created() {
-  },
+  created() {},
   async mounted() {
     await this.getHeaderMulti(this.headerParam, this.$refs.divWrapper1);
     await this.getHeaderMulti(this.headerParam2, this.$refs.divWrapper2);
   },
-  computed: {
-  },
-  watch: {
-  },
+  computed: {},
+  watch: {},
   methods: {
     //그리드 데이터 가져오기
     async getGridData(data) {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetOMDurableDefinitionList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMDurableDefinitionList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          standarddurableid: data.STANDARDDURABLEID
-        }
-      }).then((res) => {
-         const data = res.map((x, idx) => {
+          standarddurableid: data.STANDARDDURABLEID,
+        },
+      }).then(res => {
+        const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
-            newRow: false
-          }
+            newRow: false,
+          };
         });
-        this.$nuxt.$emit('iccReset')
+        this.$nuxt.$emit('iccReset');
         this.gridData = data;
-        this.isLoading = false
+        this.isLoading = false;
         this.$refs.rowGrid.skip = 0;
 
         // console.log(this.gridData[0])
@@ -258,29 +270,29 @@ export default {
         //   this.$refs.alertPop.visibleDialog = true;
         //   return;
         // }
-      })
+      });
     },
 
-    async getGridData2(){
-    await this.mesGet({
-      apiKey: "mes/common/getqueryresult",
-      queryId: "GetOMDurableInfoList",
-      sendParam: {
-        plantid: this.$auth.$state.user.plantId,
-        standarddurableid: this.standarddurableid
-      }
-      }).then((res) => {
+    async getGridData2() {
+      await this.mesGet({
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMDurableInfoList',
+        sendParam: {
+          plantid: this.$auth.$state.user.plantId,
+          standarddurableid: this.standarddurableid,
+        },
+      }).then(res => {
         // res를 역순으로 뒤집기
         res = res.reverse();
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
-          }
+          };
         });
         this.gridData2 = data;
         this.isLoading = false;
@@ -288,11 +300,12 @@ export default {
       });
     },
 
-    async durableInfo(data){
-      if(Object.keys(data).length === 0){
-        this.$refs.alertPop.title = ""
-        this.$refs.alertPop.message = "기준 Durable을 먼저 선택하시기 바랍니다.";
-        this.$refs.alertPop.modalWidth = "330px";
+    async durableInfo(data) {
+      if (Object.keys(data).length === 0) {
+        this.$refs.alertPop.title = '';
+        this.$refs.alertPop.message =
+          '기준 Durable을 먼저 선택하시기 바랍니다.';
+        this.$refs.alertPop.modalWidth = '330px';
         this.$refs.alertPop.visibleDialog = true;
         return;
       }
@@ -307,40 +320,39 @@ export default {
       this.getGridData2();
     },
 
-    searchBtn(){
+    searchBtn() {
       this.getGridData();
     },
 
-    searchInput(nm, val){
+    searchInput(nm, val) {
       this[nm] = val;
     },
-    createBtn(data){
-      const saveData = this.gridData
-      .map(x => {
-        return { 
-       DESCRIPTION: x.DESCRIPTION,
-       CREATEUSERID: x.CREATEUSERID,
-       _ROWSTATUS: x._ROWSTATUS,
-       EXPIRYTIME: x.EXPIRYTIME,
-       USAGELIMIT: x.USAGELIMIT,
-       PLANTID: x.PLANTID,
-       ACTIVESTAT: x.ACTIVESTAT,
-       STANDARDDURABLEID: x.STANDARDDURABLEID,
-       CAPACITY: x.CAPACITY,
-       STANDARDDURABLENAME: x.STANDARDDURABLENAME,
-       DURABLETYPE: x.DURABLETYPE,
-        }
+    createBtn(data) {
+      const saveData = this.gridData.map(x => {
+        return {
+          DESCRIPTION: x.DESCRIPTION,
+          CREATEUSERID: x.CREATEUSERID,
+          _ROWSTATUS: x._ROWSTATUS,
+          EXPIRYTIME: x.EXPIRYTIME,
+          USAGELIMIT: x.USAGELIMIT,
+          PLANTID: x.PLANTID,
+          ACTIVESTAT: x.ACTIVESTAT,
+          STANDARDDURABLEID: x.STANDARDDURABLEID,
+          CAPACITY: x.CAPACITY,
+          STANDARDDURABLENAME: x.STANDARDDURABLENAME,
+          DURABLETYPE: x.DURABLETYPE,
+        };
       });
-      if(saveData.length > 0){
+      if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnCreateDurable",
-          sendParam: saveData
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnCreateDurable',
+          sendParam: saveData,
         }).then(() => {
           this.$nextTick(() => {
             this.durableInfo(this.initData);
-          })
-        })
+          });
+        });
       }
     },
 
@@ -351,20 +363,16 @@ export default {
     //   }else{
     //     this.gridData2 = this.gridData2.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
     //   }
-    // }, 
-    sortChangeHandler(e){
+    // },
+    sortChangeHandler(e) {
       this.gfn_sortChangeHandler(this.gridData, e);
     },
-    sortChangeHandler2(e){
+    sortChangeHandler2(e) {
       this.gfn_sortChangeHandler(this.gridData2, e);
-    }   
-
-  }
+    },
+  },
 };
 
-const defaultData = {
-};
+const defaultData = {};
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

@@ -1,9 +1,12 @@
 <template>
   <div ref="contents">
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00175") }}</li> <!-- 설비관리 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00184") }}</li> <!-- 설비상태 변경 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00175') }}</li>
+      <!-- 설비관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00184') }}</li>
+      <!-- 설비상태 변경 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,7 +16,8 @@
               <v-col :sm="9" :lg="10" align="left">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00177") }}</label> <!-- 설비코드 -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00177') }}</label>
+                    <!-- 설비코드 -->
                     <inputText
                       ref="intputEquipmentId"
                       :boxWidth="'100%'"
@@ -26,7 +30,8 @@
                     />
                   </div>
                   <div class="form-group">
-                    <Label>{{ $t("MES_CommLang.MES_CommLang_00173") }}</Label> <!--설비상태 -->
+                    <Label>{{ $t('MES_CommLang.MES_CommLang_00173') }}</Label>
+                    <!--설비상태 -->
                     <MesVariableSelectBox
                       ref="comboArea"
                       :allYN="true"
@@ -37,12 +42,13 @@
                         plantid: plantID,
                         stateobject: 'Equipment',
                       }"
-                      :inputcol=inputcol
+                      :inputcol="inputcol"
                       @comboChange="sparepartComboChange"
                     ></MesVariableSelectBox>
                   </div>
-                  <div class="form-group" style="display : none">
-                    <Label>{{ $t("MES_CommLang.MES_CommLang_00238") }}</Label> <!-- 작업일자 -->
+                  <div class="form-group" style="display: none">
+                    <Label>{{ $t('MES_CommLang.MES_CommLang_00238') }}</Label>
+                    <!-- 작업일자 -->
                     <div class="form-datepicker">
                       <DatePicker
                         ref="workToDate"
@@ -71,8 +77,9 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</Button
-                > <!-- 조회 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -80,9 +87,9 @@
       </v-col>
     </v-row>
     <v-row ref="contents" :style="{ height: '100%' }">
-      <v-col :cols="12"  :style="{ height: 'calc(50% - 58px)' }">
-        <Card ref="gridCard" :style="{ height : '100%'}">
-            <CardBody :style="{width:'100%', height : '100%'}">
+      <v-col :cols="12" :style="{ height: 'calc(50% - 58px)' }">
+        <Card ref="gridCard" :style="{ height: '100%' }">
+          <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row>
               <v-col cols="12" align="left"> </v-col>
             </v-row>
@@ -104,7 +111,11 @@
           </CardBody>
         </Card>
       </v-col>
-      <v-col :cols="12" :class="'divList2'" :style="{ height: 'calc(50% + 58px)' }">
+      <v-col
+        :cols="12"
+        :class="'divList2'"
+        :style="{ height: 'calc(50% + 58px)' }"
+      >
         <Card ref="gridCard2" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
@@ -114,8 +125,9 @@
                   :size="'small'"
                   :icon="'save'"
                   @click="toggleDialog"
-                  >{{$t("MES_CommLang.MES_CommLang_00414") }}</Button
-                > <!-- 저장 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</Button
+                >
+                <!-- 저장 -->
               </v-col>
             </v-row>
             <!-- <div
@@ -140,192 +152,204 @@
             </div> -->
             <div class="detail-area">
               <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00177") }}</label> <!-- 설비코드 -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputEquipmentCode"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputEquipmentCode'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputEquipmentCode"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00171") }}</label> <!-- 설비명 -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputEquipmentName"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputEquipmentName'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputEquipmentName"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00177') }}</label>
+                  <!-- 설비코드 -->
                 </div>
-                <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00176") }}</label> <!-- 설비구분-->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputEquipmentType"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputEquipmentType'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputEquipmentType"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00488") }}</label> <!-- 상세구분 -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputDetailType"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputDetailType'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputDetailType"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputEquipmentCode"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputEquipmentCode'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputEquipmentCode"
+                    @input-text-set="searchInput"
+                  />
                 </div>
-                <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00784") }}</label> <!-- PM주기  -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputPmCycle"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputPmCycle'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputPmCycle"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00508") }}</label> <!-- 최근보전 -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputLatelyPreservation"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputLatelyPreservation'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputLatelyPreservation"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00171') }}</label>
+                  <!-- 설비명 -->
                 </div>
-                <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00237") }}</label> <!-- 작업일시 -->
-                  </div>
-                  <div class="area-td area-full">
-                    <inputText
-                      ref="intputWorkDateYYYYMMDD"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputWorkDateYYYYMMDD'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputWorkDateYYYYMMDD"
-                      @input-text-set="searchInput"
-                      style="width: 100px"
-                    />
-                    <inputText
-                      ref="intputWorkDateHHMMSS"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputWorkDateHHMMSS'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputWorkDateHHMMSS"
-                      @input-text-set="searchInput"
-                      style="width: 80px"
-                    />
-                    <Button
-                      :theme-color="'secondary'"
-                      :size="'medium'"
-                      @click="nowDateBtn"
-                      >{{$t("MES_CommLang.MES_CommLang_00414") }}</Button
-                    > <!-- 현재일시 -->
-                  </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputEquipmentName"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputEquipmentName'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputEquipmentName"
+                    @input-text-set="searchInput"
+                  />
                 </div>
-                <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00334") }}</label> <!-- 현재상태 -->
-                  </div>
-                  <div class="area-td">
-                    <inputText
-                      ref="intputNowStatus"
-                      :boxWidth="'100%'"
-                      :dataNm="'intputNowStatus'"
-                      :disabled="false"
-                      :readonly="true"
-                      :defaultValue="intputNowStatus"
-                      @input-text-set="searchInput"
-                    />
-                  </div>
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00363") }}</label> <!-- 변경상태 -->
-                  </div>
-                  <div class="area-td">
-                    <DropDownList
-                      ref="comboArea2"
-                      :data-items="codeLists"
-                      :text-field="'STATENAME'"
-                      :value-field="'STATE'"
-                      :value-primitive="true"
-                      :default-value="intputAfterStatus"
-                      v-model="intputAfterStatus"
-                      @change="comboChange"
-                    ></DropDownList>
-                  </div>
+              </div>
+              <div class="area-form">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00176') }}</label>
+                  <!-- 설비구분-->
                 </div>
-                <div class="area-form">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00142") }}</label> <!-- 사유코드 -->
-                  </div>
-                  <div class="area-td area-full">
-                    <!-- 3칸 : area-full -->
-                    <DropDownList
-                      ref="comboArea3"
-                      style="width: 265px"
-                      :disabled="reasonDisable"
-                      :data-items="gridData3"
-                      :text-field="'DESCRIPTION'"
-                      :value-field="'REASONCODE'"
-                      :value-primitive="true"
-                      :default-value="intputReasonCode"
-                      v-model="intputReasonCode"
-                      @change="reasonComboChange"
-                    ></DropDownList>
-                  </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputEquipmentType"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputEquipmentType'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputEquipmentType"
+                    @input-text-set="searchInput"
+                  />
                 </div>
-                <div class="area-form" style="display : none">
-                  <div class="area-th">
-                    <label>{{$t("MES_CommLang.MES_CommLang_00487") }}</label> <!-- 비고 -->
-                  </div>
-                  <div class="area-td area-full">
-                    <TextArea
-                      :style="{ height: '80px' }"
-                      :auto-size="false"
-                      :rows="5"
-                      v-model="textAreaData"
-                    />
-                  </div>
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00488') }}</label>
+                  <!-- 상세구분 -->
                 </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputDetailType"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputDetailType'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputDetailType"
+                    @input-text-set="searchInput"
+                  />
+                </div>
+              </div>
+              <div class="area-form">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00784') }}</label>
+                  <!-- PM주기  -->
+                </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputPmCycle"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputPmCycle'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputPmCycle"
+                    @input-text-set="searchInput"
+                  />
+                </div>
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00508') }}</label>
+                  <!-- 최근보전 -->
+                </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputLatelyPreservation"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputLatelyPreservation'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputLatelyPreservation"
+                    @input-text-set="searchInput"
+                  />
+                </div>
+              </div>
+              <div class="area-form">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00237') }}</label>
+                  <!-- 작업일시 -->
+                </div>
+                <div class="area-td area-full">
+                  <inputText
+                    ref="intputWorkDateYYYYMMDD"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputWorkDateYYYYMMDD'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputWorkDateYYYYMMDD"
+                    @input-text-set="searchInput"
+                    style="width: 100px"
+                  />
+                  <inputText
+                    ref="intputWorkDateHHMMSS"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputWorkDateHHMMSS'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputWorkDateHHMMSS"
+                    @input-text-set="searchInput"
+                    style="width: 80px"
+                  />
+                  <Button
+                    :theme-color="'secondary'"
+                    :size="'medium'"
+                    @click="nowDateBtn"
+                    >{{ $t('MES_CommLang.MES_CommLang_00414') }}</Button
+                  >
+                  <!-- 현재일시 -->
+                </div>
+              </div>
+              <div class="area-form">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00334') }}</label>
+                  <!-- 현재상태 -->
+                </div>
+                <div class="area-td">
+                  <inputText
+                    ref="intputNowStatus"
+                    :boxWidth="'100%'"
+                    :dataNm="'intputNowStatus'"
+                    :disabled="false"
+                    :readonly="true"
+                    :defaultValue="intputNowStatus"
+                    @input-text-set="searchInput"
+                  />
+                </div>
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00363') }}</label>
+                  <!-- 변경상태 -->
+                </div>
+                <div class="area-td">
+                  <DropDownList
+                    ref="comboArea2"
+                    :data-items="codeLists"
+                    :text-field="'STATENAME'"
+                    :value-field="'STATE'"
+                    :value-primitive="true"
+                    :default-value="intputAfterStatus"
+                    v-model="intputAfterStatus"
+                    @change="comboChange"
+                  ></DropDownList>
+                </div>
+              </div>
+              <div class="area-form">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00142') }}</label>
+                  <!-- 사유코드 -->
+                </div>
+                <div class="area-td area-full">
+                  <!-- 3칸 : area-full -->
+                  <DropDownList
+                    ref="comboArea3"
+                    style="width: 265px"
+                    :disabled="reasonDisable"
+                    :data-items="gridData3"
+                    :text-field="'DESCRIPTION'"
+                    :value-field="'REASONCODE'"
+                    :value-primitive="true"
+                    :default-value="intputReasonCode"
+                    v-model="intputReasonCode"
+                    @change="reasonComboChange"
+                  ></DropDownList>
+                </div>
+              </div>
+              <div class="area-form" style="display: none">
+                <div class="area-th">
+                  <label>{{ $t('MES_CommLang.MES_CommLang_00487') }}</label>
+                  <!-- 비고 -->
+                </div>
+                <div class="area-td area-full">
+                  <TextArea
+                    :style="{ height: '80px' }"
+                    :auto-size="false"
+                    :rows="5"
+                    v-model="textAreaData"
+                  />
+                </div>
+              </div>
               <!-- <div ref="topAreaDivWrapper3" class="right-area" style="display: block; float: right; width: calc(40% - 5px) !important; ">
                 <span class="i-msg" style="display: block; padding: 10px 0">※ 더블클릭하여 사유코드를 선택하세요.</span>
                 <div ref="divWrapper3">
@@ -361,17 +385,17 @@
   </div>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
-import InputText from "@/components/common/input/InputText";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid";
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-import { Button } from "@progress/kendo-vue-buttons";
-import { DropDownList } from "@progress/kendo-vue-dropdowns";
-import MesVariableSelectBox from "@/components/common/select/MesVariableSelectBox";
-import { DatePicker } from "@progress/kendo-vue-dateinputs";
-import { TextArea } from "@progress/kendo-vue-inputs";
+import mixinGlobal from '@/mixin/global.js';
+import InputText from '@/components/common/input/InputText';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
+import { Button } from '@progress/kendo-vue-buttons';
+import { DropDownList } from '@progress/kendo-vue-dropdowns';
+import MesVariableSelectBox from '@/components/common/select/MesVariableSelectBox';
+import { DatePicker } from '@progress/kendo-vue-dateinputs';
+import { TextArea } from '@progress/kendo-vue-inputs';
 
 let myTitle;
 let myMenuId;
@@ -381,13 +405,12 @@ let month = d.getMonth(); // 월
 let day = d.getDate(); // 일
 let workFromDate = new Date(year, month, day - 7);
 
-
 export default {
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
@@ -410,15 +433,15 @@ export default {
     DatePicker,
     TextArea,
   },
-  props:{
+  props: {
     visibleDialog: {
       type: Boolean,
       default: false,
     },
     callBack: {
       type: Function,
-      default: () => true
-    }
+      default: () => true,
+    },
   },
   data() {
     return {
@@ -431,60 +454,63 @@ export default {
       gridHeader3: [],
       gridData3: [],
       gridOriData3: [],
-      selectedField: "selected",
-      selectedField2: "selected",
-      selectedField3: "selected",
-      intputEquipmentId: "",
-      intputEquipmentCode: "",
-      intputEquipmentName: "",
-      intputEquipmentType: "",
-      intputDetailType: "",
-      intputPmCycle: "",
-      intputLatelyPreservation: "",
-      intputWorkDateYYYYMMDD: "",
-      intputWorkDateHHMMSS: "",
-      intputNowStatus: "",
-      intputReasonCode: "",
-      intputReasonCodeName: "",
-      textAreaData: "",
-      sparepartData:"",
-      loginInfo:"",
+      selectedField: 'selected',
+      selectedField2: 'selected',
+      selectedField3: 'selected',
+      intputEquipmentId: '',
+      intputEquipmentCode: '',
+      intputEquipmentName: '',
+      intputEquipmentType: '',
+      intputDetailType: '',
+      intputPmCycle: '',
+      intputLatelyPreservation: '',
+      intputWorkDateYYYYMMDD: '',
+      intputWorkDateHHMMSS: '',
+      intputNowStatus: '',
+      intputReasonCode: '',
+      intputReasonCodeName: '',
+      textAreaData: '',
+      sparepartData: '',
+      loginInfo: '',
       plantID: this.$auth.$state.user.plantId,
       headerParam: {
-        gridid: "dgvEquipmentStateChangeList", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvEquipmentStateChangeList', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
       },
       headerParam2: {
-        gridid: "dgvEquipmentHistory", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvEquipmentHistory', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
       },
       headerParam3: {
-        gridid: "dgvReasonCode", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvReasonCode', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
         noFirstCheck: true,
         noRowstat: true,
       },
-      stateobject: "",
-      workFromDate: Utility.setFormatDate(workFromDate.toLocaleDateString(),"YYYY-MM-DD"),
-      workToDate: Utility.setFormatDate(new Date(), "YYYYMMDD"),
-      inputcol: ["STATE", "STATENAME"],
+      stateobject: '',
+      workFromDate: Utility.setFormatDate(
+        workFromDate.toLocaleDateString(),
+        'YYYY-MM-DD'
+      ),
+      workToDate: Utility.setFormatDate(new Date(), 'YYYYMMDD'),
+      inputcol: ['STATE', 'STATENAME'],
       // inputcol2: ["STATE", "STATENAME"],
-      codeLists:[],
-      statusFlag:"",
-      defaultvalue: "",
-      intputAfterStatus: "",
-      gridHeight: "",
-      gridHeight2: "",
-      gridHeight3: "",
-      dropDownStatus:{},
-      reasonDisable: false
+      codeLists: [],
+      statusFlag: '',
+      defaultvalue: '',
+      intputAfterStatus: '',
+      gridHeight: '',
+      gridHeight2: '',
+      gridHeight3: '',
+      dropDownStatus: {},
+      reasonDisable: false,
     };
   },
   created() {},
@@ -495,7 +521,7 @@ export default {
     await this.getHeaderMulti(this.headerParam, this.$refs.divWrapper);
     //await this.getHeaderMulti(this.headerParam2, this.$refs.divWrapper2);
     //await this.getHeaderMulti(this.headerParam3, this.$refs.divWrapper3);
-    
+
     // this.$refs.comboArea.sendParam.stateobject = this.changeStatus;
     // this.$refs.comboArea2.sendParam.stateobject = this.changeStatus;
     // this.comboList();
@@ -504,14 +530,13 @@ export default {
   computed: {
     areAllSelected() {
       return (
-        this.gridData.findIndex((x) => x.checked === false) === -1 &&
+        this.gridData.findIndex(x => x.checked === false) === -1 &&
         this.gridData.length !== 0
       );
     },
   },
   watch: {},
   methods: {
-    
     // 조회버튼 클릭
     searchBtn() {
       this.$refs.rowGrid.sortField = [{}];
@@ -527,15 +552,15 @@ export default {
       // console.log("저장시::::::::", this.textAreaData);
       // console.log("변경상태:::::::", this.intputAfterStatus);
       let reasonCodeTypeData;
-      if (this.intputAfterStatus == "Down") {
-        reasonCodeTypeData = "EQP-DOWN";
-      } else if (this.intputAfterStatus == "Hold") {
-        reasonCodeTypeData = "EQP-HOLD";
+      if (this.intputAfterStatus == 'Down') {
+        reasonCodeTypeData = 'EQP-DOWN';
+      } else if (this.intputAfterStatus == 'Hold') {
+        reasonCodeTypeData = 'EQP-HOLD';
       }
 
       const saveData = this.gridData
-        .filter((x) => x.EQUIPMENTID == this.intputEquipmentCode)
-        .map((x) => {
+        .filter(x => x.EQUIPMENTID == this.intputEquipmentCode)
+        .map(x => {
           return {
             ...x,
             _rowstatus: x.rowStat,
@@ -543,11 +568,13 @@ export default {
             currentstate: this.intputNowStatus, // 현재상태
             reasoncode: this.intputReasonCode, // 사유코드 있음
             plantid: this.$auth.$state.user.plantId,
-            eventtime: this.intputWorkDateYYYYMMDD.replaceAll("-", "") + this.intputWorkDateHHMMSS.replaceAll(":", ""), // 작업일시
+            eventtime:
+              this.intputWorkDateYYYYMMDD.replaceAll('-', '') +
+              this.intputWorkDateHHMMSS.replaceAll(':', ''), // 작업일시
             changestate: this.intputAfterStatus, // 변경상태
             equipmentid: this.intputEquipmentCode, // 설비코드 있음
             reasoncodetype: reasonCodeTypeData, // 사유코드 타입 있음
-            /* 
+            /*
                 저장신을하면되는데....
                 파라미터를 잘 확인하고 저장하시오
                 주의 YES or NO 팝업창 있음!!!!!확인하기
@@ -557,17 +584,23 @@ export default {
       // console.log("save data ::::::::", saveData);
       if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnEquipmentStateChange",
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnEquipmentStateChange',
           sendParam: saveData,
-        }).then((result) => {
+        }).then(result => {
           this.$nextTick(() => {
-            if (result.returncode !== undefined && result.returncode === "0") {
+            if (result.returncode !== undefined && result.returncode === '0') {
               this.inputBoxReset(); // 우측 정보창 클리어시키기 위함
-              this.$refs.alertPop.show( this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* 알림, 저장되었습니다. */
-              this.getGridData("R");
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); /* 알림, 저장되었습니다. */
+              this.getGridData('R');
             } else {
-              this.$refs.alertPop.show("ERROR : " + result.returncode, result.returnmessage);
+              this.$refs.alertPop.show(
+                'ERROR : ' + result.returncode,
+                result.returnmessage
+              );
             }
           });
         });
@@ -576,15 +609,18 @@ export default {
 
     nowDateBtn() {
       // 현재시간 버튼클릭
-      this.intputWorkDateYYYYMMDD = Utility.setFormatDate(new Date(),"YYYY-MM-DD");
-      this.intputWorkDateHHMMSS = Utility.setFormatDate(new Date(), "HH:mm:ss");
+      this.intputWorkDateYYYYMMDD = Utility.setFormatDate(
+        new Date(),
+        'YYYY-MM-DD'
+      );
+      this.intputWorkDateHHMMSS = Utility.setFormatDate(new Date(), 'HH:mm:ss');
     },
 
     // clearBtn 클릭
     clearBtn() {
       // Clear 클릭시 사유코드 초기화
-      this.intputReasonCode = ""; // 사유코드
-      this.intputReasonCodeName = ""; // 사유코드명
+      this.intputReasonCode = ''; // 사유코드
+      this.intputReasonCodeName = ''; // 사유코드명
     },
     //그리드1 데이터 가져오기
     async getGridData(re) {
@@ -592,18 +628,19 @@ export default {
       // console.log(":::::::::::", this.inputcol);
 
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetEquipmentList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEqptList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           equipmentid: this.intputEquipmentId,
-          equipmentstate: this.sparepartData === undefined ? "" : this.sparepartData,
+          equipmentstate:
+            this.sparepartData === undefined ? '' : this.sparepartData,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: false,
@@ -617,8 +654,8 @@ export default {
         this.gridOriData = data;
         this.gridData = data;
 
-        if (re != "R") {
-          if (this.intputEquipmentId == "") {
+        if (re != 'R') {
+          if (this.intputEquipmentId == '') {
             this.getGridData2(data[0].EQUIPMENTID);
           } else {
             this.getGridData2(data[0].equipmentid);
@@ -628,34 +665,36 @@ export default {
           this.intputEquipmentName = this.gridData[0].EQUIPMENTNAME;
           this.intputEquipmentType = this.gridData[0].EQUIPMENTTYPE;
           this.intputDetailType = this.gridData[0].EQUIPMENTTYPENAME;
-          this.intputPmCycle = this.gridData[0].PMCYCLEVALUE + this.$i18n.t('MES_CommLang.MES_CommLang_00348'); // 일
+          this.intputPmCycle =
+            this.gridData[0].PMCYCLEVALUE +
+            this.$i18n.t('MES_CommLang.MES_CommLang_00348'); // 일
           this.intputLatelyPreservation = this.gridData[0].LASTMAINTENANCETIME;
           this.intputWorkDateYYYYMMDD = Utility.setFormatDate(
             new Date(),
-            "YYYY-MM-DD"
+            'YYYY-MM-DD'
           );
           this.intputWorkDateHHMMSS = Utility.setFormatDate(
             new Date(),
-            "HH:mm:ss"
+            'HH:mm:ss'
           );
           this.intputNowStatus = this.gridData[0].EQUIPMENTSTATENAME;
           // 현재상태에 따라 셀박 바꿔주기
           this.statusFlag = this.gridData[0].EQUIPMENTSTATENAME;
-          
+
           this.intputAfterStatus = this.gridData[0].EQUIPMENTSTATENAME;
 
-          let changeState = "";
+          let changeState = '';
           if (
-            this.gridData[0].EQUIPMENTSTATE == "PM" ||
-            this.gridData[0].EQUIPMENTSTATE == "Down"
+            this.gridData[0].EQUIPMENTSTATE == 'PM' ||
+            this.gridData[0].EQUIPMENTSTATE == 'Down'
           ) {
-            changeState = "Idle";
+            changeState = 'Idle';
             this.intputAfterStatus = changeState;
             // this.$refs.topAreaDivWrapper3.style.display = "none";
             // this.$refs.divWrapper3.style.display = "none";
             this.reasonDisable = true;
           } else {
-            changeState = "Down";
+            changeState = 'Down';
             this.intputAfterStatus = changeState;
             // this.$refs.topAreaDivWrapper3.style.display = "block";
             // this.$refs.divWrapper3.style.display = "block";
@@ -663,7 +702,6 @@ export default {
           }
           //   console.log("STATUS::::", changeState);
           this.getGridData3(changeState);
-
         } else {
           let nowStatus = this.intputNowStatus;
           let afterStatus = this.intputAfterStatus;
@@ -672,11 +710,11 @@ export default {
           this.intputAfterStatus = nowStatus; // 변경상태
           // console.log("this.intputNowStatus:::::::", this.intputNowStatus);
           this.statusFlag = this.intputNowStatus;
-          let changeState = "";
+          let changeState = '';
           if (
-            this.intputAfterStatus == "PM" ||
-            this.intputAfterStatus == "Idle" ||
-            this.intputAfterStatus == "Run"
+            this.intputAfterStatus == 'PM' ||
+            this.intputAfterStatus == 'Idle' ||
+            this.intputAfterStatus == 'Run'
           ) {
             // this.intputAfterStatus = "Idle";
             // this.$refs.topAreaDivWrapper3.style.display = "none";
@@ -687,10 +725,10 @@ export default {
             // this.$refs.topAreaDivWrapper3.style.display = "block";
             // this.$refs.divWrapper3.style.display = "block";
             this.reasonDisable = false;
-            if (this.intputAfterStatus == "Down") {
-              changeState = "EQP-DOWN";
+            if (this.intputAfterStatus == 'Down') {
+              changeState = 'EQP-DOWN';
             } else {
-              changeState = "EQP-HOLD";
+              changeState = 'EQP-HOLD';
             }
           }
 
@@ -700,7 +738,6 @@ export default {
       });
       // console.log("inputcol2::::::::", this.intputAfterStatus);
       // console.log("this.:::::::", this.intputNowStatus);
-      
     },
     //그리드2 데이터 가져오기
     async getGridData2(intputEquipmentId) {
@@ -709,19 +746,19 @@ export default {
       // console.log("workFromDate:::::::::", this.workFromDate.replaceAll('-', ''));
 
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetEquipmentHistory",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEquipmentHistory',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           equipmentid: intputEquipmentId,
           todate: this.workToDate,
-          fromdate: this.workFromDate.replaceAll("-", ""),
+          fromdate: this.workFromDate.replaceAll('-', ''),
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -739,17 +776,17 @@ export default {
       // console.log("state:::::::::", state);
 
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetReasoncodeList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetRsncodeList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           reasoncodetype: state,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -760,8 +797,8 @@ export default {
         // this.$nuxt.$emit("iccReset");
         this.gridOriData3 = data;
         this.gridData3 = data;
-        
-        if(this.gridData3.length > 0) {
+
+        if (this.gridData3.length > 0) {
           this.intputReasonCode = this.gridData3[0].REASONCODE;
         }
       });
@@ -769,14 +806,14 @@ export default {
     },
     async comboList() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetStateDefinitionList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetStateDefinitionList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           stateobject: 'Equipment',
         },
-      }).then((res) => {
-        const data = res.map((x) => {
+      }).then(res => {
+        const data = res.map(x => {
           return {
             STATE: x.STATE,
             STATENAME: x.STATENAME,
@@ -784,16 +821,22 @@ export default {
         });
         // console.log("comboArea2List data ====== ", data);
         // console.log("nStatus ====== ", nStatus);
-        if(this.statusFlag === "Idle") {
-          this.codeLists = data.filter((y) => y.STATE !== "Idle");
-        } else if(this.statusFlag === "PM") {
-          this.codeLists = data.filter((y) => y.STATE === "Idle");
-        } else if(this.statusFlag === "Hold") {
-          this.codeLists = data.filter((y) => y.STATE === "Idle" || y.STATE === "Down");
-        } else if(this.statusFlag === "Run") {
-          this.codeLists = data.filter((y) => y.STATE === "Idle" || y.STATE === "Down" || y.STATE === "Hold");
-        } else if(this.statusFlag === "Down") {
-          this.codeLists = data.filter((y) => y.STATE === "Idle" || y.STATE === "PM");
+        if (this.statusFlag === 'Idle') {
+          this.codeLists = data.filter(y => y.STATE !== 'Idle');
+        } else if (this.statusFlag === 'PM') {
+          this.codeLists = data.filter(y => y.STATE === 'Idle');
+        } else if (this.statusFlag === 'Hold') {
+          this.codeLists = data.filter(
+            y => y.STATE === 'Idle' || y.STATE === 'Down'
+          );
+        } else if (this.statusFlag === 'Run') {
+          this.codeLists = data.filter(
+            y => y.STATE === 'Idle' || y.STATE === 'Down' || y.STATE === 'Hold'
+          );
+        } else if (this.statusFlag === 'Down') {
+          this.codeLists = data.filter(
+            y => y.STATE === 'Idle' || y.STATE === 'PM'
+          );
         } else {
           this.codeLists = data;
         }
@@ -808,9 +851,9 @@ export default {
       // event.dataItem[this.selectedField] = event.dataItem[this.selectedField];
       const equipmentid = event.dataItem.EQUIPMENTID;
       const rowStat = event.dataItem.rowStat;
-      this.intputReasonCode = "";
-      this.intputReasonCodeName = "";
-      if (equipmentid != "" && rowStat == "N") {
+      this.intputReasonCode = '';
+      this.intputReasonCodeName = '';
+      if (equipmentid != '' && rowStat == 'N') {
         const intputEquipmentId = event.dataItem.EQUIPMENTID;
         this.getGridData2(intputEquipmentId);
 
@@ -819,26 +862,34 @@ export default {
         this.intputEquipmentName = event.dataItem.EQUIPMENTNAME;
         this.intputEquipmentType = event.dataItem.EQUIPMENTTYPE;
         this.intputDetailType = event.dataItem.EQUIPMENTTYPENAME;
-        this.intputPmCycle = event.dataItem.PMCYCLEVALUE + this.$i18n.t('MES_CommLang.MES_CommLang_00348'); //일
+        this.intputPmCycle =
+          event.dataItem.PMCYCLEVALUE +
+          this.$i18n.t('MES_CommLang.MES_CommLang_00348'); //일
         this.intputLatelyPreservation = event.dataItem.LASTMAINTENANCETIME;
-        this.intputWorkDateYYYYMMDD = Utility.setFormatDate(new Date(),"YYYY-MM-DD");
-        this.intputWorkDateHHMMSS = Utility.setFormatDate(new Date(),"HH:mm:ss");
+        this.intputWorkDateYYYYMMDD = Utility.setFormatDate(
+          new Date(),
+          'YYYY-MM-DD'
+        );
+        this.intputWorkDateHHMMSS = Utility.setFormatDate(
+          new Date(),
+          'HH:mm:ss'
+        );
         this.intputNowStatus = event.dataItem.EQUIPMENTSTATE;
         this.statusFlag = event.dataItem.EQUIPMENTSTATE;
 
-        let changeState = "";
+        let changeState = '';
         if (
-          event.dataItem.EQUIPMENTSTATE == "PM" ||
-          event.dataItem.EQUIPMENTSTATE == "Down"
+          event.dataItem.EQUIPMENTSTATE == 'PM' ||
+          event.dataItem.EQUIPMENTSTATE == 'Down'
         ) {
-          changeState = "Idle";
+          changeState = 'Idle';
           // this.statusFlag = changeState;
           this.intputAfterStatus = changeState;
           // this.$refs.topAreaDivWrapper3.style.display = "none";
           // this.$refs.divWrapper3.style.display = "none";
           this.reasonDisable = true;
         } else {
-          changeState = "Down";
+          changeState = 'Down';
           // this.statusFlag = changeState;
           this.intputAfterStatus = changeState;
           // this.$refs.topAreaDivWrapper3.style.display = "block";
@@ -849,7 +900,7 @@ export default {
         //그리드 selecte
         this.row = { ...event.dataItem };
         this.gridData.forEach(
-          (item) => (item.selected = item.idx === event.dataItem.idx)
+          item => (item.selected = item.idx === event.dataItem.idx)
         );
         this.selected = event.dataItem;
         //   console.log("STATUS::::", changeState);
@@ -864,7 +915,7 @@ export default {
       //그리드 selecte
       this.row = { ...event.dataItem };
       this.gridData2.forEach(
-        (item) => (item.selected = item.idx === event.dataItem.idx)
+        item => (item.selected = item.idx === event.dataItem.idx)
       );
       this.selected = event.dataItem;
     },
@@ -875,7 +926,7 @@ export default {
       //그리드 selecte
       this.row = { ...event.dataItem };
       this.gridData3.forEach(
-        (item) => (item.selected = item.idx === event.dataItem.idx)
+        item => (item.selected = item.idx === event.dataItem.idx)
       );
       this.selected = event.dataItem;
     },
@@ -897,7 +948,7 @@ export default {
       event.dataItem[this.selectedField] = !event.dataItem[this.selectedField];
       const equipmentid = event.dataItem.EQUIPMENTID;
       const rowStat = event.dataItem.rowStat;
-      if (equipmentid != "" && rowStat == "N") {
+      if (equipmentid != '' && rowStat == 'N') {
         const intputEquipmentId = event.dataItem.EQUIPMENTID;
         this.getGridData2(intputEquipmentId);
       }
@@ -927,15 +978,15 @@ export default {
     //그리드 인풋 제외 데이터 변경시
     rowDdChange(e, name, dataItem) {
       // console.log("===rowDdChange===", e);
-      const idx = this.gridData2.findIndex((x) => x.idx === dataItem.idx);
+      const idx = this.gridData2.findIndex(x => x.idx === dataItem.idx);
       const data = JSON.parse(JSON.stringify(this.gridData2));
 
       data[idx] = { ...data[idx], [name]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.chkOriginalData(data, idx)) {
-        data[idx].rowStat = "N";
+      if (data[idx].rowStat === 'U' && !this.chkOriginalData(data, idx)) {
+        data[idx].rowStat = 'N';
       }
 
       this.gridData2 = data;
@@ -945,13 +996,13 @@ export default {
     griditemchange(e) {
       // console.log("===griditemchange===");
       const data = JSON.parse(JSON.stringify(this.gridData2));
-      const idx = data.findIndex((x) => x.idx === e.dataItem.idx);
+      const idx = data.findIndex(x => x.idx === e.dataItem.idx);
       data[idx] = { ...data[idx], [e.field]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.chkOriginalData(data, idx)) {
-        data[idx].rowStat = "N";
+      if (data[idx].rowStat === 'U' && !this.chkOriginalData(data, idx)) {
+        data[idx].rowStat = 'N';
       }
 
       this.gridData2 = data;
@@ -961,8 +1012,8 @@ export default {
     chkOriginalData(gridData, idx) {
       const data = JSON.parse(JSON.stringify(gridData));
       const keys = Object.keys(data[idx]);
-      const chkArr = keys.filter((x) => {
-        return data[idx][x] !== this.gridOriData2[idx][x] && x !== "rowStat";
+      const chkArr = keys.filter(x => {
+        return data[idx][x] !== this.gridOriData2[idx][x] && x !== 'rowStat';
       });
       return chkArr.length > 0;
     },
@@ -971,7 +1022,7 @@ export default {
     searchInput(nm, val) {
       this[nm] = val;
     },
-    sparepartComboChange (nm, val) {
+    sparepartComboChange(nm, val) {
       // console.log("콤보체인지nm:::::::", nm);
       // console.log("콤보체인지val:::::::", val);
       this.sparepartData = val;
@@ -981,64 +1032,72 @@ export default {
       // console.log("콤보체인지nm:::::::", e);
       // console.log("콤보체인지val:::::::", e.value);
       this.intputAfterStatus = e.value;
-      this.intputReasonCode = "";
-      this.intputReasonCodeName = "";
+      this.intputReasonCode = '';
+      this.intputReasonCodeName = '';
 
-      if (e.value == "PM" || e.value == "Idle" || e.value == "Run") {
+      if (e.value == 'PM' || e.value == 'Idle' || e.value == 'Run') {
         // this.$refs.topAreaDivWrapper3.style.display = "none";
         // this.$refs.divWrapper3.style.display = "none";
         this.reasonDisable = true;
-      } else if (e.value == "Down") {
+      } else if (e.value == 'Down') {
         // this.$refs.topAreaDivWrapper3.style.display = "block";
         // this.$refs.divWrapper3.style.display = "block";
         this.reasonDisable = false;
-        let changeState = "";
-        changeState = "EQP_DOWN";
+        let changeState = '';
+        changeState = 'EQP_DOWN';
         this.getGridData3(changeState);
       } else {
         // this.$refs.topAreaDivWrapper3.style.display = "block";
         // this.$refs.divWrapper3.style.display = "block";
         this.reasonDisable = false;
-        let changeState = "";
-        changeState = "EQP_HOLD";
+        let changeState = '';
+        changeState = 'EQP_HOLD';
         this.getGridData3(changeState);
       }
     },
-    reasonComboChange (e, val) {
+    reasonComboChange(e, val) {
       // console.log("콤보체인지nm:::::::", nm);
       // console.log("콤보체인지val:::::::", val);
       this.intputReasonCode = e.value;
     },
     toChange(e) {
-      this.workToDate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.workToDate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     fromChange(e) {
-      this.workFromDate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.workFromDate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
 
     toggleDialog() {
       // this.visibleDialog = !this.visibleDialog;
-      if (this.intputAfterStatus == "Down" && this.intputReasonCode == "") {
-        this.$refs.alertPop.show( this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00068')); /* 알림, 사유입력이 필수 입니다. 사유를 선택해 주시기 바랍니다. */
+      if (this.intputAfterStatus == 'Down' && this.intputReasonCode == '') {
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00068')
+        ); /* 알림, 사유입력이 필수 입니다. 사유를 선택해 주시기 바랍니다. */
       } else if (
-        this.intputAfterStatus == "Hold" &&
-        this.intputReasonCode == ""
+        this.intputAfterStatus == 'Hold' &&
+        this.intputReasonCode == ''
       ) {
-        this.$refs.alertPop.show( this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00068')); /* 알림, 사유입력이 필수 입니다. 사유를 선택해 주시기 바랍니다. */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00068')
+        ); /* 알림, 사유입력이 필수 입니다. 사유를 선택해 주시기 바랍니다. */
       } else {
-        this.$refs["confirmPop"].title = "Info";
-        this.$refs["confirmPop"].message =
-          "EquipmentID (" +
+        this.$refs['confirmPop'].title = 'Info';
+        this.$refs['confirmPop'].message =
+          'EquipmentID (' +
           this.intputEquipmentCode +
-          ") "+ this.$i18n.t('MES_MsgLang.MES_MsgLang_00117')+"<br/>" + // 의 상태를
-          "<br/>" +
+          ') ' +
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00117') +
+          '<br/>' + // 의 상태를
+          '<br/>' +
           this.intputNowStatus +
-          " -> " +
+          ' -> ' +
           this.intputAfterStatus +
           this.$i18n.t('Mes_MsgLang.MES_MsgLang_00113'); // 으로 변경하시겠습니까?
-        this.$refs["confirmPop"].callBack = this.saveBtn;
-        this.$refs["confirmPop"].modalWidth = "300px";
-        this.$refs["confirmPop"].visibleDialog = true;
+        this.$refs['confirmPop'].callBack = this.saveBtn;
+        this.$refs['confirmPop'].modalWidth = '300px';
+        this.$refs['confirmPop'].visibleDialog = true;
       }
     },
     inputBoxReset() {
@@ -1053,37 +1112,72 @@ export default {
       // this.intputWorkDateHHMMSS = ""; // 작업일시 HH:MM:SS
       // this.intputNowStatus = ""; // 현재상태
       // this.intputAfterStatus = ""; // 변경상태
-      this.intputReasonCode = ""; // 사유코드
-      this.intputReasonCodeName = ""; // 사유코드명
-      this.textAreaData = ""; // 비고
+      this.intputReasonCode = ''; // 사유코드
+      this.intputReasonCodeName = ''; // 사유코드명
+      this.textAreaData = ''; // 비고
     },
-    sortChangeHandler(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.gridData = this.gridData.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.gridData = this.gridData.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.gridData = this.gridData.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.gridData = this.gridData.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
     },
-    sortChangeHandler2(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.gridData2 = this.gridData2.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.gridData2 = this.gridData2.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler2(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.gridData2 = this.gridData2.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.gridData2 = this.gridData2.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
     },
-    sortChangeHandler3(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.gridData3 = this.gridData3.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.gridData3 = this.gridData3.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler3(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.gridData3 = this.gridData3.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.gridData3 = this.gridData3.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
-    }
+    },
   },
 };
-
 </script>
 <style lang="scss" scoped>
 @media (max-width: 1267px) {

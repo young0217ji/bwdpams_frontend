@@ -21,7 +21,7 @@
               />
             </div>
             <div class="form-group">
-              <label>{{ $t("MES_CommLang.MES_CommLang_00263") }}</label>
+              <label>{{ $t('MES_CommLang.MES_CommLang_00263') }}</label>
               <InputText
                 ref="productid"
                 :searchOption="true"
@@ -40,7 +40,7 @@
                   :defaultchecked="false"
                   @checkbox-set="chkReleaseTime"
                 />
-                <label>{{ $t("MES_CommLang.MES_CommLang_00199") }}</label>
+                <label>{{ $t('MES_CommLang.MES_CommLang_00199') }}</label>
               </div>
 
               <div class="form-datepicker">
@@ -73,7 +73,7 @@
                   :defaultchecked="true"
                   @checkbox-set="chkReleased"
                 />
-                <label>{{ $t("MES_CommLang.MES_CommLang_00252") }}</label>
+                <label>{{ $t('MES_CommLang.MES_CommLang_00252') }}</label>
               </div>
             </div>
           </div>
@@ -84,14 +84,14 @@
             :theme-color="'primary'"
             :size="'medium'"
             @click="searchBtn"
-            >{{ $t("MES_CommLang.MES_CommLang_00277") }}</Button
+            >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
           >
           <Button
             icon="check"
             :theme-color="'primary'"
             :size="'medium'"
             @click="selectRow"
-            >{{ $t("MES_CommLang.MES_CommLang_00169") }}</Button
+            >{{ $t('MES_CommLang.MES_CommLang_00169') }}</Button
           >
         </v-col>
       </v-row>
@@ -130,8 +130,6 @@ import InputText from '@/components/common/input/InputText';
 import Checkbox from '@/components/common/input/Checkbox';
 import DateUtility from '~/plugins/dateUtility';
 import AlertPop from '../../components/../components/common/modal/AlertPop.vue';
-
-
 
 export default {
   name: 'SearchModal',
@@ -225,7 +223,7 @@ export default {
     async getGridData() {
       this.mesGet({
         apiKey: 'mes/common/getqueryresult',
-        queryId: 'GetLotSearchList',
+        queryId: 'GetLotSrchList',
         sendParam: this.params,
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -252,16 +250,16 @@ export default {
           a[e.event?.field] < b[e.event?.field]
             ? -1
             : a[e.event?.field] > b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       } else {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] > b[e.event?.field]
             ? -1
             : a[e.event?.field] < b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       }
     },
@@ -306,7 +304,10 @@ export default {
       this.todate = this.todate.replace(/-/g, '');
       this.fromdate = this.fromdate.replace(/-/g, '');
       if (this.todate && this.fromdate > this.todate) {
-        this.$refs.alertPop.show('', this.$i18n.t('MES_MsgLang.MES_MsgLang_00003'));
+        this.$refs.alertPop.show(
+          '',
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00003')
+        );
       }
     },
     chkReleased(nm, val) {

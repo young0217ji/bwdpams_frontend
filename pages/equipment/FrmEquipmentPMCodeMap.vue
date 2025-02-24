@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00175") }}</li> <!-- 설비관리 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00596") }}</li> <!-- 예방보전 계획등록 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00175') }}</li>
+      <!-- 설비관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00596') }}</li>
+      <!-- 예방보전 계획등록 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -14,33 +17,68 @@
                 <div class="form-group-wrap">
                   <div class="form-group">
                     <Label>Line</Label>
-                    <DropDownList ref="cmbLine" :style="{ width: '250px' }" :data-items="line" :text-field="'text'"
-                      :data-item-key="'id'" :value="value" @change="comboChange">
+                    <DropDownList
+                      ref="cmbLine"
+                      :style="{ width: '250px' }"
+                      :data-items="line"
+                      :text-field="'text'"
+                      :data-item-key="'id'"
+                      :value="value"
+                      @change="comboChange"
+                    >
                     </DropDownList>
                   </div>
-                  <div class="form-group" style="margin-left: 5px;">
+                  <div class="form-group" style="margin-left: 5px">
                     <Label>WorkCenter</Label>
-                    <DropDownList ref="cmbWorkCenter" :style="{ width: '200px' }" :data-items="workCenter"
-                      :text-field="'text'" :data-item-key="'id'" :value="value2" @change="comboChange2">
+                    <DropDownList
+                      ref="cmbWorkCenter"
+                      :style="{ width: '200px' }"
+                      :data-items="workCenter"
+                      :text-field="'text'"
+                      :data-item-key="'id'"
+                      :value="value2"
+                      @change="comboChange2"
+                    >
                     </DropDownList>
                   </div>
-                  <div class="form-group" style="margin-left: -5px;">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00177") }}</label> <!-- 설비코드 -->
-                    <InputText ref="equipmentid" :boxWidth="'85%'" :dataNm="'equipmentid'" :disabled="false"
-                      :defaultValue="equipmentid" :searchOption="true" :searchFunc="searchBtn"
-                      @input-text-set="searchInput" />
+                  <div class="form-group" style="margin-left: -5px">
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00177') }}</label>
+                    <!-- 설비코드 -->
+                    <InputText
+                      ref="equipmentid"
+                      :boxWidth="'85%'"
+                      :dataNm="'equipmentid'"
+                      :disabled="false"
+                      :defaultValue="equipmentid"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
-                  <div class="form-group" style="margin-left: -50px;">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00171") }}</label> <!-- 설비명 -->
-                    <InputText ref="equipmentname" :boxWidth="'85%'" :dataNm="'equipmentname'" :disabled="false"
-                      :defaultValue="equipmentname" :searchOption="true" :searchFunc="searchBtn"
-                      @input-text-set="searchInput" />
+                  <div class="form-group" style="margin-left: -50px">
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00171') }}</label>
+                    <!-- 설비명 -->
+                    <InputText
+                      ref="equipmentname"
+                      :boxWidth="'85%'"
+                      :dataNm="'equipmentname'"
+                      :disabled="false"
+                      :defaultValue="equipmentname"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                 </div>
               </v-col>
               <v-col :sm="3" :lg="2" align="right">
-                <Button :theme-color="'primary'" icon="search" @click="searchBtn">{{ $t("MES_CommLang.MES_CommLang_00277")
-                }}</Button> <!-- 조회 -->
+                <Button
+                  :theme-color="'primary'"
+                  icon="search"
+                  @click="searchBtn"
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -48,49 +86,110 @@
       </v-col>
     </v-row>
 
-
     <v-row ref="contents">
-      <v-col :sm="3" :lg="3" :class="'divListWapper'" :style="{ height: '100%' }">
+      <v-col
+        :sm="3"
+        :lg="3"
+        :class="'divListWapper'"
+        :style="{ height: '100%' }"
+      >
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="4" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00172") }}</CardTitle>
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00172')
+                }}</CardTitle>
                 <!-- 설비목록 -->
               </v-col>
             </v-row>
-            <div ref="divWrapper1" style="height: calc(100% - 33px);">
-              <KendoGrid ref="equipmentGrid" :gridHeight="gridHeight" :gridItems="gridData" :sortable="true"
-                :columns="equipmentHeaderParam.gridHeader" :resizable="false" :edit-field="'inEdit'" :isPaging="true"
-                :selected-field="selectedField" @gridrowclick="equipmentOnRowClick" />
+            <div ref="divWrapper1" style="height: calc(100% - 33px)">
+              <KendoGrid
+                ref="equipmentGrid"
+                :gridHeight="gridHeight"
+                :gridItems="gridData"
+                :sortable="true"
+                :columns="equipmentHeaderParam.gridHeader"
+                :resizable="false"
+                :edit-field="'inEdit'"
+                :isPaging="true"
+                :selected-field="selectedField"
+                @gridrowclick="equipmentOnRowClick"
+              />
             </div>
           </CardBody>
         </Card>
       </v-col>
-      <v-col :sm="9" :lg="9" :class="'divListWapper'" :style="{ height: '65%' }">
+      <v-col
+        :sm="9"
+        :lg="9"
+        :class="'divListWapper'"
+        :style="{ height: '65%' }"
+      >
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00597") }}</CardTitle> <!-- 예방보전 항목 -->
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00597')
+                }}</CardTitle>
+                <!-- 예방보전 항목 -->
               </v-col>
               <v-col cols="6" align="right">
-                <Button :theme-color="'primary'" :size="'small'" icon="save" @click="saveBtn">{{
-                  $t("MES_CommLang.MES_CommLang_00414") }}</Button> <!-- 저장 -->
-                <Button ref="addBtn" :theme-color="'secondary'" :size="'small'" :icon="'add'" @click="addBtn"
-                  :disabled="disableAddBtn">{{ $t("MES_CommLang.MES_CommLang_00411") }}</Button>
-                <Button :theme-color="'secondary'" :size="'small'" :icon="'delete'" @click="delConfirm">{{
-                  $t("MES_CommLang.MES_CommLang_00412") }}</Button> <!-- 삭제 -->
-                <Button :theme-color="'secondary'" :size="'small'" :icon="'undo'" @click="undoBtn">UNDO</Button>
+                <Button
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  icon="save"
+                  @click="saveBtn"
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</Button
+                >
+                <!-- 저장 -->
+                <Button
+                  ref="addBtn"
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  :icon="'add'"
+                  @click="addBtn"
+                  :disabled="disableAddBtn"
+                  >{{ $t('MES_CommLang.MES_CommLang_00411') }}</Button
+                >
+                <Button
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  :icon="'delete'"
+                  @click="delConfirm"
+                  >{{ $t('MES_CommLang.MES_CommLang_00412') }}</Button
+                >
+                <!-- 삭제 -->
+                <Button
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  :icon="'undo'"
+                  @click="undoBtn"
+                  >UNDO</Button
+                >
               </v-col>
             </v-row>
-            <div ref="divWrapper2" style="height: calc(100% - 33px);">
-              <KendoGrid ref="pmCodeGrid" :gridHeight="gridHeight" :gridItems="gridData2" :sortable="true"
-                :columns="PMCodeHeaderParam.gridHeader" :gridDropDownList="PMCodeHeaderParam.enumComboBox"
-                :resizable="true" :edit-field="'inEdit'" :isPaging="true" :selected-field="selectedField"
-                :customCell="customCell" :dateTimePickerList="PMCodeHeaderParam.dateTimePickerList"
-                @gridButtonClick="gridButtonClick" @selectionchange="onSelectionchange" @gridrowclick="pmCodeOnRowClick"
-                @gridddchang="rowDdChange" @griditemchange="griditemchange" />
+            <div ref="divWrapper2" style="height: calc(100% - 33px)">
+              <KendoGrid
+                ref="pmCodeGrid"
+                :gridHeight="gridHeight"
+                :gridItems="gridData2"
+                :sortable="true"
+                :columns="PMCodeHeaderParam.gridHeader"
+                :gridDropDownList="PMCodeHeaderParam.enumComboBox"
+                :resizable="true"
+                :edit-field="'inEdit'"
+                :isPaging="true"
+                :selected-field="selectedField"
+                :customCell="customCell"
+                :dateTimePickerList="PMCodeHeaderParam.dateTimePickerList"
+                @gridButtonClick="gridButtonClick"
+                @selectionchange="onSelectionchange"
+                @gridrowclick="pmCodeOnRowClick"
+                @gridddchang="rowDdChange"
+                @griditemchange="griditemchange"
+              />
             </div>
           </CardBody>
         </Card>
@@ -100,13 +199,25 @@
             <CardBody :style="{ width: '100%', height: '100%' }">
               <v-row no-gutters>
                 <v-col cols="6" align="left">
-                  <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00599") }}</CardTitle> <!-- 점검항목 상세 -->
+                  <CardTitle>{{
+                    $t('MES_CommLang.MES_CommLang_00599')
+                  }}</CardTitle>
+                  <!-- 점검항목 상세 -->
                 </v-col>
               </v-row>
-              <div ref="divWrapper3" style="height: calc(100% - 33px);">
-                <KendoGrid ref="pmCodeDetailGrid" :gridHeight="gridHeight" :gridItems="gridData3" :sortable="true"
-                  :columns="pmCodeDetalHeaderParam.gridHeader" :gridDropDownList="pmCodeDetalHeaderParam.enumComboBox"
-                  :resizable="true" :edit-field="'inEdit'" :isPaging="false" :selected-field="selectedField" />
+              <div ref="divWrapper3" style="height: calc(100% - 33px)">
+                <KendoGrid
+                  ref="pmCodeDetailGrid"
+                  :gridHeight="gridHeight"
+                  :gridItems="gridData3"
+                  :sortable="true"
+                  :columns="pmCodeDetalHeaderParam.gridHeader"
+                  :gridDropDownList="pmCodeDetalHeaderParam.enumComboBox"
+                  :resizable="true"
+                  :edit-field="'inEdit'"
+                  :isPaging="false"
+                  :selected-field="selectedField"
+                />
               </div>
             </CardBody>
           </Card>
@@ -115,37 +226,43 @@
     </v-row>
     <AlertPop ref="alertPop" :is="'alertPop'" />
     <ConfirmPop :is="'confirmPop'" ref="confirmPop" :visibleDialog="false" />
-    <PMCodeDetailModal ref="PMCodeDetailModal" v-if="pmCodeDetailModalVisible" :visibleDialog="pmCodeDetailModalVisible"
-      :title="pmCodeDetailModalTitle" :selected-field="selectedField" :initData=initData
-      @visibleDialog="val => (pmCodeDetailModalVisible = val)" @pmCodeList="pmCodeList" />
+    <PMCodeDetailModal
+      ref="PMCodeDetailModal"
+      v-if="pmCodeDetailModalVisible"
+      :visibleDialog="pmCodeDetailModalVisible"
+      :title="pmCodeDetailModalTitle"
+      :selected-field="selectedField"
+      :initData="initData"
+      @visibleDialog="val => (pmCodeDetailModalVisible = val)"
+      @pmCodeList="pmCodeList"
+    />
   </div>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid"
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-import { Button } from "@progress/kendo-vue-buttons";
-import moment from "moment";
-import utils from "~/plugins/utils";
+import mixinGlobal from '@/mixin/global.js';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
+import { Button } from '@progress/kendo-vue-buttons';
+import moment from 'moment';
+import utils from '~/plugins/utils';
 //   import customGridHeaderMixin from "@/mixin/customGridHeaderMixin";
-import WorkerGroup from "@/components/frmEquipmentWorker/WorkerGroup"
-import InputText from "@/components/common/input/InputText";
-import { DropDownList } from "@progress/kendo-vue-dropdowns";
-import PMCodeDetailModal from "@/components/frmEquipmentPMCodeMap/PMCodeDetailModal.vue";
+import WorkerGroup from '@/components/frmEquipmentWorker/WorkerGroup';
+import InputText from '@/components/common/input/InputText';
+import { DropDownList } from '@progress/kendo-vue-dropdowns';
+import PMCodeDetailModal from '@/components/frmEquipmentPMCodeMap/PMCodeDetailModal.vue';
 import { DateTimePicker } from '@/static/kendo.all.min.js';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
@@ -153,7 +270,7 @@ export default {
       return myTitle;
     },
     menuId: myMenuId,
-    closable: true
+    closable: true,
   },
   components: {
     Utility,
@@ -166,7 +283,7 @@ export default {
     CardTitle,
     DropDownList,
     PMCodeDetailModal,
-    DateTimePicker
+    DateTimePicker,
   },
   data() {
     return {
@@ -196,40 +313,40 @@ export default {
       selectedEquipmentID: '',
       selectedPMCodeID: '',
       selectedPMCodeList: [],
-      value: '', /* Line */
-      value2: { id: '', text: '' }, /* WorkCenter */
+      value: '' /* Line */,
+      value2: { id: '', text: '' } /* WorkCenter */,
       equipmentSelectedIdx: '',
       pmCodeDetailModalVisible: false,
       btnClickIdx: '',
       equipmentHeaderParam: {
-        gridid: "dgvEquipmentLisst_SparePart", // 그리드 ID
+        gridid: 'dgvEquipmentLisst_SparePart', // 그리드 ID
         gridHeader: [],
         noFirstCheck: true,
-        noRowstat: true
+        noRowstat: true,
       },
       PMCodeHeaderParam: {
-        gridid: "dgvEquipmentPMCodeMap", // 그리드 ID
+        gridid: 'dgvEquipmentPMCodeMap', // 그리드 ID
         rowStat: '',
         gridHeader: [],
         noRowstat: false,
         enumComboBox: [],
         xOverflowYn: true,
-        dateTimePickerList: ["PMPLANSTARTTIME", "PMPLANENDTIME"],
+        dateTimePickerList: ['PMPLANSTARTTIME', 'PMPLANENDTIME'],
         gridDropDownList: [
           {
-            dataVal: "MANAGERUSERID",
+            dataVal: 'MANAGERUSERID',
             dataItem: [],
             disable: false,
           },
           {
-            dataVal: "WORKERUSERID",
+            dataVal: 'WORKERUSERID',
             dataItem: [],
             disable: false,
           },
         ],
       },
       pmCodeDetalHeaderParam: {
-        gridid: "dgvPMDetail", // 그리드 ID
+        gridid: 'dgvPMDetail', // 그리드 ID
         rowStat: '',
         gridHeader: [],
         noRowstat: true,
@@ -240,26 +357,41 @@ export default {
       customDropDown: true,
     };
   },
-  created() {
-  },
+  created() {},
   async mounted() {
-    this.pmCodeDetailModalTitle = this.$i18n.t('MES_CommLang.MES_CommLang_00597'); /* 예방보전 항목 */
+    this.pmCodeDetailModalTitle = this.$i18n.t(
+      'MES_CommLang.MES_CommLang_00597'
+    ); /* 예방보전 항목 */
     this.gridHeight = this.$refs.contents.offsetHeight - 180 + 'px';
-    await this.getHeaderMulti(this.equipmentHeaderParam, this.$refs.divWrapper1);
-    await this.getHeaderMulti(this.PMCodeHeaderParam, this.$refs.divWrapper2, this.customDropDown);
-    await this.getHeaderMulti(this.pmCodeDetalHeaderParam, this.$refs.divWrapper3);
+    await this.getHeaderMulti(
+      this.equipmentHeaderParam,
+      this.$refs.divWrapper1
+    );
+    await this.getHeaderMulti(
+      this.PMCodeHeaderParam,
+      this.$refs.divWrapper2,
+      this.customDropDown
+    );
+    await this.getHeaderMulti(
+      this.pmCodeDetalHeaderParam,
+      this.$refs.divWrapper3
+    );
     this.getComboData();
     await this.getEquipmentGridData();
     this.getGridComboList();
-    this.value2.text = this.$i18n.t('MES_CommLang.MES_CommLang_00501'); /* 전체 */
+    this.value2.text = this.$i18n.t(
+      'MES_CommLang.MES_CommLang_00501'
+    ); /* 전체 */
   },
   computed: {
     areAllSelected() {
-      return this.gridData.findIndex((x) => x.checked === false) === -1 && this.gridData.length !== 0
+      return (
+        this.gridData.findIndex(x => x.checked === false) === -1 &&
+        this.gridData.length !== 0
+      );
     },
   },
-  watch: {
-  },
+  watch: {},
   methods: {
     // 설비목록 그리드 데이터 가져오기
     async getEquipmentGridData() {
@@ -274,7 +406,7 @@ export default {
           plantid: this.$auth.$state.user.plantId,
           WORKCENTER: this.$refs['cmbWorkCenter'].value.id,
           EQUIPMENTNAME: this.equipmentname,
-          EQUIPMENTID: this.equipmentid
+          EQUIPMENTID: this.equipmentid,
         },
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -286,7 +418,6 @@ export default {
             inEdit: true,
             newRow: false,
             resizable: true,
-
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
@@ -377,7 +508,7 @@ export default {
         queryVersion: '00003',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          AREATYPE: 'Line'
+          AREATYPE: 'Line',
         },
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -412,7 +543,7 @@ export default {
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           AREATYPE: 'WorkCenter',
-          SUPERAREAID: res
+          SUPERAREAID: res,
         },
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -426,7 +557,10 @@ export default {
             resizable: true,
           };
         });
-        this.workCenter.push({ id: '', text: this.$i18n.t('MES_CommLang.MES_CommLang_00501') }); /* 전체 */
+        this.workCenter.push({
+          id: '',
+          text: this.$i18n.t('MES_CommLang.MES_CommLang_00501'),
+        }); /* 전체 */
         this.value2 = this.workCenter[0];
         for (let i = 0; i < data.length; i++) {
           if (i < data.length) {
@@ -479,19 +613,21 @@ export default {
           return {
             ENUMVALUE: x.USERID,
             ENUMVALUENAME: x.USERNAME,
-          }
-        })
+          };
+        });
         this.PMCodeHeaderParam.gridDropDownList[0].dataItem = combo;
         this.PMCodeHeaderParam.gridDropDownList[1].dataItem = combo;
       });
-      
     },
     async getHaeder() {
-      this.gridHeader = await this.getCustomHeader("dgvEquipmentStateChangeList", true, true);
+      this.gridHeader = await this.getCustomHeader(
+        'dgvEquipmentStateChangeList',
+        true,
+        true
+      );
     },
     async searchBtn() {
       this.getEquipmentGridData();
-
     },
     // modal에서 선택된 PMCODEID 리스트 가져오기
     pmCodeList(data) {
@@ -507,7 +643,10 @@ export default {
           return {
             ...x,
             _ROWSTATUS: x.rowStat,
-            PMPLANSTARTTIME: Utility.setFormatDate(x.PMPLANSTARTTIME, "YYYYMMDDHHmmss")
+            PMPLANSTARTTIME: Utility.setFormatDate(
+              x.PMPLANSTARTTIME,
+              'YYYYMMDDHHmmss'
+            ),
           };
         });
       const validate = this.mesValidation(
@@ -515,7 +654,10 @@ export default {
         this.gridData2
       );
       if (!validate.isValidate) {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), validate.msg); /* 알림 */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          validate.msg
+        ); /* 알림 */
         return;
       }
 
@@ -527,7 +669,10 @@ export default {
         }).then(result => {
           this.$nextTick(() => {
             if (result.returncode !== undefined && result.returncode === '0') {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* 알림, 저장되었습니다. */
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); /* 알림, 저장되었습니다. */
               this.getEquipmentPMCodeMap(this.selectedEquipmentID);
               this.gridData3 = [];
             } else {
@@ -539,11 +684,14 @@ export default {
           });
         });
       } else {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); /* 알림, 저장할 데이터가 없습니다. */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); /* 알림, 저장할 데이터가 없습니다. */
         return;
       }
     },
-    openAlert(title, message, visiable = true, width = "350px") {
+    openAlert(title, message, visiable = true, width = '350px') {
       this.$refs.alertPop.title = title;
       this.$refs.alertPop.message = message;
       this.$refs.alertPop.visibleDialog = visiable;
@@ -560,7 +708,7 @@ export default {
     },
     // 예방보전 항목 그리드 로우 클릭
     pmCodeOnRowClick(event) {
-      this.selectedPMCodeID = event.dataItem.PMCODEID
+      this.selectedPMCodeID = event.dataItem.PMCODEID;
       this.gridData2.forEach(x => (x.selected = false));
       event.dataItem[this.selectedField] = true;
       this.getPMCodeDetail(this.selectedPMCodeID);
@@ -633,13 +781,17 @@ export default {
         });
       if (delData.length > 0) {
         this.$refs['confirmPop'].title = 'info';
-        this.$refs['confirmPop'].message = this.$i18n.t('MES_MsgLang.MES_MsgLang_00089'); //선택한 데이터를 삭제 하시겠습니까?
+        this.$refs['confirmPop'].message = this.$i18n.t(
+          'MES_MsgLang.MES_MsgLang_00089'
+        ); //선택한 데이터를 삭제 하시겠습니까?
         if (delData.filter(x => x.rowStat !== 'C').length >= 1) {
           var selectedRow = {};
           selectedRow = delData.map(x => x.EQUIPMENTID);
-          this.$refs[
-            'confirmPop'
-          ].message = selectedRow + this.$i18n.t('MES_MsgLang.MES_MsgLang_00089'); /* 선택한 데이터를 삭제 하시겠습니까? */
+          this.$refs['confirmPop'].message =
+            selectedRow +
+            this.$i18n.t(
+              'MES_MsgLang.MES_MsgLang_00089'
+            ); /* 선택한 데이터를 삭제 하시겠습니까? */
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;
@@ -647,7 +799,7 @@ export default {
       } else {
         this.$refs.alertPop.show(
           this.$i18n.t('MES_CommLang.MES_CommLang_00409'), //확인
-          this.$i18n.t('MES_MsgLang.MES_MsgLang_00088')//선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00088') //선택한 데이터가 없습니다. 삭제할 데이터를 선택해 주시기 바랍니다.
         );
         return;
       }
@@ -669,24 +821,28 @@ export default {
     },
     //unbo 버튼 클릭
     undoBtn() {
-      this.gridData2 = this.gridOriData2.filter((x) => x.newRow !== true);
+      this.gridData2 = this.gridOriData2.filter(x => x.newRow !== true);
       this.$nuxt.$emit('iccReset');
     },
     //그리드 인풋 제외 데이터 변경시
     rowDdChange(e, name, dataItem) {
-      const idx = this.gridData2.findIndex((x) => x.idx === dataItem.idx);
+      const idx = this.gridData2.findIndex(x => x.idx === dataItem.idx);
       const Data = JSON.parse(JSON.stringify(this.gridData2));
 
-      if (this.gridOriData2)
-        Data[idx] = { ...Data[idx], [name]: e.value };
+      if (this.gridOriData2) Data[idx] = { ...Data[idx], [name]: e.value };
 
-      if (Data[idx].rowStat === "N") {
+      if (Data[idx].rowStat === 'N') {
         Data[idx].rowStat = 'U';
       }
 
       if (
         Data[idx].rowStat === 'U' &&
-        !this.gfn_ChkOriginalData(this.PMCodeHeaderParam.gridHeader, Data, this.gridOriData2, idx)
+        !this.gfn_ChkOriginalData(
+          this.PMCodeHeaderParam.gridHeader,
+          Data,
+          this.gridOriData2,
+          idx
+        )
       ) {
         Data[idx].rowStat = 'N';
       }
@@ -700,32 +856,36 @@ export default {
     //그리드 인풋 데이터 변경시
     griditemchange(e) {
       const data = JSON.parse(JSON.stringify(this.gridData2));
-      const idx = data.findIndex((x) => x.idx === e.dataItem.idx);
+      const idx = data.findIndex(x => x.idx === e.dataItem.idx);
 
       data[idx] = { ...data[idx], [e.field]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
 
       if (
         data[idx].rowStat === 'U' &&
-        !this.gfn_ChkOriginalData(this.PMCodeHeaderParam.gridHeader, data, this.gridOriData2, idx)
+        !this.gfn_ChkOriginalData(
+          this.PMCodeHeaderParam.gridHeader,
+          data,
+          this.gridOriData2,
+          idx
+        )
       ) {
         data[idx].rowStat = 'N';
       }
 
       this.gridData2 = data;
     },
-   
+
     //검색버튼 선택
     selectedRow(row) {
       this.gridData2 = this.gridData2.map(item => {
-
         return {
           ...item,
           PARTID: item.idx === this.btnClickIdx ? row.SPAREPARTID : item.PARTID,
-          PARTNAME: item.idx === this.btnClickIdx ? row.SPAREPARTNAME : item.PARTNAME,
-
+          PARTNAME:
+            item.idx === this.btnClickIdx ? row.SPAREPARTNAME : item.PARTNAME,
         };
       });
     },
@@ -737,7 +897,7 @@ export default {
       dt.setMinutes(timeSplit[1]);
       return dt;
     },
-    //그리드 버튼 클릭 
+    //그리드 버튼 클릭
     gridButtonClick(e, field, dataItem) {
       if (field === 'PARTIDBUTTON') {
         this.sparePartGridData = this.gridData2.filter(
@@ -747,9 +907,8 @@ export default {
         // this.sparePartModalVisible = true;
       }
     },
-  }
+  },
 };
-const defaultData = {
-};
+const defaultData = {};
 </script>
 <style lang="scss"></style>

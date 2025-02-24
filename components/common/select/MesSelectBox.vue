@@ -15,28 +15,25 @@
 </template>
 
 <script>
-
-import { mapActions } from "vuex";
-import { DropDownList } from "@progress/kendo-vue-dropdowns";
-
-
+import { mapActions } from 'vuex';
+import { DropDownList } from '@progress/kendo-vue-dropdowns';
 
 export default {
   props: {
     enumID: {
       type: String,
       require: true,
-      default: "",
+      default: '',
     },
     allYN: {
       type: Boolean,
       require: false,
       default: false,
     },
-    dataNm:{
+    dataNm: {
       type: String,
       require: false,
-      default: null
+      default: null,
     },
     disabled: {
       type: Boolean,
@@ -51,8 +48,8 @@ export default {
     defaultValue: {
       type: String,
       require: true,
-      default: "",
-    }
+      default: '',
+    },
   },
   components: {
     dropdownlist: DropDownList,
@@ -60,52 +57,54 @@ export default {
   data() {
     return {
       codeLists: [],
-      value: "",
-      befValue: "",
+      value: '',
+      befValue: '',
     };
   },
   computed: {},
   async created() {
     await this.mesGet({
-      apiKey: "mes/common/getqueryresult",
-      queryId: "GetEnumValue",
+      apiKey: 'mes/common/getqueryresult',
+      queryId: 'GetEnumValue',
       sendParam: {
         plantid: this.$auth.$state.user.plantId,
-        enumid: this.enumID
-      }
-    }).then((data) => {
-      if(this.allYN){
-        data.unshift({ENUMVALUE: "", ENUMVALUENAME: this.$i18n.t('MES_CommLang.MES_CommLang_00501')}) // 전체
+        enumid: this.enumID,
+      },
+    }).then(data => {
+      if (this.allYN) {
+        data.unshift({
+          ENUMVALUE: '',
+          ENUMVALUENAME: this.$i18n.t('MES_CommLang.MES_CommLang_00501'),
+        }); // 전체
       }
       this.codeLists = data.map(item => {
         return {
           id: item.ENUMVALUE,
           text: item.ENUMVALUENAME,
-        }
+        };
       });
 
-      if(this.codeLists.find(x => x.id === this.defaultValue)) {
+      if (this.codeLists.find(x => x.id === this.defaultValue)) {
         this.value = this.defaultValue;
-      }
-      else {
-        this.value = this.codeLists[0] === undefined ? "" : this.codeLists[0].id;
+      } else {
+        this.value =
+          this.codeLists[0] === undefined ? '' : this.codeLists[0].id;
       }
       this.befValue = this.value;
     });
   },
   methods: {
     ...mapActions({
-      mesGet: "modules/list/mesGet",
+      mesGet: 'modules/list/mesGet',
     }),
-    handleChange(event){
-      if(this.readonly) {
+    handleChange(event) {
+      if (this.readonly) {
         this.value = this.befValue;
-      }
-      else {
+      } else {
         this.befValue = this.value;
         this.$emit('comboChange', this.dataNm, event.value);
       }
-    }
+    },
   },
 };
 </script>

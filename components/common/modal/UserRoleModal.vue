@@ -4,52 +4,57 @@
       <Button @click="toggleDialog">Open Dialog</Button>
     </span>
     <Dialog
-    v-if="visibleDialog"
-        :title="$i18n.t('MES_CommLang.MES_CommLang_00526')"
-        width="40%"
-        height="600"
-        @close="toggleDialog"
+      v-if="visibleDialog"
+      :title="$i18n.t('MES_CommLang.MES_CommLang_00526')"
+      width="40%"
+      height="600"
+      @close="toggleDialog"
     >
-    <v-row ref="searchFilter" no-gutters>
+      <v-row ref="searchFilter" no-gutters>
         <v-col :sm="9" :lg="9">
           <div class="form-group-wrap">
             <div class="form-group">
               <Label>
-              {{$t('MES_CommLang.MES_CommLang_00132')}}
-            </Label>
-            <InputText
-              ref="selectUserId"
-              :searchOption="true"
-              :dataNm="'searchUserId'"
-              :boxWidth="'90%'"
-              :readonly="isReadOnly"
-            />
+                {{ $t('MES_CommLang.MES_CommLang_00132') }}
+              </Label>
+              <InputText
+                ref="selectUserId"
+                :searchOption="true"
+                :dataNm="'searchUserId'"
+                :boxWidth="'90%'"
+                :readonly="isReadOnly"
+              />
             </div>
             <div class="form-group">
               <Label>
-              {{$t('MES_CommLang.MES_CommLang_00134')}}
-            </Label>
-            <InputText
-              ref="selectUserName"
-              :searchOption="true"
-              :dataNm="'searchUserNm'"
-              :boxWidth="'90%'"
-              :readonly="isReadOnly"
-            />
+                {{ $t('MES_CommLang.MES_CommLang_00134') }}
+              </Label>
+              <InputText
+                ref="selectUserName"
+                :searchOption="true"
+                :dataNm="'searchUserNm'"
+                :boxWidth="'90%'"
+                :readonly="isReadOnly"
+              />
             </div>
           </div>
         </v-col>
         <v-col :sm="4" :lg="3" align="right">
-            <kbutton :theme-color="'primary'" icon="check"  @click="[selectRow(), sendUserRole()]">{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton>
+          <kbutton
+            :theme-color="'primary'"
+            icon="check"
+            @click="[selectRow(), sendUserRole()]"
+            >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
+          >
         </v-col>
       </v-row>
-      
+
       <v-row ref="contents">
-          <v-col :cols="12" :style="{ height: '100%' }">
-            <Card ref="gridCard" :style="{ height: '100%' }">
-              <CardBody :style="{ width: '100%', height: '100%' }">
-                <div ref="divWrapper" :style="{ height: '100%' }">
-                  <KendoGrid 
+        <v-col :cols="12" :style="{ height: '100%' }">
+          <Card ref="gridCard" :style="{ height: '100%' }">
+            <CardBody :style="{ width: '100%', height: '100%' }">
+              <div ref="divWrapper" :style="{ height: '100%' }">
+                <KendoGrid
                   ref="rowGrid"
                   :gridHeight="gridHeight"
                   :gridItems="gridData"
@@ -65,31 +70,28 @@
                   @sortChangeHandler="sortChangeHandler"
                   @selectionchange="onSelectionchange"
                   @headerselectionchange="onHeaderSelectionChange"
-                  
-                  />
-                </div>
-              </CardBody>
-            </Card>
-          </v-col>
-        </v-row>
+                />
+              </div>
+            </CardBody>
+          </Card>
+        </v-col>
+      </v-row>
     </Dialog>
   </div>
 </template>
 <script>
-import { Dialog, DialogActionsBar } from "@progress/kendo-vue-dialogs";
-import { Button } from "@progress/kendo-vue-buttons";
-import mixinGlobal from "@/mixin/global.js";
+import { Dialog, DialogActionsBar } from '@progress/kendo-vue-dialogs';
+import { Button } from '@progress/kendo-vue-buttons';
+import mixinGlobal from '@/mixin/global.js';
 //import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import KendoGrid from "@/components/common/KendoGrid";
-import InputText from "@/components/common/input/InputText";
-import FadeLoader from "vue-spinner/src/FadeLoader.vue";
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-
-
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import KendoGrid from '@/components/common/KendoGrid';
+import InputText from '@/components/common/input/InputText';
+import FadeLoader from 'vue-spinner/src/FadeLoader.vue';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 
 export default {
-  name: "UserRoleModal",
+  name: 'UserRoleModal',
   mixins: [mixinGlobal, multiGridHeaderMinin],
   components: {
     Dialog,
@@ -112,32 +114,32 @@ export default {
       type: Function,
       default: () => true,
     },
-    userData : {
+    userData: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       gridHeader: [],
       gridData: [],
-      gridHeight: "400px",
-      selectedField: "selected",
+      gridHeight: '400px',
+      selectedField: 'selected',
       headerParam: {
-        gridid: "dgvSFRoleList", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvSFRoleList', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         noRowstat: true,
         enumComboBox: [],
         checkBox: [],
       },
       selectedID: null,
       selectedRole: [],
-      productid: "",
-      productName: "",
+      productid: '',
+      productName: '',
       isLoading: true,
       reSetPage: false,
-      searchUserId: "",
-      searchUserNm: "",
+      searchUserId: '',
+      searchUserNm: '',
     };
   },
   computed: {
@@ -158,11 +160,11 @@ export default {
       // flag : false
       this.reSetPage = flag;
     },
-    setUserInfo(){
-      console.log("this.userData",this.userData);
+    setUserInfo() {
+      console.log('this.userData', this.userData);
       this.$refs['selectUserId'].textVal = this.userData.userId;
       this.$refs['selectUserName'].textVal = this.userData.userName;
-      this.isReadOnly = !this.isReadOnly; 
+      this.isReadOnly = !this.isReadOnly;
     },
     async searchBtn() {
       this.reSetPage = true;
@@ -171,13 +173,13 @@ export default {
     //그리드 데이터 가져오기
     async getGridData() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetSFRoleList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetSFRoleList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           useFlag: 'Yes',
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
@@ -189,26 +191,26 @@ export default {
             resizable: true,
           };
         });
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         // if (data !== undefined && data.length > 0) {
         //   data[0][this.selectedField] = true;
         // }
         console.log(data);
-        let arrayRoleList = this.userData.roleId.split(",");
-        for(let i = 0; i < arrayRoleList.length; i++){
-          for(let j = 0; j < data.length; j++){
-          if(data[j].ROLEID == arrayRoleList[i]){
-            data[j][this.selectedField] = true;
+        let arrayRoleList = this.userData.roleId.split(',');
+        for (let i = 0; i < arrayRoleList.length; i++) {
+          for (let j = 0; j < data.length; j++) {
+            if (data[j].ROLEID == arrayRoleList[i]) {
+              data[j][this.selectedField] = true;
+            }
           }
         }
-        }
-        
+
         this.gridData = data;
         this.isLoading = false;
       });
     },
     toggleDialog() {
-      this.$emit("visibleDialog", !this.visibleDialog);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     //그리드 로우 클릭
     onRowClick(event) {
@@ -222,14 +224,14 @@ export default {
       this.selected = event.dataItem;
     },
     // 체크된 권한 가져오기
-    sendUserRole(){
+    sendUserRole() {
       this.$emit('checkedUserRole', this.selectedRole);
     },
     //row 선택
     selectRow() {
-      const returnData = this.gridData.filter((x) => x.selected);
-      this.$emit("modelingInfo", returnData[0]);
-      this.$emit("visibleDialog", !this.visibleDialog);
+      const returnData = this.gridData.filter(x => x.selected);
+      this.$emit('modelingInfo', returnData[0]);
+      this.$emit('visibleDialog', !this.visibleDialog);
       this.selectedRole = returnData;
     },
     //맨앞 checkBox 클릭
@@ -247,22 +249,22 @@ export default {
       this[nm] = val;
     },
     sortChangeHandler(e) {
-      const isAscending = e.sort[0]?.dir == "asc";
+      const isAscending = e.sort[0]?.dir == 'asc';
       if (isAscending) {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] < b[e.event?.field]
             ? -1
             : a[e.event?.field] > b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       } else {
         this.gridData = this.gridData.sort((a, b) =>
           a[e.event?.field] > b[e.event?.field]
             ? -1
             : a[e.event?.field] < b[e.event?.field]
-            ? 1
-            : 0
+              ? 1
+              : 0
         );
       }
     },

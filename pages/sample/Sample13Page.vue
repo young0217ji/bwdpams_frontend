@@ -1,34 +1,39 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00159") }}</li> <!-- 생산계획 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00798") }}</li> <!-- 생산 계획 현황 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00159') }}</li>
+      <!-- 생산계획 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00798') }}</li>
+      <!-- 생산 계획 현황 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
         <Card>
           <CardBody>
             <v-row no-gutters>
-              <v-col :sm="9" :lg="11">                
+              <v-col :sm="9" :lg="11">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00681") }}</label> <!-- Work Center  -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00681') }}</label>
+                    <!-- Work Center  -->
                     <DropDownList
-                        ref="cmbWorkCenter"
-                        :style="{ width: '240px' }"
-                        :data-items="workCenterList"
-                        :text-field="'text'"
-                        :data-item-key="'id'"
-                        :value="workCenterValue"
-                        @change="workCenterChange"
-                        >
+                      ref="cmbWorkCenter"
+                      :style="{ width: '240px' }"
+                      :data-items="workCenterList"
+                      :text-field="'text'"
+                      :data-item-key="'id'"
+                      :value="workCenterValue"
+                      @change="workCenterChange"
+                    >
                     </DropDownList>
                   </div>
 
                   <div class="form-group">
-                      <label>{{ $t("MES_CommLang.MES_CommLang_00171") }}</label> <!-- 설비명 -->
-                      <DropDownList
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00171') }}</label>
+                    <!-- 설비명 -->
+                    <DropDownList
                       ref="cmbEquipmentType"
                       :style="{ width: '240px' }"
                       :data-items="equipmentList"
@@ -36,11 +41,11 @@
                       :data-item-key="'EQUIPMENTID'"
                       :value="equipmentValue"
                       @change="selectEquipmentCombo"
-                      />
+                    />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00706")}}</label>
-                    <div class="form-datepicker">  
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00706') }}</label>
+                    <div class="form-datepicker">
                       <DatePicker
                         ref="startDate"
                         :name="'startDate'"
@@ -51,7 +56,7 @@
                       />
                     </div>
                   </div>
-                  <div class="form-group" :style="{ marginLeft : '10px'}">
+                  <div class="form-group" :style="{ marginLeft: '10px' }">
                     <div class="form-chk">
                       <Checkbox
                         ref="colunmFix"
@@ -64,32 +69,63 @@
                     <InputText
                       ref="colunmFixInput"
                       :dataNm="'colunmFixInput'"
-                      :style="{ width: '30px', marginLeft: '5px'}"
+                      :style="{ width: '30px', marginLeft: '5px' }"
                       @input-text-set="setColunmFixInput"
                     />
-                    <label>&nbsp;개 열 고정(고정열에서 끌어서 이동하기 안됨)</label>
+                    <label
+                      >&nbsp;개 열 고정(고정열에서 끌어서 이동하기 안됨)</label
+                    >
                   </div>
                   <div class="form-group">
-                    <label>찾기</label> <!-- 찾기 -->
-                    <InputText 
-                        ref="nextSearc" 
-                        :dataNm="'nextSearc'" 
-                        :disabled="false"
-                        :readonly="isReadOnly" 
-                        :searchOption="true" 
-                        @input-text-set="nextSearchBtnInput" />
-                    <Button :theme-color="'primary'" @click="nextSearchBtn">다음찾기</Button>
+                    <label>찾기</label>
+                    <!-- 찾기 -->
+                    <InputText
+                      ref="nextSearc"
+                      :dataNm="'nextSearc'"
+                      :disabled="false"
+                      :readonly="isReadOnly"
+                      :searchOption="true"
+                      @input-text-set="nextSearchBtnInput"
+                    />
+                    <Button :theme-color="'primary'" @click="nextSearchBtn"
+                      >다음찾기</Button
+                    >
                   </div>
-                  <div class="form-group" :style="{ marginLeft : '35px'}">
-                    <Button :theme-color="'primary'" :style="{ marginLeft : '5px'}" @click="selectBtn">선택하기</Button>
-                    <Button :theme-color="'primary'" :style="{ marginLeft : '5px'}" @click="moveBtn">이동하기</Button>
-                    <Button :theme-color="'primary'" :style="{ marginLeft : '5px'}" @click="unSelectBtn">선택취소</Button>
-                    <Button :theme-color="'primary'" :style="{ marginLeft : '5px'}" @click="undoBtn">미지정</Button>
+                  <div class="form-group" :style="{ marginLeft: '35px' }">
+                    <Button
+                      :theme-color="'primary'"
+                      :style="{ marginLeft: '5px' }"
+                      @click="selectBtn"
+                      >선택하기</Button
+                    >
+                    <Button
+                      :theme-color="'primary'"
+                      :style="{ marginLeft: '5px' }"
+                      @click="moveBtn"
+                      >이동하기</Button
+                    >
+                    <Button
+                      :theme-color="'primary'"
+                      :style="{ marginLeft: '5px' }"
+                      @click="unSelectBtn"
+                      >선택취소</Button
+                    >
+                    <Button
+                      :theme-color="'primary'"
+                      :style="{ marginLeft: '5px' }"
+                      @click="undoBtn"
+                      >미지정</Button
+                    >
                   </div>
-                  <div class="form-group" :style="{ marginLeft : '170px'}">
-                    <Button :theme-color="'primary'" :style="{ marginLeft : '5px'}" @click="resetBtn">새로고침</Button>
+                  <div class="form-group" :style="{ marginLeft: '170px' }">
+                    <Button
+                      :theme-color="'primary'"
+                      :style="{ marginLeft: '5px' }"
+                      @click="resetBtn"
+                      >새로고침</Button
+                    >
                   </div>
-                  <div class="form-group" :style="{ marginLeft : '10px'}">
+                  <div class="form-group" :style="{ marginLeft: '10px' }">
                     <div class="form-chk">
                       <Checkbox
                         ref="resetCycle"
@@ -102,12 +138,12 @@
                     <InputText
                       ref="resetCycleInput"
                       :dataNm="'resetCycleInput'"
-                      :style="{ width: '30px', marginLeft: '5px'}"
+                      :style="{ width: '30px', marginLeft: '5px' }"
                       @input-text-set="setResetCycleInput"
                     />
                     <label>&nbsp;분, 간격 새로고침(1분에서 99분사이)</label>
                   </div>
-                  <div class="form-group" :style="{ marginLeft : '10px'}">
+                  <div class="form-group" :style="{ marginLeft: '10px' }">
                     <div class="form-chk">
                       <Checkbox
                         ref="inspectionHis"
@@ -127,7 +163,9 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                >{{ $t("MES_CommLang.MES_CommLang_00277") }}</Button> <!-- 조회 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -136,84 +174,105 @@
     </v-row>
 
     <v-row ref="contents">
-        <v-col :cols="12" :lg="12" :class="'divListWapper'" :style="{ height: '60%' }">
-          <Card ref="gridCard" :style="{ height: '100%' }"> <!-- ref변수명으로 들어간 index는 나중에 다른값으로 변경? -->
-            <CardBody :style="{ width: '100%', height: '100%' }">
-                <!-- <v-row>
+      <v-col
+        :cols="12"
+        :lg="12"
+        :class="'divListWapper'"
+        :style="{ height: '60%' }"
+      >
+        <Card ref="gridCard" :style="{ height: '100%' }">
+          <!-- ref변수명으로 들어간 index는 나중에 다른값으로 변경? -->
+          <CardBody :style="{ width: '100%', height: '100%' }">
+            <!-- <v-row>
                     <v-col cols="2" align="left">
                         <CardTitle>장비명칭</CardTitle>
                     </v-col>
                 </v-row> -->
-              <div :ref="'GridFir'" :style="{ height: 'calc(100% - 33px)' }">
-                <div :ref="'gridArea'+index" v-for="(gridDataList, index) in gridDataList[0]" :key="index"
-                  :style="{ width: '20%',height: 'calc(100% - 33px)', float:'left', marginBottom: '45px'}">
-
-                  <CardTitle>{{ index+"번 장비" }}</CardTitle>
-                  <KendoGrid 
-                    :ref="'rowGrid'+index"
-                    :gridHeight="gridHeight"
-                    :gridItems="gridData.GridFir"
-                    :sortable="true"
-                    :columns="GridFirHeaderParam.gridHeader"
-                    :resizable="false"
-                    :edit-field="'inEdit'"
-                    :selected-field="selectedField"
-                    :isPaging="false"
-                    :scrollable="true"
-                    :cell-render="'myTemplate'"
-                    :dataItem="gridData.GridFir+index"
-                    :dropPosition="dropPosition"
-                    :class="isDragging"
-                    :style="{ width: '100%' }"
-                    @gridddchang="rowDdChange"
-                    @gridrowclick="onRowClick"
-                    @griditemchange="griditemchange"
-                    @dragHandler="dragHandler"
-                    @pressHandler="pressHandler"
-                    @releaseHandler="releaseHandler"
-                    >
-                  </KendoGrid>
-                </div>
+            <div :ref="'GridFir'" :style="{ height: 'calc(100% - 33px)' }">
+              <div
+                :ref="'gridArea' + index"
+                v-for="(gridDataList, index) in gridDataList[0]"
+                :key="index"
+                :style="{
+                  width: '20%',
+                  height: 'calc(100% - 33px)',
+                  float: 'left',
+                  marginBottom: '45px',
+                }"
+              >
+                <CardTitle>{{ index + '번 장비' }}</CardTitle>
+                <KendoGrid
+                  :ref="'rowGrid' + index"
+                  :gridHeight="gridHeight"
+                  :gridItems="gridData.GridFir"
+                  :sortable="true"
+                  :columns="GridFirHeaderParam.gridHeader"
+                  :resizable="false"
+                  :edit-field="'inEdit'"
+                  :selected-field="selectedField"
+                  :isPaging="false"
+                  :scrollable="true"
+                  :cell-render="'myTemplate'"
+                  :dataItem="gridData.GridFir + index"
+                  :dropPosition="dropPosition"
+                  :class="isDragging"
+                  :style="{ width: '100%' }"
+                  @gridddchang="rowDdChange"
+                  @gridrowclick="onRowClick"
+                  @griditemchange="griditemchange"
+                  @dragHandler="dragHandler"
+                  @pressHandler="pressHandler"
+                  @releaseHandler="releaseHandler"
+                >
+                </KendoGrid>
               </div>
-            </CardBody>
-          </Card>
-        </v-col>
-        <v-col :cols="12" :lg="12" :class="'divListWapper2'" :style="{ height: '40%' }">
-          <Card ref="gridCard" :style="{ height: '100%' }"> <!-- ref변수명으로 들어간 index는 나중에 다른값으로 변경? -->
-            <CardBody :style="{ width: '100%', height: '100%' }">
-                <v-row>
-                    <v-col cols="2" align="left">
-                        <CardTitle>장비명칭</CardTitle>
-                    </v-col>
-                </v-row>
-                <div :ref="'GridSec'" :style="{ height: 'calc(100% - 33px)'}">
-                  <KendoGrid
-                    ref="rowGridSec"
-                    :gridHeight="gridHeight"
-                    :gridItems="gridData.GridSec"
-                    :sortable="true"
-                    :columns="GridSecHeaderParam.gridHeader"
-                    :resizable="false"
-                    :edit-field="'inEdit'"
-                    :selected-field="selectedField"
-                    :isPaging="false"
-                    :scrollable="true"
-                    :cell-render="'myTemplate'"
-                    :dataItem="gridData.GridSec"
-                    :dropPosition="dropPosition"
-                    :class="isDragging"
-                    :style="{float:'left'}"
-                    @gridddchang="rowDdChange"
-                    @gridrowclick="onRowClick"
-                    @griditemchange="griditemchange"
-                    @dragHandler="dragHandler"
-                    @pressHandler="pressHandler"
-                    @releaseHandler="releaseHandler">
-                  </KendoGrid>
-                </div>
-            </CardBody>
-          </Card>
-        </v-col>
+            </div>
+          </CardBody>
+        </Card>
+      </v-col>
+      <v-col
+        :cols="12"
+        :lg="12"
+        :class="'divListWapper2'"
+        :style="{ height: '40%' }"
+      >
+        <Card ref="gridCard" :style="{ height: '100%' }">
+          <!-- ref변수명으로 들어간 index는 나중에 다른값으로 변경? -->
+          <CardBody :style="{ width: '100%', height: '100%' }">
+            <v-row>
+              <v-col cols="2" align="left">
+                <CardTitle>장비명칭</CardTitle>
+              </v-col>
+            </v-row>
+            <div :ref="'GridSec'" :style="{ height: 'calc(100% - 33px)' }">
+              <KendoGrid
+                ref="rowGridSec"
+                :gridHeight="gridHeight"
+                :gridItems="gridData.GridSec"
+                :sortable="true"
+                :columns="GridSecHeaderParam.gridHeader"
+                :resizable="false"
+                :edit-field="'inEdit'"
+                :selected-field="selectedField"
+                :isPaging="false"
+                :scrollable="true"
+                :cell-render="'myTemplate'"
+                :dataItem="gridData.GridSec"
+                :dropPosition="dropPosition"
+                :class="isDragging"
+                :style="{ float: 'left' }"
+                @gridddchang="rowDdChange"
+                @gridrowclick="onRowClick"
+                @griditemchange="griditemchange"
+                @dragHandler="dragHandler"
+                @pressHandler="pressHandler"
+                @releaseHandler="releaseHandler"
+              >
+              </KendoGrid>
+            </div>
+          </CardBody>
+        </Card>
+      </v-col>
     </v-row>
 
     <AlertPop ref="alertPop" :is="'alertPop'" />
@@ -295,7 +354,7 @@ export default {
       resetCycleInput: "",
       inspectionHis: "IptHis",
       selectedField: "selected",
-      selected: { 
+      selected: {
         GridFir: null,
         GridSec: null
       },
@@ -340,14 +399,14 @@ export default {
   async beforeMount() {
     // this.getGridData();
     console.log("beforeMount");
-    
+
   },
   async mounted() {
     console.log("mounted::::", this.gridDataList);
 
     await this.getWorkCenterListData();
     await this.getHeaderMulti(
-      this.GridFirHeaderParam, 
+      this.GridFirHeaderParam,
       this.$refs.GridFir,
     );
     await this.getHeaderMulti(
@@ -356,8 +415,8 @@ export default {
     );
     await this.getGridData();
 
-    // await this.getGridData('mount'); 
-    
+    // await this.getGridData('mount');
+
     // await this.setGridData();
 
     const gridBody = document.getElementsByClassName("k-grid-content")[0];
@@ -475,7 +534,7 @@ export default {
 
     // 새로고침 버튼 클릭시
     resetBtn() {
-      alert("새로고침!");  
+      alert("새로고침!");
     },
 
     // 새로고침 주기 INPUT 변경시
@@ -489,7 +548,7 @@ export default {
       // this.setGridData();
     },
 
-    
+
 
     chkVal(nm, val) {
         // nm : Fix / Reset / IptHis
@@ -527,7 +586,7 @@ export default {
             if (result.returncode !== undefined && result.returncode === '0') {
               this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* 알림, 저장되었습니다. */
               this.getGridData();
-            } 
+            }
             });
           });
         } else {
@@ -621,9 +680,9 @@ export default {
                   WORKCENTERID: x.WORKCENTER,
                   // WORKCENTER: this.headerParam.enumComboBox[0].dataItem.filter(y=>x.WORKCENTER == y.ENUMVALUE)[0].ENUMVALUENAME,
                   CERTIFICATIONSTATE: x.CERTIFICATIONSTATE == 'DEL' ? '자격상실' : '',
-              }; 
+              };
 
-              
+
           });
 
         // this.$nuxt.$emit('iccReset');
@@ -635,10 +694,10 @@ export default {
         this.gridOriData.GridSec = JSON.parse(JSON.stringify(this.gridData.GridSec));
         this.gridDataList.push(data); // 그리드 가변용
 
-        
+
         console.log("그리드 가변용:::",this.gridDataList)
       });
-    }, 
+    },
 
     //그리드아이템 가변용
     // async setGridData() {
@@ -656,7 +715,7 @@ export default {
     // });
     // },
 
-    
+
 
     // 그리드 INPUT 제외 수정
     rowDdChange(e, name, dataItem){
@@ -665,22 +724,22 @@ export default {
 
       if(name == 'CHANGEOPERDATE') {
         data[idx][name] = e.value
-        
+
         const expectDate = new Date(e.value);
 
         expectDate.setFullYear(expectDate.getFullYear() + 1);
-        
+
         data[idx].DISQUALIFICATIONEXPECTDATE = Utility.setFormatDate(expectDate, "YYYYMMDD")
         // console.log(expectDate);
       }
 
 
-      
+
       data[idx] = { ...data[idx], [name]: e.value };
       if(data[idx].rowStat === 'N') {
           data[idx].rowStat = 'U';
       }
-      
+
       if(data[idx].rowStat === 'U' && !this.gfn_ChkOriginalData(this.GridFirHeaderParam.gridHeader, data, this.gridOriData, idx)) {
           // data[idx].rowStat = 'N';
       }
@@ -703,7 +762,7 @@ export default {
     },
 
 
-    
+
     // 그리드 ROW 선택
     onRowClick(event){
       const selectedIdx = event.dataItem.idx;
@@ -728,22 +787,22 @@ export default {
 
     dragHandler(dataItem, event) {
       if(this.orgTargetRowIdx === undefined || this.orgTargetRowIdx == "") { // 최초 rowIdx를 설정
-        this.orgTargetRowIdx = event.originalEvent.target.parentElement.rowIndex; 
+        this.orgTargetRowIdx = event.originalEvent.target.parentElement.rowIndex;
       }
       this.top = event.pageY + 10;
       this.left = event.pageX;
       this.targetLeftOffset = this.getGridReference().offsetLeft + this.getGridReference().offsetLeft/2;
       this.targetTopOffset = this.getTargetTopOffSet(event);
       this.dropPosition = this.getDropPosition(event)
-      
+
       this.showDropHints = true;
     },
     getDropPosition: function(event){
       const targetRowIdx = event.originalEvent.target.parentElement.rowIndex; // 셀영역 rowIdx
       const iconRowIdx = event.originalEvent.target.parentElement.parentElement.rowIndex; // 아이콘영역의 부모 rowIdx
-      
-      /* targetRowIdx나 iconRowIdx의 값이 있으면 이동한것. 
-        따라서 this.orgTargetRowIdx(최초row)와 targetRowIdx 혹은 iconRowIdx 를 비교하여 
+
+      /* targetRowIdx나 iconRowIdx의 값이 있으면 이동한것.
+        따라서 this.orgTargetRowIdx(최초row)와 targetRowIdx 혹은 iconRowIdx 를 비교하여
         below인지 above인지 설정
       */
       // console.log("targetRowIdx >>>>>", targetRowIdx);
@@ -763,7 +822,7 @@ export default {
       // console.log(dataItem)
     },
     releaseHandler(dataItem, event) {
-  
+
       const targetIndex = event.originalEvent.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('k-card-title')[0].innerText.match(/\d+/)[0];
       console.log("releaseHandler>>>>>>>>>", this.$refs['rowGrid'+targetIndex] + "index>>>>>>>", targetIndex);
       console.log("releaseHandler>>>>>>>>>", event);
@@ -843,14 +902,13 @@ const defaultData = {};
 </script>
 <style>
 .dropdown-menu {
-    min-width: 1rem !important;
+  min-width: 1rem !important;
 }
 
 html .k-grid.dragging tbody tr:hover td {
-    /* background-color: #f5a3a3 !important; */
-    /* border-bottom-color: red;
+  /* background-color: #f5a3a3 !important; */
+  /* border-bottom-color: red;
     border-bottom-width: 3px; */
-    background-color: rgb(240, 200, 200);
+  background-color: rgb(240, 200, 200);
 }
-
 </style>

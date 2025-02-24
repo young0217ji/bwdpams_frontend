@@ -1,9 +1,9 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00074") }}</li>
-      <li>{{ $t("MES_CommLang.MES_CommLang_00006") }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00074') }}</li>
+      <li>{{ $t('MES_CommLang.MES_CommLang_00006') }}</li>
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,7 +13,7 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00070") }}</label>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00070') }}</label>
                     <InputText
                       ref="standarddurableid"
                       :dataNm="'standarddurableid'"
@@ -31,7 +31,7 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</kbutton
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</kbutton
                 >
               </v-col>
             </v-row>
@@ -45,7 +45,9 @@
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00006") }}</CardTitle>
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00006')
+                }}</CardTitle>
               </v-col>
               <v-col cols="6" align="right">
                 <kbutton
@@ -53,21 +55,21 @@
                   :size="'small'"
                   :icon="'save'"
                   @click="saveBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton 
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'add'"
                   @click="addBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00411") }}</kbutton 
+                  >{{ $t('MES_CommLang.MES_CommLang_00411') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
                   :icon="'delete'"
                   @click="confirmDel"
-                  >{{ $t("MES_CommLang.MES_CommLang_00412") }}</kbutton
+                  >{{ $t('MES_CommLang.MES_CommLang_00412') }}</kbutton
                 >
                 <kbutton
                   :theme-color="'secondary'"
@@ -120,7 +122,6 @@ import MesSelectBox from '@/components/common/select/MesSelectBox';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -417,9 +418,8 @@ export default {
           selectedRow = delData
             .filter(x => x.rowStat !== 'C')
             .map(x => x.STANDARDDURABLEID);
-          this.$refs[
-            'confirmPop'
-          ].message = `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
+          this.$refs['confirmPop'].message =
+            `선택한 데이터 (${selectedRow}) 를 삭제 하시겠습니까?`;
         }
         this.$refs['confirmPop'].modalWidth = '300px';
         this.$refs['confirmPop'].visibleDialog = true;

@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00449") }}</li> <!-- 설정 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00528") }}</li> <!-- 권한사용자설정 관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00449') }}</li>
+      <!-- 설정 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00528') }}</li>
+      <!-- 권한사용자설정 관리 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,21 +16,41 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00077") }}</label> <!-- 권한코드 -->
-                    <InputText ref="s_RoleID" :dataNm="'s_RoleID'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00077') }}</label>
+                    <!-- 권한코드 -->
+                    <InputText
+                      ref="s_RoleID"
+                      :dataNm="'s_RoleID'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00078") }}</label> <!-- 권한명 -->
-                    <InputText ref="s_RoleName" :dataNm="'s_RoleName'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00078') }}</label>
+                    <!-- 권한명 -->
+                    <InputText
+                      ref="s_RoleName"
+                      :dataNm="'s_RoleName'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                 </div>
               </v-col>
               <v-col :sm="3" :lg="2" align="right">
-                <Button :theme-color="'primary'" :size="'medium'" :icon="'search'" @click="searchBtn">
-                  {{ $t("MES_CommLang.MES_CommLang_00277") }}
-                </Button> <!-- 조회 -->
+                <Button
+                  :theme-color="'primary'"
+                  :size="'medium'"
+                  :icon="'search'"
+                  @click="searchBtn"
+                >
+                  {{ $t('MES_CommLang.MES_CommLang_00277') }}
+                </Button>
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -35,52 +58,96 @@
       </v-col>
     </v-row>
     <v-row ref="contents">
-      <v-col :sm="4" :lg="3" :class="'divListWapper'" :style="{ height: '100%' }">
+      <v-col
+        :sm="4"
+        :lg="3"
+        :class="'divListWapper'"
+        :style="{ height: '100%' }"
+      >
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00079") }} <!-- 권한리스트 -->
-                <span class="i-msg">{{
-                        this.t_RoleID
-                      }}</span></CardTitle>
+                <CardTitle
+                  >{{ $t('MES_CommLang.MES_CommLang_00079') }}
+                  <!-- 권한리스트 -->
+                  <span class="i-msg">{{ this.t_RoleID }}</span></CardTitle
+                >
               </v-col>
             </v-row>
-              <div ref="divWrapper" style="height: calc(100% - 33px)">
-                <KendoGrid ref="rowGridRole" :gridHeight="gridHeight" :gridItems="items" :sortable="true"
-                  :columns="columnsRole" :resizable="true" :selected-field="selectedFieldRole"
-                  @gridrowclick="onRowClickRole">
-                </KendoGrid>
-              </div>
+            <div ref="divWrapper" style="height: calc(100% - 33px)">
+              <KendoGrid
+                ref="rowGridRole"
+                :gridHeight="gridHeight"
+                :gridItems="items"
+                :sortable="true"
+                :columns="columnsRole"
+                :resizable="true"
+                :selected-field="selectedFieldRole"
+                @gridrowclick="onRowClickRole"
+              >
+              </KendoGrid>
+            </div>
           </CardBody>
         </Card>
       </v-col>
-      <v-col :sm="8" :lg="9" :class="'divListWapper'" :style="{ height: '100%' }">
+      <v-col
+        :sm="8"
+        :lg="9"
+        :class="'divListWapper'"
+        :style="{ height: '100%' }"
+      >
         <Card ref="gridCard" :style="{ height: '100%' }">
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00136") }}</CardTitle> <!-- 사용자목록 -->
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00136')
+                }}</CardTitle>
+                <!-- 사용자목록 -->
               </v-col>
               <v-col cols="6" align="right">
-                <Button :theme-color="'primary'" :size="'small'" icon="save" @click="saveValidation">{{
-                  $t("MES_CommLang.MES_CommLang_00414") }}</Button> <!-- 저장 -->
-                  <kbutton
-                :theme-color="'secondary'"
-                :size="'small'"
-                @click="getExcel"
-                >전체EXCEL</kbutton
+                <Button
+                  :theme-color="'primary'"
+                  :size="'small'"
+                  icon="save"
+                  @click="saveValidation"
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</Button
                 >
-                <Button :theme-color="'secondary'" :size="'small'" :icon="'undo'" @click="undoBtn">UNDO</Button>
+                <!-- 저장 -->
+                <kbutton
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  @click="getExcel"
+                  >전체EXCEL</kbutton
+                >
+                <Button
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  :icon="'undo'"
+                  @click="undoBtn"
+                  >UNDO</Button
+                >
               </v-col>
             </v-row>
             <div ref="divWrapper" style="height: calc(100% - 33px)">
-              <KendoGrid ref="rowGrid" :gridHeight="gridHeight" :gridItems="gridData" :sortable="true"
-                :columns="gridHeader" :resizable="true" :edit-field="'inEdit'" :isPaging="false"
-                :selected-field="selectedField" :gridDropDownList="headerParam.enumComboBox"
-                :checkHeaderArr="headerParam.checkBox" @selectionchange="onSelectionchange" @gridrowclick="onRowClick"
+              <KendoGrid
+                ref="rowGrid"
+                :gridHeight="gridHeight"
+                :gridItems="gridData"
+                :sortable="true"
+                :columns="gridHeader"
+                :resizable="true"
+                :edit-field="'inEdit'"
+                :isPaging="false"
+                :selected-field="selectedField"
+                :gridDropDownList="headerParam.enumComboBox"
+                :checkHeaderArr="headerParam.checkBox"
+                @selectionchange="onSelectionchange"
+                @gridrowclick="onRowClick"
                 @sortChangeHandler="sortChangeHandler"
-                @headerselectionchange="onHeaderSelectionChange" />
+                @headerselectionchange="onHeaderSelectionChange"
+              />
             </div>
           </CardBody>
         </Card>
@@ -104,7 +171,6 @@ import MesSelectBox from '@/components/common/select/MesSelectBox';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -160,12 +226,12 @@ export default {
       selectedID: 0,
       selectedData: [],
       selectedFieldRole: 'selected',
-      label1: this.$i18n.t("MES_CommLang.MES_CommLang_00077"), // 권한코드
-      label2: this.$i18n.t("MES_CommLang.MES_CommLang_00078"), // 권한명
+      label1: this.$i18n.t('MES_CommLang.MES_CommLang_00077'), // 권한코드
+      label2: this.$i18n.t('MES_CommLang.MES_CommLang_00078'), // 권한명
     };
   },
 
-  created() { },
+  created() {},
   async mounted() {
     this.gridHeight = this.$refs.contents.offsetHeight - 180 + 'px';
     await this.gridInit();
@@ -179,17 +245,17 @@ export default {
       );
     },
     gridItems() {
-      return this.gridDataRole.map((item) => ({
+      return this.gridDataRole.map(item => ({
         ...item,
         selected: item.idx === this.selectedID,
       }));
     },
-    items(){
-      return this.gridItems.map((item) => ({
-      ...item,
-      selected: item.ROLEID === this.t_RoleID,
-}));
-    }
+    items() {
+      return this.gridItems.map(item => ({
+        ...item,
+        selected: item.ROLEID === this.t_RoleID,
+      }));
+    },
   },
   watch: {},
   methods: {
@@ -212,31 +278,51 @@ export default {
             ...x,
             _ROWSTATUS: x.rowStat,
             CHECKFLAG: x.selected,
-            ROLEID: this.roleID
+            ROLEID: this.roleID,
           };
         });
 
       if (saveData.length > 0) {
         const res = await this.mesPost({
           apiKey: 'mes/common/manage',
-          messagename: 'TxnSFRoleUserMap',
+          messagename:
+            '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
           sendParam: saveData,
         });
 
         if (res?.returncode == '0') {
-          this.openAlert(this.$i18n.t('MES_CommLang.MES_CommLang_00414'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* ('저장', '저장되었습니다.') */
+          this.openAlert(
+            this.$i18n.t('MES_CommLang.MES_CommLang_00414'),
+            this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+          ); /* ('저장', '저장되었습니다.') */
           this.getGridData(this.roleID);
         } else {
-          this.openAlert('error', this.$i18n.t('MES_MsgLang.MES_MsgLang_00109')); /* ('오류가 발생했습니다.') */
+          this.openAlert(
+            'error',
+            this.$i18n.t('MES_MsgLang.MES_MsgLang_00109')
+          ); /* ('오류가 발생했습니다.') */
         }
       } else {
-        this.openAlert(this.$i18n.t('MES_CommLang.MES_CommLang_00414'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); /* ('저장', '저장할 데이터가 존재하지 않습니다.') */
+        this.openAlert(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00414'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); /* ('저장', '저장할 데이터가 존재하지 않습니다.') */
       }
     },
     gridInit() {
       this.columnsRole = [
-        { field: "ROLEID", editable: false, title: this.label1, width: this.setPer("divWrapper", 15) },
-        { field: "ROLENAME", editable: false, title: this.label2, width: this.setPer("divWrapper", 15) },
+        {
+          field: 'ROLEID',
+          editable: false,
+          title: this.label1,
+          width: this.setPer('divWrapper', 15),
+        },
+        {
+          field: 'ROLENAME',
+          editable: false,
+          title: this.label2,
+          width: this.setPer('divWrapper', 15),
+        },
       ];
       this.gridDataSelect();
     },
@@ -268,7 +354,7 @@ export default {
     },
     //그리드 데이터 가져오기
     async getGridData(roleID = '') {
-      if ( this.roleID == undefined || this.roleID == '' ) {
+      if (this.roleID == undefined || this.roleID == '') {
         return;
       }
 
@@ -302,7 +388,12 @@ export default {
         return {
           ...item,
           selected: item.idx === selectedIdx ? !item.selected : item.selected,
-          rowStat: item.idx === selectedIdx ? (item.rowStat === 'N' ? 'U' : 'N') : item.rowStat,
+          rowStat:
+            item.idx === selectedIdx
+              ? item.rowStat === 'N'
+                ? 'U'
+                : 'N'
+              : item.rowStat,
         };
       });
       this.selected = event.dataItem;
@@ -316,7 +407,12 @@ export default {
         return {
           ...item,
           selected: item.idx === selectedIdx ? !item.selected : item.selected,
-          rowStat: item.idx === selectedIdx ? (item.rowStat === 'N' ? 'U' : 'N') : item.rowStat,
+          rowStat:
+            item.idx === selectedIdx
+              ? item.rowStat === 'N'
+                ? 'U'
+                : 'N'
+              : item.rowStat,
         };
       });
       this.selected = event.dataItem;
@@ -333,16 +429,29 @@ export default {
           return {
             ...item,
             selected: checked,
-            rowStat: item.rowStat === 'N' ? (item.selected ? item.rowStat : 'U') : (item.selected ? item.rowStat : 'N'),
+            rowStat:
+              item.rowStat === 'N'
+                ? item.selected
+                  ? item.rowStat
+                  : 'U'
+                : item.selected
+                  ? item.rowStat
+                  : 'N',
           };
         });
-      }
-      else {
+      } else {
         this.gridData = this.gridData.map(item => {
           return {
             ...item,
             selected: checked,
-            rowStat: item.rowStat === 'N' ? (item.selected ? 'U' : item.rowStat) : (item.selected ? 'N' : item.rowStat),
+            rowStat:
+              item.rowStat === 'N'
+                ? item.selected
+                  ? 'U'
+                  : item.rowStat
+                : item.selected
+                  ? 'N'
+                  : item.rowStat,
           };
         });
       }
@@ -359,24 +468,20 @@ export default {
       this.$refs.alertPop.modalWidth = width;
     },
     sortChangeHandler(e) {
-      this.gfn_sortChangeHandler(
-        this.gridData,
-        e,
-        ['ROLEID']
-      );
+      this.gfn_sortChangeHandler(this.gridData, e, ['ROLEID']);
     },
-    getExcel(){
-        this.excelGet({
-            apiKey: 'mes/excel/customquery',
-            queryId: 'GetSFRoleUserMap',
-            sendParam: {
-              plantid: this.$auth.$state.user.plantId,
-              ROLEID: this.roleID,
-              gridid: this.headerParam.gridid,
-              gridqueryversion: "00001",
-            },
-        });
+    getExcel() {
+      this.excelGet({
+        apiKey: 'mes/excel/customquery',
+        queryId: 'GetSFRoleUserMap',
+        sendParam: {
+          plantid: this.$auth.$state.user.plantId,
+          ROLEID: this.roleID,
+          gridid: this.headerParam.gridid,
+          gridqueryversion: '00001',
         },
+      });
+    },
   },
 };
 

@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00449") }}</li> <!-- 설정 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00518") }}</li> <!-- 권한 관리 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00449') }}</li>
+      <!-- 설정 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00518') }}</li>
+      <!-- 권한 관리 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,21 +16,41 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00077") }}</label> <!-- 권한코드 -->
-                    <InputText ref="s_RoleId" :dataNm="'s_RoleId'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00077') }}</label>
+                    <!-- 권한코드 -->
+                    <InputText
+                      ref="s_RoleId"
+                      :dataNm="'s_RoleId'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00078") }}</label> <!-- 권한명 -->
-                    <InputText ref="s_RoleName" :dataNm="'s_RoleName'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00078') }}</label>
+                    <!-- 권한명 -->
+                    <InputText
+                      ref="s_RoleName"
+                      :dataNm="'s_RoleName'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                 </div>
               </v-col>
               <v-col :sm="3" :lg="2" align="right">
-                <kbutton :theme-color="'primary'" :size="'medium'" :icon="'search'" @click="searchBtn">
-                  {{ $t("MES_CommLang.MES_CommLang_00277") }}
-                </kbutton> <!-- 조회 -->
+                <kbutton
+                  :theme-color="'primary'"
+                  :size="'medium'"
+                  :icon="'search'"
+                  @click="searchBtn"
+                >
+                  {{ $t('MES_CommLang.MES_CommLang_00277') }}
+                </kbutton>
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -42,29 +65,66 @@
               <CardBody :style="{ width: '100%', height: '100%' }">
                 <v-row no-gutters>
                   <v-col cols="3" align="left">
-                    <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00079") }}</CardTitle> <!-- 권한리스트 -->
+                    <CardTitle>{{
+                      $t('MES_CommLang.MES_CommLang_00079')
+                    }}</CardTitle>
+                    <!-- 권한리스트 -->
                   </v-col>
                   <v-col cols="9" align="right">
-                    <kbutton :theme-color="'primary'" :size="'small'" :icon="'save'" @click="saveBtn">{{ $t("MES_CommLang.MES_CommLang_00414") }}
-                    </kbutton> <!-- 저장 -->
-                    <kbutton :theme-color="'secondary'" :size="'small'" :icon="'add'" @click="addBtn">{{ $t("MES_CommLang.MES_CommLang_00411") }}
-                    </kbutton> <!-- 추가 -->
-                    <kbutton :theme-color="'secondary'" :size="'small'" :icon="'delete'" @click="confirmDel">{{ $t("MES_CommLang.MES_CommLang_00412") }}
-                    </kbutton>  <!-- 삭제 -->
-                    <kbutton :theme-color="'secondary'" :size="'small'" :icon="'undo'" @click="undoBtn">
+                    <kbutton
+                      :theme-color="'primary'"
+                      :size="'small'"
+                      :icon="'save'"
+                      @click="saveBtn"
+                      >{{ $t('MES_CommLang.MES_CommLang_00414') }}
+                    </kbutton>
+                    <!-- 저장 -->
+                    <kbutton
+                      :theme-color="'secondary'"
+                      :size="'small'"
+                      :icon="'add'"
+                      @click="addBtn"
+                      >{{ $t('MES_CommLang.MES_CommLang_00411') }}
+                    </kbutton>
+                    <!-- 추가 -->
+                    <kbutton
+                      :theme-color="'secondary'"
+                      :size="'small'"
+                      :icon="'delete'"
+                      @click="confirmDel"
+                      >{{ $t('MES_CommLang.MES_CommLang_00412') }}
+                    </kbutton>
+                    <!-- 삭제 -->
+                    <kbutton
+                      :theme-color="'secondary'"
+                      :size="'small'"
+                      :icon="'undo'"
+                      @click="undoBtn"
+                    >
                       UNDO
                     </kbutton>
                   </v-col>
                 </v-row>
                 <div ref="divWrapper" :style="{ height: 'calc(100% - 33px)' }">
-                  <KendoGrid ref="rowGrid" :gridHeight="gridHeight" :gridItems="items" :sortable="true"
-                    :columns="gridHeader" :resizable="false" :edit-field="'inEdit'" :selected-field="selectedField"
-                    :gridDropDownList="headerParam.enumComboBox" :checkHeaderArr="headerParam.checkBox" :isPaging="true"
+                  <KendoGrid
+                    ref="rowGrid"
+                    :gridHeight="gridHeight"
+                    :gridItems="items"
+                    :sortable="true"
+                    :columns="gridHeader"
+                    :resizable="false"
+                    :edit-field="'inEdit'"
+                    :selected-field="selectedField"
+                    :gridDropDownList="headerParam.enumComboBox"
+                    :checkHeaderArr="headerParam.checkBox"
+                    :isPaging="true"
                     :gridPageData="gridPageData"
-                    :reSetPage="this.reSetPage" @gridrowclick="onRowClick" @sortChangeHandler="sortChangeHandler"
-                    @pageChangeEvent="pageChangeEvent" />
+                    :reSetPage="this.reSetPage"
+                    @gridrowclick="onRowClick"
+                    @sortChangeHandler="sortChangeHandler"
+                    @pageChangeEvent="pageChangeEvent"
+                  />
                 </div>
-
               </CardBody>
             </Card>
           </v-col>
@@ -73,7 +133,10 @@
               <CardBody :style="{ width: '100%', height: '100%' }">
                 <v-row no-gutters>
                   <v-col cols="4" align="left">
-                    <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00080") }}</CardTitle> <!-- 권한상세 -->
+                    <CardTitle>{{
+                      $t('MES_CommLang.MES_CommLang_00080')
+                    }}</CardTitle>
+                    <!-- 권한상세 -->
                   </v-col>
                 </v-row>
                 <div>
@@ -82,18 +145,22 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'#fb8200'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00077") }}
-                          </Label> <!-- 권한코드 -->
+                            <v-icon x-small :color="'#fb8200'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00077') }}
+                          </Label>
+                          <!-- 권한코드 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText 
-                          ref="roleId" 
-                          :disabled="itemDis"
-                          :required="true" 
-                          :boxWidth="'90%'" 
-                          :dataNm="'ROLEID'"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="roleId"
+                            :disabled="itemDis"
+                            :required="true"
+                            :boxWidth="'90%'"
+                            :dataNm="'ROLEID'"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -101,13 +168,21 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'#fb8200'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00078") }}
-                          </Label> <!-- 권한명 -->
+                            <v-icon x-small :color="'#fb8200'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00078') }}
+                          </Label>
+                          <!-- 권한명 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText ref="roleName" :required="true" :boxWidth="'90%'" :dataNm="'ROLENAME'"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="roleName"
+                            :required="true"
+                            :boxWidth="'90%'"
+                            :dataNm="'ROLENAME'"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -123,23 +198,28 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'#fb8200'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00129") }}
-                          </Label> <!-- 사용여부 -->
+                            <v-icon x-small :color="'#fb8200'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00129') }}
+                          </Label>
+                          <!-- 사용여부 -->
                         </v-col>
                         <v-col :cols="8">
-                          <MesVariableSelectBox :style="{ width: '90%' }"
+                          <MesVariableSelectBox
+                            :style="{ width: '90%' }"
                             :ref="'comboUseFlag'"
                             :allYN="false"
                             :dataNm="'useFlag'"
                             :queryId="'GetEnumValue'"
                             :inputcol="inputcol"
-                              :sendParam="{
-                               plantid: plantID,
-                               ENUMID: enumID,
-                              }"
-                            @comboChange="comboChange">
-                            </MesVariableSelectBox>
+                            :sendParam="{
+                              plantid: plantID,
+                              ENUMID: enumID,
+                            }"
+                            @comboChange="comboChange"
+                          >
+                          </MesVariableSelectBox>
                         </v-col>
                       </v-row>
                     </v-col>
@@ -149,13 +229,21 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'primary'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00469") }}
-                          </Label> <!-- 등록자 -->
+                            <v-icon x-small :color="'primary'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00469') }}
+                          </Label>
+                          <!-- 등록자 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText ref="Cuer" :boxWidth="'90%'" :dataNm="'CREATEUSER'" :disabled="true"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="Cuer"
+                            :boxWidth="'90%'"
+                            :dataNm="'CREATEUSER'"
+                            :disabled="true"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -163,13 +251,21 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'primary'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00352") }}
-                          </Label> <!-- 등록일시 -->
+                            <v-icon x-small :color="'primary'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00352') }}
+                          </Label>
+                          <!-- 등록일시 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText ref="CTime" :boxWidth="'90%'" :dataNm="'CREATETIME'" :disabled="true"
-                            @input="formInputValSet" />
+                          <InputText
+                            ref="CTime"
+                            :boxWidth="'90%'"
+                            :dataNm="'CREATETIME'"
+                            :disabled="true"
+                            @input="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -179,13 +275,21 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'primary'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00189") }}
-                          </Label> <!-- 수정자 -->
+                            <v-icon x-small :color="'primary'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00189') }}
+                          </Label>
+                          <!-- 수정자 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText ref="LastUser" :boxWidth="'90%'" :dataNm="'LASTUPDATEUSER'" :disabled="true"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="LastUser"
+                            :boxWidth="'90%'"
+                            :dataNm="'LASTUPDATEUSER'"
+                            :disabled="true"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -193,13 +297,21 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="4">
                           <Label>
-                            <v-icon x-small :color="'primary'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00191") }}
-                          </Label> <!-- 수정일시 -->
+                            <v-icon x-small :color="'primary'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00191') }}
+                          </Label>
+                          <!-- 수정일시 -->
                         </v-col>
                         <v-col :cols="8">
-                          <InputText ref="LastTime" :boxWidth="'90%'" :dataNm="'LASTUPDATETIME'" :disabled="true"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="LastTime"
+                            :boxWidth="'90%'"
+                            :dataNm="'LASTUPDATETIME'"
+                            :disabled="true"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -209,13 +321,20 @@
                       <v-row class="search-box" align="center" no-gutters>
                         <v-col :cols="2">
                           <Label>
-                            <v-icon x-small :color="'primary'" class="mr-1">mdi-record-circle</v-icon>
-                            {{ $t("MES_CommLang.MES_CommLang_00487") }}
-                          </Label> <!-- 비고 -->
+                            <v-icon x-small :color="'primary'" class="mr-1"
+                              >mdi-record-circle</v-icon
+                            >
+                            {{ $t('MES_CommLang.MES_CommLang_00487') }}
+                          </Label>
+                          <!-- 비고 -->
                         </v-col>
                         <v-col :cols="10">
-                          <InputText ref="Description" :dataNm="'DESCRIPTION'" :boxWidth="'95%'"
-                            @input-text-set="formInputValSet" />
+                          <InputText
+                            ref="Description"
+                            :dataNm="'DESCRIPTION'"
+                            :boxWidth="'95%'"
+                            @input-text-set="formInputValSet"
+                          />
                         </v-col>
                       </v-row>
                     </v-col>
@@ -241,13 +360,12 @@ import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 import InputText from '@/components/common/input/InputText';
 import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { Button } from '@progress/kendo-vue-buttons';
-import { Label } from "@progress/kendo-vue-labels";
+import { Label } from '@progress/kendo-vue-labels';
 import { DropDownList } from '@progress/kendo-vue-dropdowns';
-import MesVariableSelectBox from "@/components/common/select/MesVariableSelectBox";
+import MesVariableSelectBox from '@/components/common/select/MesVariableSelectBox';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -291,7 +409,7 @@ export default {
       headerParam: {
         gridid: 'dgvSFRoleList', // 그리드 ID
         rowStat: '', //rowStat 표시 여부
-        noFirstCheck: true
+        noFirstCheck: true,
       },
       gridHeader: [],
       reSetPage: false,
@@ -299,15 +417,15 @@ export default {
       itemDis: true,
       btnDis: false,
       baseData: [],
-      useFlag: "",
+      useFlag: '',
       useFlagList: [],
       plantID: this.$auth.$state.user.plantId,
       enumID: 'FlagYesNo',
-      inputcol: ["ENUMVALUE", "ENUMVALUENAME"],
+      inputcol: ['ENUMVALUE', 'ENUMVALUENAME'],
       gridPageData: {},
     };
   },
-  created() { },
+  created() {},
   async mounted() {
     this.gridHeight = this.$refs.contents.offsetHeight - 180 + 'px';
     this.getGridData();
@@ -321,35 +439,38 @@ export default {
       );
     },
     items() {
-      return this.gridData.map((item) => ({
+      return this.gridData.map(item => ({
         ...item,
         selected: item.idx === this.selectedID,
-    }));
-
-},
+      }));
+    },
   },
   watch: {},
   methods: {
     onRowClick(event) {
       if (event.dataItem) {
-
         this.selectedID = event.dataItem.idx;
         this.selectedData = event.dataItem;
 
-        this.$refs["roleId"].textVal = event.dataItem.ROLEID ? event.dataItem.ROLEID : "";
-        this.$refs["roleName"].textVal = event.dataItem.ROLENAME ? event.dataItem.ROLENAME : "";
-        this.$refs["Description"].textVal = event.dataItem.DESCRIPTION ? event.dataItem.DESCRIPTION : "";
-        this.$refs["Cuer"].textVal = event.dataItem.CREATEUSERID;
-        this.$refs["CTime"].textVal = event.dataItem.CREATETIME;
-        this.$refs["LastUser"].textVal = event.dataItem.LASTUPDATEUSERID;
-        this.$refs["LastTime"].textVal = event.dataItem.LASTUPDATETIME;
+        this.$refs['roleId'].textVal = event.dataItem.ROLEID
+          ? event.dataItem.ROLEID
+          : '';
+        this.$refs['roleName'].textVal = event.dataItem.ROLENAME
+          ? event.dataItem.ROLENAME
+          : '';
+        this.$refs['Description'].textVal = event.dataItem.DESCRIPTION
+          ? event.dataItem.DESCRIPTION
+          : '';
+        this.$refs['Cuer'].textVal = event.dataItem.CREATEUSERID;
+        this.$refs['CTime'].textVal = event.dataItem.CREATETIME;
+        this.$refs['LastUser'].textVal = event.dataItem.LASTUPDATEUSERID;
+        this.$refs['LastTime'].textVal = event.dataItem.LASTUPDATETIME;
 
         this.$refs.comboUseFlag.value = event.dataItem.USEFLAG;
 
-        if ( this.$refs["roleId"].textVal == "" ) {
+        if (this.$refs['roleId'].textVal == '') {
           this.itemDis = false;
-        }
-        else {
+        } else {
           this.itemDis = true;
         }
       }
@@ -376,20 +497,27 @@ export default {
 
       const validate = this.mesValidation(this.gridHeader, this.gridData);
       if (!validate.isValidate) {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), validate.msg);
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          validate.msg
+        );
         return;
       }
 
       if (saveData.length > 0) {
         const res = this.mesPost({
           apiKey: 'mes/common/manage',
-          messagename: 'TxnSFRole',
+          messagename:
+            '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
           sendParam: saveData,
         }).then(result => {
           this.$nextTick(() => {
             this.getGridData();
             if (result.returncode !== undefined && result.returncode === '0') {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* ('알림', '저장되었습니다.') */
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); /* ('알림', '저장되었습니다.') */
             } else {
               this.$refs.alertPop.show(
                 'ERROR : ' + result.code,
@@ -399,7 +527,10 @@ export default {
           });
         });
       } else {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); /* ('알림', '저장할 데이터가 존재하지 않습니다.') */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); /* ('알림', '저장할 데이터가 존재하지 않습니다.') */
         return;
       }
     },
@@ -413,7 +544,7 @@ export default {
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           roleId: this.s_RoleId,
-          roleName: this.s_RoleName
+          roleName: this.s_RoleName,
         },
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -435,10 +566,10 @@ export default {
     formInputValSet(nm, val) {
       this.selectedData[nm] = val;
       const index = this.gridData.findIndex(
-        (p) => p.idx === this.selectedData.idx
+        p => p.idx === this.selectedData.idx
       );
-      if (this.selectedData.rowStat == "") {
-        this.selectedData.rowStat = "U";
+      if (this.selectedData.rowStat == '') {
+        this.selectedData.rowStat = 'U';
       }
       this.gridData.splice(index, 1, this.selectedData);
     },
@@ -449,7 +580,7 @@ export default {
     },
     //추가 버튼 클릭
     addBtn() {
-      this.selectedID = "";
+      this.selectedID = '';
       const newRecord = {
         PLANTID: this.$auth.$state.user.plantId,
         ROLEID: '',
@@ -467,8 +598,10 @@ export default {
     },
     //삭제버튼
     confirmDel() {
-      const index = this.gridData.findIndex(p => p.idx === this.selectedData.idx);
-      this.selectedData.rowStat = "D";
+      const index = this.gridData.findIndex(
+        p => p.idx === this.selectedData.idx
+      );
+      this.selectedData.rowStat = 'D';
       this.gridData.splice(index, 1, this.selectedData);
     },
     search() {
@@ -479,16 +612,16 @@ export default {
       this[nm] = val;
       this.search();
     },
-    comboChange(nm, val){
-      if(nm == 'useFlag') {
+    comboChange(nm, val) {
+      if (nm == 'useFlag') {
         this.selectedData['USEFLAG'] = val;
 
         const index = this.gridData.findIndex(
-          (p) => p.idx === this.selectedData.idx
+          p => p.idx === this.selectedData.idx
         );
-        
-        if (this.selectedData.rowStat == "") {
-          this.selectedData.rowStat = "U";
+
+        if (this.selectedData.rowStat == '') {
+          this.selectedData.rowStat = 'U';
         }
         this.gridData.splice(index, 1, this.selectedData);
       }
@@ -500,14 +633,13 @@ export default {
       this.gfn_sortChangeHandler(this.gridData, e);
     },
     async pageChangeEvent(skip = 0, take = 20) {
-            this.gridPageData = {
-                skip: skip,
-                take: take
-            }
-            this.reSetPage = false;
-            this.getGridData();
-
-        },
+      this.gridPageData = {
+        skip: skip,
+        take: take,
+      };
+      this.reSetPage = false;
+      this.getGridData();
+    },
   },
 };
 

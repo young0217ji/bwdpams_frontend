@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00074") }}</li> <!-- 기준정보 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00543") }}</li> <!-- ERP라우팅기준정보 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00074') }}</li>
+      <!-- 기준정보 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00543') }}</li>
+      <!-- ERP라우팅기준정보 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,31 +16,64 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00540") }}</label> <!-- 제품그룹 -->
-                    <DropDownList ref="cmbProGroup" :style="{ width: '250px' }" :data-items="productGroup"
-                      :text-field="'text'" :data-item-key="'id'" :value="value" @change="selectProGroup">
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00540') }}</label>
+                    <!-- 제품그룹 -->
+                    <DropDownList
+                      ref="cmbProGroup"
+                      :style="{ width: '250px' }"
+                      :data-items="productGroup"
+                      :text-field="'text'"
+                      :data-item-key="'id'"
+                      :value="value"
+                      @change="selectProGroup"
+                    >
                     </DropDownList>
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00264") }}</label> <!-- 기준정보 -->
-                    <MesSelectBox :enumID="'ProductionType'" :allYN="true" :dataNm="'ProductionType'"
-                      @comboChange="comboChange"></MesSelectBox>
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00264') }}</label>
+                    <!-- 기준정보 -->
+                    <MesSelectBox
+                      :enumID="'ProductionType'"
+                      :allYN="true"
+                      :dataNm="'ProductionType'"
+                      @comboChange="comboChange"
+                    ></MesSelectBox>
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00259") }}</label> <!-- 제품ID -->
-                    <InputText ref="productid" :dataNm="'productid'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00259') }}</label>
+                    <!-- 제품ID -->
+                    <InputText
+                      ref="productid"
+                      :dataNm="'productid'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00260") }}</label> <!-- 제품명 -->
-                    <InputText ref="productName" :dataNm="'productName'" :disabled="false" :searchOption="true"
-                      :searchFunc="searchBtn" @input-text-set="searchInput" />
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00260') }}</label>
+                    <!-- 제품명 -->
+                    <InputText
+                      ref="productName"
+                      :dataNm="'productName'"
+                      :disabled="false"
+                      :searchOption="true"
+                      :searchFunc="searchBtn"
+                      @input-text-set="searchInput"
+                    />
                   </div>
                 </div>
               </v-col>
               <v-col :sm="3" :lg="2" align="right">
-                <kbutton :theme-color="'primary'" :size="'medium'" :icon="'search'" @click="searchBtn">{{
-                  $t("MES_CommLang.MES_CommLang_00277") }}</kbutton> <!-- 조회 -->
+                <kbutton
+                  :theme-color="'primary'"
+                  :size="'medium'"
+                  :icon="'search'"
+                  @click="searchBtn"
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</kbutton
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -50,20 +86,49 @@
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00090") }}</CardTitle> <!-- 라우팅목록 -->
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00090')
+                }}</CardTitle>
+                <!-- 라우팅목록 -->
               </v-col>
               <v-col cols="6" align="right">
-                <kbutton :theme-color="'secondary'" :size="'small'" @click="getExcel">전체EXCEL</kbutton>
-                <kbutton :theme-color="'secondary'" :size="'small'" @click="getExcelPaging">페이지EXCEL</kbutton>
+                <kbutton
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  @click="getExcel"
+                  >전체EXCEL</kbutton
+                >
+                <kbutton
+                  :theme-color="'secondary'"
+                  :size="'small'"
+                  @click="getExcelPaging"
+                  >페이지EXCEL</kbutton
+                >
               </v-col>
             </v-row>
             <div ref="divWrapper" :style="{ height: 'calc(100% - 33px)' }">
-              <KendoGrid ref="rowGrid" :gridHeight="gridHeight" :gridItems="gridData" :sortable="true" :gridPageData="gridPageData"
-                :columns="gridHeader" :resizable="true" :edit-field="'inEdit'" :selected-field="selectedField"
-                :gridDropDownList="headerParam.enumComboBox" :checkHeaderArr="headerParam.checkBox" :isPaging="true"
-                :reSetPage="this.reSetPage" @selectionchange="onSelectionchange" @gridrowclick="onRowClick"
-                @gridddchang="rowDdChange" @griditemchange="griditemchange"
-                @headerselectionchange="onHeaderSelectionChange" @sortChangeHandler="sortChangeHandler" @pageChangeEvent="pageChangeEvent"/>
+              <KendoGrid
+                ref="rowGrid"
+                :gridHeight="gridHeight"
+                :gridItems="gridData"
+                :sortable="true"
+                :gridPageData="gridPageData"
+                :columns="gridHeader"
+                :resizable="true"
+                :edit-field="'inEdit'"
+                :selected-field="selectedField"
+                :gridDropDownList="headerParam.enumComboBox"
+                :checkHeaderArr="headerParam.checkBox"
+                :isPaging="true"
+                :reSetPage="this.reSetPage"
+                @selectionchange="onSelectionchange"
+                @gridrowclick="onRowClick"
+                @gridddchang="rowDdChange"
+                @griditemchange="griditemchange"
+                @headerselectionchange="onHeaderSelectionChange"
+                @sortChangeHandler="sortChangeHandler"
+                @pageChangeEvent="pageChangeEvent"
+              />
             </div>
           </CardBody>
         </Card>
@@ -82,11 +147,10 @@ import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 import InputText from '@/components/common/input/InputText';
 import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { Button } from '@progress/kendo-vue-buttons';
-import { DropDownList } from "@progress/kendo-vue-dropdowns";
+import { DropDownList } from '@progress/kendo-vue-dropdowns';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -112,7 +176,7 @@ export default {
     CardBody,
     CardTitle,
     KendoGrid,
-    DropDownList
+    DropDownList,
   },
   data() {
     return {
@@ -129,20 +193,20 @@ export default {
       gridLastModIdx: null,
       selectedField: 'selected',
       headerParam: {
-        gridid: 'dgvErpRouting', // 그리드 ID       
+        gridid: 'dgvErpRouting', // 그리드 ID
         enumComboBox: [],
         rowstat: '',
         checkBox: [],
         noRowstat: true,
         noFirstCheck: true,
-        xOverflowYn: true // true - spread관리 width 그대로 사용, 스크롤바 사용 / false - 전체 넓이 중 비율 사용, 스크롤바 사용 안함      
+        xOverflowYn: true, // true - spread관리 width 그대로 사용, 스크롤바 사용 / false - 전체 넓이 중 비율 사용, 스크롤바 사용 안함
       },
       gridHeader: [],
       reSetPage: false,
-      gridPageData: {}
+      gridPageData: {},
     };
   },
-  created() { },
+  created() {},
   async mounted() {
     this.gridHeight = this.$refs.contents.offsetHeight - 180 + 'px';
     this.getProductGroupData();
@@ -174,7 +238,7 @@ export default {
       const { skip = 0, take = 20 } = this.gridPageData;
       this.mesGet({
         apiKey: 'mes/common/customquerypaging',
-        queryId: "GetErpRoutingList",
+        queryId: 'GetErpRoutingList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           PRODUCTID: this.productid,
@@ -185,22 +249,19 @@ export default {
           take: take,
         },
       }).then(({ list, paging, ...x }) => {
-
         const data = list.map((x, idx) => {
           return {
-
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
             WAREHOUSEMAPBUTTON: this.$i18n.t('MES_CommLang.MES_CommLang_00042'), //검색
-
           };
         });
 
-        this.gridOriData = JSON.parse(JSON.stringify(data))
+        this.gridOriData = JSON.parse(JSON.stringify(data));
         this.gridPageData = paging;
         this.gridData = data;
         this.$refs.rowGrid.skip = 0;
@@ -208,12 +269,11 @@ export default {
     },
     // 제품그룹 콤보 데이터 가져오기
     async getProductGroupData() {
-
       this.gridOriData = [];
       this.gridData = [];
       this.mesGet({
         apiKey: 'mes/common/getqueryresult',
-        queryId: 'GetProductGroupList',
+        queryId: 'GetProdGrpList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
         },
@@ -231,20 +291,22 @@ export default {
         });
         for (let i = 0; i < data.length; i++) {
           if (i < data.length) {
-            this.productGroup.push({ id: data[i].PRODUCTGROUPID, text: data[i].PRODUCTGROUPNAME });
+            this.productGroup.push({
+              id: data[i].PRODUCTGROUPID,
+              text: data[i].PRODUCTGROUPNAME,
+            });
             this.value = this.productGroup[0];
           }
         }
       });
     },
-    async pageChangeEvent(skip=0, take=20) {
+    async pageChangeEvent(skip = 0, take = 20) {
       this.gridPageData = {
         skip: skip,
-        take: take
-      }
+        take: take,
+      };
       this.reSetPage = false;
       this.getGridData();
-      
     },
     getExcel() {
       this.excelGet({
@@ -257,7 +319,7 @@ export default {
           PRODUCTIONTYPE: this.ProductionType,
           PRODUCTGROUPID: this.$refs['cmbProGroup'].value.id,
           gridid: this.headerParam.gridid,
-          gridqueryversion: "00001",
+          gridqueryversion: '00001',
         },
       });
     },
@@ -273,7 +335,7 @@ export default {
           PRODUCTIONTYPE: this.ProductionType,
           PRODUCTGROUPID: this.$refs['cmbProGroup'].value.id,
           gridid: this.headerParam.gridid,
-          gridqueryversion: "00001",
+          gridqueryversion: '00001',
           skip: skip,
           take: take,
         },

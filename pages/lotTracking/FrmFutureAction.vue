@@ -38,7 +38,9 @@
                     <div class="form-datepicker">
                       <DatePicker
                         ref="fromdate"
-                        :default-value="new Date(new Date().setDate(new Date().getDate() - 7))"
+                        :default-value="
+                          new Date(new Date().setDate(new Date().getDate() - 7))
+                        "
                         :dataNm="'fromdate'"
                         :format="'yyyy-MM-dd'"
                         @change="fromChange"
@@ -58,7 +60,13 @@
                 </div>
               </v-col>
               <v-col :sm="3" :lg="2" align="right">
-                <Button :theme-color="'primary'" :size="'medium'" icon="search" @click="searchBtn">조회</Button>
+                <Button
+                  :theme-color="'primary'"
+                  :size="'medium'"
+                  icon="search"
+                  @click="searchBtn"
+                  >조회</Button
+                >
               </v-col>
             </v-row>
           </CardBody>
@@ -69,7 +77,7 @@
       <v-row :class="'divListWapper'" :style="{ height: '50%' }">
         <v-col :cols="12" :class="'divList1'" :style="{ height: '100%' }">
           <Card ref="gridCard" :style="{ height: '100%' }">
-            <CardBody :style="{ width: '100%',height: '100%' }">
+            <CardBody :style="{ width: '100%', height: '100%' }">
               <v-row>
                 <v-col cols="1" align="left">
                   <CardTitle>Lot 목록</CardTitle>
@@ -78,7 +86,10 @@
                   <span>목록에서 예약 작업을 관리할 Lot을 선택하세요.</span>
                 </v-col>
               </v-row>
-              <div ref="divWrapperLotList" :style="{ height: 'calc(100% - 33px)' }">
+              <div
+                ref="divWrapperLotList"
+                :style="{ height: 'calc(100% - 33px)' }"
+              >
                 <KendoGrid
                   ref="rowGrid"
                   :gridHeight="dgvLotListHeight"
@@ -105,21 +116,50 @@
       <v-row :class="'divListWapper'" :style="{ height: '50%' }">
         <v-col :cols="12" :class="'divList2'" :style="{ height: '100%' }">
           <Card ref="gridCard2" :style="{ height: '100%' }">
-            <CardBody :style="{ width: '100%',height: '100%' }">
+            <CardBody :style="{ width: '100%', height: '100%' }">
               <v-row>
                 <v-col cols="6" align="left">
                   <CardTitle>예약 작업관리 목록</CardTitle>
                 </v-col>
                 <v-col cols="6" align="right">
-                  <Button :theme-color="'primary'" :size="'small'" icon="save" @click="saveBtn">저장</Button>
-                  <Button :theme-color="'secondary'" :size="'small'" icon="add" @click="addBtn">추가</Button>
-                  <Button :theme-color="'secondary'" :size="'small'" icon="delete" @click="delBtn">삭제</Button>
-                  <Button :theme-color="'secondary'" :size="'small'" icon="undo" @click="undoBtn">undo</Button>
+                  <Button
+                    :theme-color="'primary'"
+                    :size="'small'"
+                    icon="save"
+                    @click="saveBtn"
+                    >저장</Button
+                  >
+                  <Button
+                    :theme-color="'secondary'"
+                    :size="'small'"
+                    icon="add"
+                    @click="addBtn"
+                    >추가</Button
+                  >
+                  <Button
+                    :theme-color="'secondary'"
+                    :size="'small'"
+                    icon="delete"
+                    @click="delBtn"
+                    >삭제</Button
+                  >
+                  <Button
+                    :theme-color="'secondary'"
+                    :size="'small'"
+                    icon="undo"
+                    @click="undoBtn"
+                    >undo</Button
+                  >
                 </v-col>
               </v-row>
-              <v-row :style="{ height: 'calc(100% - 33px)', 'margin-top': '0px' }">
+              <v-row
+                :style="{ height: 'calc(100% - 33px)', 'margin-top': '0px' }"
+              >
                 <v-col :sm="4" :lg="3" :style="{ height: '100%' }">
-                  <div ref="divWrapperLotProcessList" :style="{ height: '100%' }">
+                  <div
+                    ref="divWrapperLotProcessList"
+                    :style="{ height: '100%' }"
+                  >
                     <KendoGrid
                       ref="rowGrid"
                       :gridItems="dgvLotProcessListData"
@@ -139,7 +179,10 @@
                   </div>
                 </v-col>
                 <v-col :sm="8" :lg="9" :style="{ height: '100%' }">
-                  <div ref="divWrapperFutureActionList" :style="{ height: '100%' }">
+                  <div
+                    ref="divWrapperFutureActionList"
+                    :style="{ height: '100%' }"
+                  >
                     <KendoGrid
                       ref="rowGrid3"
                       :gridItems="dgvFutureActionListData"
@@ -165,39 +208,38 @@
         </v-col>
       </v-row>
     </div>
-    
+
     <AlertPop ref="alertPop" :is="'alertPop'" />
   </div>
 </template>
 <script>
-import mixinGlobal from "@/mixin/global.js";
-import InputText from "@/components/common/input/InputText";
-import { DatePicker } from "@progress/kendo-vue-dateinputs";
-import Checkbox from "@/components/common/input/Checkbox";
-import MesSelectBox from "@/components/common/select/MesSelectBox";
-import multiGridHeaderMinin from "@/mixin/multiGridHeaderMinin.js";
-import Utility from "~/plugins/utility";
-import KendoGrid from "@/components/common/KendoGrid";
-import { Dialog, DialogActionsBar, Window } from "@progress/kendo-vue-dialogs";
+import mixinGlobal from '@/mixin/global.js';
+import InputText from '@/components/common/input/InputText';
+import { DatePicker } from '@progress/kendo-vue-dateinputs';
+import Checkbox from '@/components/common/input/Checkbox';
+import MesSelectBox from '@/components/common/select/MesSelectBox';
+import multiGridHeaderMinin from '@/mixin/multiGridHeaderMinin.js';
+import Utility from '~/plugins/utility';
+import KendoGrid from '@/components/common/KendoGrid';
+import { Dialog, DialogActionsBar, Window } from '@progress/kendo-vue-dialogs';
 import {
   AutoComplete,
   ComboBox,
   DropDownList,
   MultiSelect,
-} from "@progress/kendo-vue-dropdowns";
-import { Card, CardBody, CardTitle } from "@progress/kendo-vue-layout";
-import { Button } from "@progress/kendo-vue-buttons";
+} from '@progress/kendo-vue-dropdowns';
+import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
+import { Button } from '@progress/kendo-vue-buttons';
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, multiGridHeaderMinin],
   async asyncData(context) {
     const myState = context.store.state;
     myMenuId = context.route.query.menuId;
-    await context.store.commit("setActiveMenuInfo", myState.menuData[myMenuId]);
+    await context.store.commit('setActiveMenuInfo', myState.menuData[myMenuId]);
     myTitle = await myState.activeMenuInfo.menuName;
   },
   meta: {
@@ -223,21 +265,21 @@ export default {
     dropdownlist: DropDownList,
     MesSelectBox,
     Window,
-    DatePicker
+    DatePicker,
   },
   props: {
     dgvLotListHeight: {
       type: String,
-      default : "250px"   
+      default: '250px',
     },
-    dgvLotProcessListHeight:{
+    dgvLotProcessListHeight: {
       type: String,
-      default: "300px"
+      default: '300px',
     },
-    dgvFutureActionListHeight:{
+    dgvFutureActionListHeight: {
       type: String,
-      default: "300px"
-    }
+      default: '300px',
+    },
   },
   data() {
     return {
@@ -249,56 +291,67 @@ export default {
       gridDropDownList: [],
       dgvFutureActionListDropDownList: [
         {
-          dataVal: "ACTIONTYPE",
+          dataVal: 'ACTIONTYPE',
           dataItem: [],
-        }
+        },
       ],
       reasonCodeList: [],
-      selectedField: "selected",
+      selectedField: 'selected',
       expand: {
         ids: [],
-        idField: "LOTID",
+        idField: 'LOTID',
       },
       selectedlot: {},
       selectedprocess: {},
-      disabledCheckHeaderArr: ["GOINORDERREQUIRED"],
-      lotid: "",
-      futureactionlotstate: "",
-      productid: "",
-      fromdate: Utility.setFormatDate(new Date(new Date().setDate(new Date().getDate() - 7)), "YYYYMMDD"),
-      todate: Utility.setFormatDate(new Date(), "YYYYMMDD"),
+      disabledCheckHeaderArr: ['GOINORDERREQUIRED'],
+      lotid: '',
+      futureactionlotstate: '',
+      productid: '',
+      fromdate: Utility.setFormatDate(
+        new Date(new Date().setDate(new Date().getDate() - 7)),
+        'YYYYMMDD'
+      ),
+      todate: Utility.setFormatDate(new Date(), 'YYYYMMDD'),
       dgvLotListParam: {
-        gridid: "dgvLotList_FutureAction", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvLotList_FutureAction', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
         noFirstCheck: true,
-        noRowstat: true
+        noRowstat: true,
       },
       dgvLotProcessListParam: {
-        gridid: "dgvLotProcessList", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvLotProcessList', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
         noFirstCheck: true,
-        noRowstat: true
+        noRowstat: true,
       },
       dgvFutureActionListParam: {
-        gridid: "dgvFutureActionList", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvFutureActionList', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
         gridHeader: [],
-        noFirstCheck: true
-      }
+        noFirstCheck: true,
+      },
     };
   },
   created() {},
   async mounted() {
-    await this.getHeaderMulti(this.dgvLotListParam, this.$refs.divWrapperLotList);
-    await this.getHeaderMulti(this.dgvLotProcessListParam, this.$refs.divWrapperLotProcessList);
-    await this.getHeaderMulti(this.dgvFutureActionListParam, this.$refs.divWrapperFutureActionList);
+    await this.getHeaderMulti(
+      this.dgvLotListParam,
+      this.$refs.divWrapperLotList
+    );
+    await this.getHeaderMulti(
+      this.dgvLotProcessListParam,
+      this.$refs.divWrapperLotProcessList
+    );
+    await this.getHeaderMulti(
+      this.dgvFutureActionListParam,
+      this.$refs.divWrapperFutureActionList
+    );
     await this.getGridComboList();
     await this.getLotListData();
   },
-  computed: {
-  },
+  computed: {},
   watch: {},
   methods: {
     initScreen() {
@@ -314,88 +367,100 @@ export default {
       this.$refs.rowGrid3.skip = 0;
       this.getLotListData();
     },
-    saveBtn(){
-      const saveData = this.dgvFutureActionListData.filter(x => x.rowStat !== "N")
-      .map(x => {
-        return { 
+    saveBtn() {
+      const saveData = this.dgvFutureActionListData
+        .filter(x => x.rowStat !== 'N')
+        .map(x => {
+          return {
             ...x,
-            REASONCODETYPE: this.reasonCodeList.find(y => y.ENUMVALUE === x.REASONCODE) === undefined ? '' : this.reasonCodeList.find(y => y.ENUMVALUE === x.REASONCODE).REASONCODETYPE,
+            REASONCODETYPE:
+              this.reasonCodeList.find(y => y.ENUMVALUE === x.REASONCODE) ===
+              undefined
+                ? ''
+                : this.reasonCodeList.find(y => y.ENUMVALUE === x.REASONCODE)
+                    .REASONCODETYPE,
             _ROWSTATUS: x.rowStat,
-            _ROWSTATUSIMAGE: 'System.Drawing.Bitmap'
-          }
-      });
+            _ROWSTATUSIMAGE: 'System.Drawing.Bitmap',
+          };
+        });
 
-      if(saveData.find(x => x.REASONCODE === "")){
+      if (saveData.find(x => x.REASONCODE === '')) {
         //alert( "사유코드 항목은 필수 항목입니다." );
-        this.$refs.alertPop.show("알림", "사유코드 항목은 필수 항목입니다.");
+        this.$refs.alertPop.show('알림', '사유코드 항목은 필수 항목입니다.');
         return;
       }
 
-      const actionTypeList = this.dgvFutureActionListData.filter(x => x.rowStat !== "D").map(x => {
-        return x.ACTIONTYPE;
-      });
+      const actionTypeList = this.dgvFutureActionListData
+        .filter(x => x.rowStat !== 'D')
+        .map(x => {
+          return x.ACTIONTYPE;
+        });
       const setCollection = new Set(actionTypeList.map(JSON.stringify));
       const isDuplicate = setCollection.size < actionTypeList.length;
-      if(isDuplicate){
+      if (isDuplicate) {
         //alert( "같은 작업구분 항목은 등록할 수 없습니다." );
-        this.$refs.alertPop.show("알림", "같은 작업구분 항목은 등록할 수 없습니다.");
+        this.$refs.alertPop.show(
+          '알림',
+          '같은 작업구분 항목은 등록할 수 없습니다.'
+        );
         return;
       }
 
-      if(saveData.length > 0){
+      if (saveData.length > 0) {
         const res = this.mesPost({
-          apiKey: "mes/common/manage",
-          messagename: "TxnLotFutureAction",
-          sendParam: saveData
-        }).then((result) => {
+          apiKey: 'mes/common/manage',
+          messagename: 'TxnLotFutureAction',
+          sendParam: saveData,
+        }).then(result => {
           this.$nextTick(() => {
             this.getLotListData();
-            if(result.returncode !== undefined){
-              if(result.returncode === "0") {
-                this.$refs.alertPop.show("알림", "저장되었습니다");
+            if (result.returncode !== undefined) {
+              if (result.returncode === '0') {
+                this.$refs.alertPop.show('알림', '저장되었습니다');
+              } else {
+                this.$refs.alertPop.show(
+                  'ERROR : ' + result.returncode,
+                  result.returnmessage
+                );
               }
-              else {
-                this.$refs.alertPop.show("ERROR : " + result.returncode, result.returnmessage);
-              }
-              
+            } else {
+              this.$refs.alertPop.show(
+                'ERROR : ' + result.code,
+                result.message
+              );
             }
-            else{
-              this.$refs.alertPop.show("ERROR : " + result.code, result.message);
-            }
-          })
-        })
-        
-      }
-      else {
+          });
+        });
+      } else {
         //alert('저장할 데이터가 존재하지 않습니다.');
-        this.$refs.alertPop.show("알림", "저장할 데이터가 존재하지 않습니다.");
+        this.$refs.alertPop.show('알림', '저장할 데이터가 존재하지 않습니다.');
         return;
       }
     },
     toChange(e) {
-      this.todate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.todate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     fromChange(e) {
-      this.fromdate = Utility.setFormatDate(e.value, "YYYYMMDD");
+      this.fromdate = Utility.setFormatDate(e.value, 'YYYYMMDD');
     },
     //그리드 데이터 가져오기
     getLotListData() {
       this.initScreen();
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetOMFutureActionLotList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMFutureActionLotList',
         sendParam: {
           lotid: this.lotid,
           lotstate: this.futureactionlotstate,
           fromdate: this.fromdate,
           todate: this.todate,
-          plantid: this.$auth.$state.user.plantId
+          plantid: this.$auth.$state.user.plantId,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -403,11 +468,11 @@ export default {
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.dgvLotListData = data;
 
-        if(data.length > 0) {
-          this.onLotListRowClick({ dataItem: this.dgvLotListData[0]});
+        if (data.length > 0) {
+          this.onLotListRowClick({ dataItem: this.dgvLotListData[0] });
         }
       });
     },
@@ -417,17 +482,17 @@ export default {
       this.dgvFutureActionListOriData = [];
       this.selectedprocess = {};
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetOMFutureActionProcessList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMFutureActionProcessList',
         sendParam: {
           lotid: this.selectedlot.LOTID,
-          plantid: this.$auth.$state.user.plantId
+          plantid: this.$auth.$state.user.plantId,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -435,11 +500,13 @@ export default {
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.dgvLotProcessListData = data;
 
-        if(data.length > 0) {
-          this.onLotProcessListRowClick({ dataItem: this.dgvLotProcessListData[0]});
+        if (data.length > 0) {
+          this.onLotProcessListRowClick({
+            dataItem: this.dgvLotProcessListData[0],
+          });
         }
       });
     },
@@ -447,18 +514,18 @@ export default {
       this.dgvFutureActionListData = [];
       this.dgvFutureActionListOriData = [];
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetOMFutureActionList",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMFutureActionList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           lotid: this.selectedprocess.LOTID,
-          timekey: this.selectedprocess.TIMEKEY
+          timekey: this.selectedprocess.TIMEKEY,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
@@ -467,18 +534,22 @@ export default {
               ACTIONTYPE: {
                 type: 'combo',
                 dataItem: this.dgvFutureActionListDropDownList[0].dataItem,
-                readonly: true
+                readonly: true,
               },
               REASONCODE: {
                 type: 'combo',
-                dataItem: this.reasonCodeList.filter(y => y.REASONCODETYPE.toUpperCase() === x.ACTIONTYPE.toUpperCase()),
-                readonly: true
-              }
-            }
+                dataItem: this.reasonCodeList.filter(
+                  y =>
+                    y.REASONCODETYPE.toUpperCase() ===
+                    x.ACTIONTYPE.toUpperCase()
+                ),
+                readonly: true,
+              },
+            },
           };
         });
         //GIRD input v-model초기화, chkbox초기화 위해 추가
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
         this.dgvFutureActionListData = data;
         this.dgvFutureActionListOriData = JSON.parse(JSON.stringify(data));
       });
@@ -486,39 +557,39 @@ export default {
 
     //그리드 콤보박스 리스트가져오기
     async getGridComboList() {
-        await this.mesGet({
-          apiKey: "mes/common/getqueryresult",
-          queryId: "GetEnumValue",
-          sendParam: {
-            plantid: this.$auth.$state.user.plantId,
-            enumid: "FutureActionType"
-          }
-        }).then((data) => {
-          this.dgvFutureActionListDropDownList[0].dataItem = data;
-        })
+      await this.mesGet({
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEnumValue',
+        sendParam: {
+          plantid: this.$auth.$state.user.plantId,
+          enumid: 'FutureActionType',
+        },
+      }).then(data => {
+        this.dgvFutureActionListDropDownList[0].dataItem = data;
+      });
 
-        await this.mesGet({
-          apiKey: "mes/common/getqueryresult",
-          queryId: "GetOMFutureActionReasoncodeList",
-          sendParam: {
-            plantid: this.$auth.$state.user.plantId,
-          }
-        }).then((data) => {
-          this.reasonCodeList = data.map(x => {
-            return {
-              REASONCODETYPE: x.REASONCODETYPE,
-              ENUMVALUE: x.REASONCODE,
-              ENUMVALUENAME: x.DESCRIPTION,
-            }
-          })
-        })
+      await this.mesGet({
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetOMFutureActionReasoncodeList',
+        sendParam: {
+          plantid: this.$auth.$state.user.plantId,
+        },
+      }).then(data => {
+        this.reasonCodeList = data.map(x => {
+          return {
+            REASONCODETYPE: x.REASONCODETYPE,
+            ENUMVALUE: x.REASONCODE,
+            ENUMVALUENAME: x.DESCRIPTION,
+          };
+        });
+      });
     },
 
     //그리드 로우 클릭
     onLotListRowClick(event) {
       //console.log("===========onRowClick==============");
       //그리드 로우 클릭시 라인표시 유무 확인필요
-      this.dgvLotListData.forEach(x => x.selected = false);
+      this.dgvLotListData.forEach(x => (x.selected = false));
       event.dataItem[this.selectedField] = true;
 
       this.selectedlot = event.dataItem;
@@ -527,41 +598,43 @@ export default {
     onLotProcessListRowClick(event) {
       //console.log("===========onRowClick==============");
       //그리드 로우 클릭시 라인표시 유무 확인필요
-      this.dgvLotProcessListData.forEach(x => x.selected = false);
+      this.dgvLotProcessListData.forEach(x => (x.selected = false));
       event.dataItem[this.selectedField] = true;
       this.selectedprocess = event.dataItem;
       this.getFutureActionListData();
     },
     onFutureActionListRowClick(event) {
-      this.dgvFutureActionListData.forEach(x => x.selected = false);
+      this.dgvFutureActionListData.forEach(x => (x.selected = false));
       event.dataItem[this.selectedField] = true;
       this.selectedprocess = event.dataItem;
     },
 
     //맨앞 checkBox 클릭
     onSelectionchange(event) {
-      console.log("===========onSelectionchange==============");
+      console.log('===========onSelectionchange==============');
       //event.dataItem[this.selectedField] = !event.dataItem[this.selectedField];
     },
     //header checkbox 클릭
     onHeaderSelectionChange(event) {
-      console.log("===========onHeaderSelectionChange==============");
+      console.log('===========onHeaderSelectionChange==============');
       let checked = event.event.target.checked;
-      this.gridData = this.gridData.map((item) => {
+      this.gridData = this.gridData.map(item => {
         return { ...item, selected: checked };
       });
     },
     //그리드 인풋 제외 데이터 변경시
     rowDdChange(e, name, dataItem) {
       // console.log("===rowDdChange===",e)
-      const idx = this.dgvFutureActionListData.findIndex((x) => x.idx === dataItem.idx);
+      const idx = this.dgvFutureActionListData.findIndex(
+        x => x.idx === dataItem.idx
+      );
       const data = JSON.parse(JSON.stringify(this.dgvFutureActionListData));
 
-      if (name === "GOINORDERREQUIRED") {
-        e.value = e.value ? "Yes" : "No";
+      if (name === 'GOINORDERREQUIRED') {
+        e.value = e.value ? 'Yes' : 'No';
       }
 
-      if(name === "ACTIONTYPE"){
+      if (name === 'ACTIONTYPE') {
         data[idx] = {
           ...data[idx],
           customCell: {
@@ -571,18 +644,28 @@ export default {
             },
             REASONCODE: {
               type: 'combo',
-              dataItem: this.reasonCodeList.filter(x => x.REASONCODETYPE === e.value.toUpperCase())
-            }
-          }
-        }
+              dataItem: this.reasonCodeList.filter(
+                x => x.REASONCODETYPE === e.value.toUpperCase()
+              ),
+            },
+          },
+        };
       }
 
       data[idx] = { ...data[idx], [name]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.gfn_ChkOriginalData(this.dgvFutureActionListParam.gridHeader, data, this.dgvFutureActionListOriData, idx)) {
-        data[idx].rowStat = "N";
+      if (
+        data[idx].rowStat === 'U' &&
+        !this.gfn_ChkOriginalData(
+          this.dgvFutureActionListParam.gridHeader,
+          data,
+          this.dgvFutureActionListOriData,
+          idx
+        )
+      ) {
+        data[idx].rowStat = 'N';
       }
 
       this.dgvFutureActionListData = data;
@@ -590,16 +673,24 @@ export default {
 
     //그리드 인풋 데이터 변경시
     griditemchange(e) {
-      console.log("===griditemchange===", e);
+      console.log('===griditemchange===', e);
 
       const data = JSON.parse(JSON.stringify(this.dgvFutureActionListData));
-      const idx = data.findIndex((x) => x.idx === e.dataItem.idx);
+      const idx = data.findIndex(x => x.idx === e.dataItem.idx);
       data[idx] = { ...data[idx], [e.field]: e.value };
-      if (data[idx].rowStat === "N") {
-        data[idx].rowStat = "U";
+      if (data[idx].rowStat === 'N') {
+        data[idx].rowStat = 'U';
       }
-      if (data[idx].rowStat === "U" && !this.gfn_ChkOriginalData(this.dgvFutureActionListParam.gridHeader, data, this.dgvFutureActionListOriData, idx)) {
-        data[idx].rowStat = "N";
+      if (
+        data[idx].rowStat === 'U' &&
+        !this.gfn_ChkOriginalData(
+          this.dgvFutureActionListParam.gridHeader,
+          data,
+          this.dgvFutureActionListOriData,
+          idx
+        )
+      ) {
+        data[idx].rowStat = 'N';
       }
 
       this.dgvFutureActionListData = data;
@@ -612,30 +703,34 @@ export default {
       this[nm] = val;
     },
     chkVal(nm, val) {
-      this[nm] = val ? "Yes" : "";
+      this[nm] = val ? 'Yes' : '';
     },
 
     //undo 버튼 클릭
-    undoBtn(){
+    undoBtn() {
       // this.dgvFutureActionListData = this.dgvFutureActionListOriData;
-      this.dgvFutureActionListData =  this.dgvFutureActionListOriData.filter((x) => x.newRow !== true);
-      this.$nuxt.$emit('iccReset')
+      this.dgvFutureActionListData = this.dgvFutureActionListOriData.filter(
+        x => x.newRow !== true
+      );
+      this.$nuxt.$emit('iccReset');
     },
     //추가 버튼 클릭
-    addBtn(){
-      const newRowUUid = Math.round(Math.random()*1000000000).toString()
-      const dataItem = { 
-        inEdit: true, 
+    addBtn() {
+      const newRowUUid = Math.round(Math.random() * 1000000000).toString();
+      const dataItem = {
+        inEdit: true,
         newRow: true,
         selected: false,
         PLANTID: this.$auth.$state.user.plantId,
-        rowStat: "C",
+        rowStat: 'C',
         newRowUUid: newRowUUid,
-        _ROWSTATUS: "C",
+        _ROWSTATUS: 'C',
         LOTID: this.selectedprocess.LOTID,
-        ACTIONTYPE: "Scrap",
+        ACTIONTYPE: 'Scrap',
         PROCESSNAME: this.selectedprocess.PROCESSNAME,
-        REASONCODE: this.reasonCodeList.filter(x => x.REASONCODETYPE === "SCRAP")[0].ENUMVALUE,
+        REASONCODE: this.reasonCodeList.filter(
+          x => x.REASONCODETYPE === 'SCRAP'
+        )[0].ENUMVALUE,
         TIMEKEY: this.selectedprocess.TIMEKEY,
         idx: this.dgvFutureActionListData.length,
         customCell: {
@@ -645,57 +740,98 @@ export default {
           },
           REASONCODE: {
             type: 'combo',
-            dataItem: this.reasonCodeList.filter(x => x.REASONCODETYPE === "SCRAP")
-          }
-        }
+            dataItem: this.reasonCodeList.filter(
+              x => x.REASONCODETYPE === 'SCRAP'
+            ),
+          },
+        },
       };
-      
+
       this.dgvFutureActionListData.splice(0, 0, dataItem);
       this.$refs.rowGrid3.skip = 0;
-      this.$nuxt.$emit('iccReset')
+      this.$nuxt.$emit('iccReset');
     },
     //삭제버튼
-    delBtn(){
+    delBtn() {
       const data = JSON.parse(JSON.stringify(this.dgvFutureActionListData));
-      this.dgvFutureActionListData = data.map(x => {
-        if(x.selected){
-          if(x.rowStat !== "C"){
-            return {
-              ...x,
-              rowStat: "D"
+      this.dgvFutureActionListData = data
+        .map(x => {
+          if (x.selected) {
+            if (x.rowStat !== 'C') {
+              return {
+                ...x,
+                rowStat: 'D',
+              };
             }
+          } else {
+            return x;
           }
-        }
-        else {
-          return x;
-        }
-      }).filter(x => x !== undefined);
-      this.$nuxt.$emit('iccReset')
+        })
+        .filter(x => x !== undefined);
+      this.$nuxt.$emit('iccReset');
     },
-    sortChangeHandler1(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.dgvLotListData = this.dgvLotListData.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.dgvLotListData = this.dgvLotListData.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler1(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.dgvLotListData = this.dgvLotListData.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.dgvLotListData = this.dgvLotListData.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
     },
-    sortChangeHandler2(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.dgvLotProcessListData = this.dgvLotProcessListData.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.dgvLotProcessListData = this.dgvLotProcessListData.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler2(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.dgvLotProcessListData = this.dgvLotProcessListData.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.dgvLotProcessListData = this.dgvLotProcessListData.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
     },
-    sortChangeHandler3(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.dgvFutureActionListData = this.dgvFutureActionListData.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.dgvFutureActionListData = this.dgvFutureActionListData.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler3(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.dgvFutureActionListData = this.dgvFutureActionListData.sort(
+          (a, b) =>
+            a[e.event?.field] < b[e.event?.field]
+              ? -1
+              : a[e.event?.field] > b[e.event?.field]
+                ? 1
+                : 0
+        );
+      } else {
+        this.dgvFutureActionListData = this.dgvFutureActionListData.sort(
+          (a, b) =>
+            a[e.event?.field] > b[e.event?.field]
+              ? -1
+              : a[e.event?.field] < b[e.event?.field]
+                ? 1
+                : 0
+        );
       }
-    }
+    },
   },
 };
 

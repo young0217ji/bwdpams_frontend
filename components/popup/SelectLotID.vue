@@ -10,89 +10,89 @@
       height="600"
       @close="toggleDialog"
     >
-    <v-row no-gutters> 
-      <v-col :sm="9" :lg="10">
-        <div class="form-group-wrap">
-          <div class="form-group">
-            <label>Lot ID</label>
-            <InputText
-              ref="lotid"
-              :dataNm="'lotid'"
-              :disabled="false"
-              :defaultValue="lotid"
-              :searchOption="true"
-              :searchFunc="getGridData"
-              @input-text-set="searchInput"
-            />
-          </div>
-          <div class="form-group">
-            <label>{{ $t("MES_CommLang.MES_CommLang_00263") }}</label>
-            <InputText
-              ref="productid"
-              :boxWidth="'98%'"
-              :dataNm="'productid'"
-              :disabled="false"
-              :defaultValue="productid"
-              :searchOption="true"
-              :searchFunc="getGridData"
-              @input-text-set="searchInput"
-            />
-          </div>
-          <div class="form-group">
-            <label>{{ $t("MES_CommLang.MES_CommLang_00199") }}</label>
-            <div class="form-datepicker">
-              <DatePicker
-                ref="fromdate"
-                :default-value="new Date(fromdate)"
-                :dataNm="'fromdate'"
-                :format="'yyyy-MM-dd'"
-                :disabled="!!lotstate"
-                @change="fromChange"
+      <v-row no-gutters>
+        <v-col :sm="9" :lg="10">
+          <div class="form-group-wrap">
+            <div class="form-group">
+              <label>Lot ID</label>
+              <InputText
+                ref="lotid"
+                :dataNm="'lotid'"
+                :disabled="false"
+                :defaultValue="lotid"
+                :searchOption="true"
+                :searchFunc="getGridData"
+                @input-text-set="searchInput"
               />
             </div>
-            <span class="i_tilde">~</span>
-            <div class="form-datepicker">
-              <DatePicker
-                ref="todate"
-                :default-value="new Date(todate)"
-                :dataNm="'todate'"
-                :format="'yyyy-MM-dd'"
-                :disabled="!!lotstate"
-                @change="toChange"
+            <div class="form-group">
+              <label>{{ $t('MES_CommLang.MES_CommLang_00263') }}</label>
+              <InputText
+                ref="productid"
+                :boxWidth="'98%'"
+                :dataNm="'productid'"
+                :disabled="false"
+                :defaultValue="productid"
+                :searchOption="true"
+                :searchFunc="getGridData"
+                @input-text-set="searchInput"
               />
             </div>
-          </div>
-          <div class="form-group">
-            <label>{{ $t("MES_CommLang.MES_CommLang_00252") }}</label>
-            <div class="form-chk">
-              <Checkbox
-              ref="lotstate"
-              :dataNm="'lotstate'"
-              :disabled="false"
-              :defaultchecked="true"
-              @checkbox-set="chkVal"
-            ></Checkbox>
+            <div class="form-group">
+              <label>{{ $t('MES_CommLang.MES_CommLang_00199') }}</label>
+              <div class="form-datepicker">
+                <DatePicker
+                  ref="fromdate"
+                  :default-value="new Date(fromdate)"
+                  :dataNm="'fromdate'"
+                  :format="'yyyy-MM-dd'"
+                  :disabled="!!lotstate"
+                  @change="fromChange"
+                />
+              </div>
+              <span class="i_tilde">~</span>
+              <div class="form-datepicker">
+                <DatePicker
+                  ref="todate"
+                  :default-value="new Date(todate)"
+                  :dataNm="'todate'"
+                  :format="'yyyy-MM-dd'"
+                  :disabled="!!lotstate"
+                  @change="toChange"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ $t('MES_CommLang.MES_CommLang_00252') }}</label>
+              <div class="form-chk">
+                <Checkbox
+                  ref="lotstate"
+                  :dataNm="'lotstate'"
+                  :disabled="false"
+                  :defaultchecked="true"
+                  @checkbox-set="chkVal"
+                ></Checkbox>
+              </div>
             </div>
           </div>
-        </div>
-      </v-col>
-      <v-col :sm="3" :lg="2" align="right">
-        <Button
-          :theme-color="'primary'"
-          :size="'medium'"
-          icon="search"
-          @click="getGridData"
-          >{{ $t("MES_CommLang.MES_CommLang_00277") }}</Button
-        >
-        <Button
-          :theme-color="'primary'"
-          :size="'medium'"
-          icon="check"
-          @click="selectRow"
-          >{{ $t("MES_CommLang.MES_CommLang_00169") }}</Button
-        >
-      </v-col>
-    </v-row>
+        </v-col>
+        <v-col :sm="3" :lg="2" align="right">
+          <Button
+            :theme-color="'primary'"
+            :size="'medium'"
+            icon="search"
+            @click="getGridData"
+            >{{ $t('MES_CommLang.MES_CommLang_00277') }}</Button
+          >
+          <Button
+            :theme-color="'primary'"
+            :size="'medium'"
+            icon="check"
+            @click="selectRow"
+            >{{ $t('MES_CommLang.MES_CommLang_00169') }}</Button
+          >
+        </v-col>
+      </v-row>
       <!--
       <v-row :style="{ 'margin-bottom': '10px' }">
         <v-col cols="5" align="left">
@@ -188,7 +188,7 @@
         </v-col>
       </v-row>
       -->
-      <div ref="divWrapper" style="height:calc(100% - 44px);">
+      <div ref="divWrapper" style="height: calc(100% - 44px)">
         <KendoGrid
           ref="rowGrid"
           :gridHeight="gridHeight"
@@ -222,8 +222,6 @@ import KendoGrid from '@/components/common/KendoGrid';
 import InputText from '@/components/common/input/InputText';
 import Checkbox from '@/components/common/input/Checkbox';
 import moment from 'moment';
-
-
 
 export default {
   name: 'SearchModal',
@@ -310,7 +308,7 @@ export default {
 
       this.mesGet({
         apiKey: 'mes/common/getqueryresult',
-        queryId: 'GetLotSearchList',
+        queryId: 'GetLotSrchList',
         sendParam: sendParam,
       }).then(res => {
         const data = res.map((x, idx) => {
@@ -349,8 +347,11 @@ export default {
     },
     //그리드 더블 클릭
     rowdblclick(event) {
-      if(this.chkNotReleaseLot && event.dataItem.LOTSTATE !== 'Released') {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00161'));
+      if (this.chkNotReleaseLot && event.dataItem.LOTSTATE !== 'Released') {
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00161')
+        );
         return;
       }
 
@@ -360,8 +361,11 @@ export default {
     //row 선택
     selectRow() {
       const rerutnData = this.items.filter(x => x.selected);
-      if(this.chkNotReleaseLot && rerutnData[0].LOTSTATE !== 'Released') {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00161'));
+      if (this.chkNotReleaseLot && rerutnData[0].LOTSTATE !== 'Released') {
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00161')
+        );
         return;
       }
 
@@ -380,12 +384,24 @@ export default {
     chkVal(nm, val) {
       this[nm] = val ? 'Released' : '';
     },
-    sortChangeHandler(e){
-      const isAscending = e.sort[0]?.dir == "asc";
-      if(isAscending){
-        this.gridData = this.gridData.sort((a,b) => a[e.event?.field] < b[e.event?.field] ? -1 : a[e.event?.field] > b[e.event?.field] ? 1 : 0)
-      }else{
-        this.gridData = this.gridData.sort((a,b) => a[e.event?.field] > b[e.event?.field] ? -1 : a[e.event?.field] < b[e.event?.field] ? 1 : 0)
+    sortChangeHandler(e) {
+      const isAscending = e.sort[0]?.dir == 'asc';
+      if (isAscending) {
+        this.gridData = this.gridData.sort((a, b) =>
+          a[e.event?.field] < b[e.event?.field]
+            ? -1
+            : a[e.event?.field] > b[e.event?.field]
+              ? 1
+              : 0
+        );
+      } else {
+        this.gridData = this.gridData.sort((a, b) =>
+          a[e.event?.field] > b[e.event?.field]
+            ? -1
+            : a[e.event?.field] < b[e.event?.field]
+              ? 1
+              : 0
+        );
       }
     },
   },

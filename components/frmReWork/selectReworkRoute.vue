@@ -72,17 +72,15 @@
   </div>
 </template>
 <script>
-import { Dialog, DialogActionsBar } from "@progress/kendo-vue-dialogs";
-import { Button } from "@progress/kendo-vue-buttons";
-import mixinGlobal from "@/mixin/global.js";
-import gridHeaderMinin from "@/mixin/gridHeaderMinin.js";
-import KendoGrid from "@/components/common/KendoGrid";
-import InputText from "@/components/common/input/InputText";
-
-
+import { Dialog, DialogActionsBar } from '@progress/kendo-vue-dialogs';
+import { Button } from '@progress/kendo-vue-buttons';
+import mixinGlobal from '@/mixin/global.js';
+import gridHeaderMinin from '@/mixin/gridHeaderMinin.js';
+import KendoGrid from '@/components/common/KendoGrid';
+import InputText from '@/components/common/input/InputText';
 
 export default {
-  name: "SearchModal",
+  name: 'SearchModal',
   mixins: [mixinGlobal, gridHeaderMinin],
   components: {
     Dialog,
@@ -106,36 +104,36 @@ export default {
       gridHeader: [],
       gridData: [],
       gridOriData: [],
-      gridHeight: "400px",
-      selectedField: "selected",
+      gridHeight: '400px',
+      selectedField: 'selected',
       headerParam: {
-        gridid: "dgvProcessRoute", // 그리드 ID
-        rowStat: "", //rowStat 표시 여부
+        gridid: 'dgvProcessRoute', // 그리드 ID
+        rowStat: '', //rowStat 표시 여부
       },
       gridDropDownList: [
         {
-          dataVal: "PROCESSROUTETYPE",
+          dataVal: 'PROCESSROUTETYPE',
           dataItem: [],
         },
       ],
-      checkHeaderArr: ["ACTIVESTATE", "CONFIRMFLAG", "COMMONFLAG"],
+      checkHeaderArr: ['ACTIVESTATE', 'CONFIRMFLAG', 'COMMONFLAG'],
       //disabledCheckHeaderArr: ["ACTIVESTATE", "CONFIRMFLAG", "COMMONFLAG"],
       noFirstCheck: true,
       noRowstat: true,
       selectedID: null,
-      processrouteid: "",
-      lotid: "",
+      processrouteid: '',
+      lotid: '',
     };
   },
   computed: {
     areAllSelected() {
       return (
-        this.gridData.findIndex((x) => x.checked === false) === -1 &&
+        this.gridData.findIndex(x => x.checked === false) === -1 &&
         this.gridData.length !== 0
       );
     },
     items() {
-      return this.gridData.map((item) => ({
+      return this.gridData.map(item => ({
         ...item,
         selected: item.PROCESSROUTEID === this.selectedID,
       }));
@@ -148,13 +146,13 @@ export default {
     //그리드 콤보박스 리스트가져오기
     getGridComboList() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetEnumValue",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetEnumValue',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
-          enumid: "ProcessRouteType",
+          enumid: 'ProcessRouteType',
         },
-      }).then((data) => {
+      }).then(data => {
         this.gridDropDownList[0].dataItem = data;
         this.getGridData();
       });
@@ -162,24 +160,24 @@ export default {
     //그리드 데이터 가져오기
     getGridData() {
       this.mesGet({
-        apiKey: "mes/common/getqueryresult",
-        queryId: "GetReworkRouteListPop ",
+        apiKey: 'mes/common/getqueryresult',
+        queryId: 'GetReworkRouteListPop ',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           PROCESSROUTEID: this.processrouteid,
         },
-      }).then((res) => {
+      }).then(res => {
         const data = res.map((x, idx) => {
           return {
             ...x,
-            rowStat: "N",
+            rowStat: 'N',
             selected: false,
             idx: idx,
             inEdit: true,
             newRow: false,
           };
         });
-        this.$nuxt.$emit("iccReset");
+        this.$nuxt.$emit('iccReset');
 
         // grid Header Customations
         this.gridHeader[1].editable = false;
@@ -190,7 +188,7 @@ export default {
       });
     },
     toggleDialog() {
-      this.$emit("visibleDialog", !this.visibleDialog);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     //그리드 로우 클릭
     onRowClick(event) {
@@ -203,21 +201,21 @@ export default {
     //header checkbox 클릭
     onHeaderSelectionChange(event) {
       let checked = event.event.target.checked;
-      this.gridData = this.gridData.map((item) => {
+      this.gridData = this.gridData.map(item => {
         return { ...item, selected: checked };
       });
     },
     //그리드 더블 클릭
     rowdblclick(event) {
-      this.$emit("popupRouteData", event.dataItem);
-      this.$emit("visibleDialog", !this.visibleDialog);
+      this.$emit('popupRouteData', event.dataItem);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     //선택
     selectRow() {
-      const returnData = this.items.filter((x) => x.selected);
-      this.$emit("productCode", returnData[0]);
-      this.$emit("popupRouteData", returnData[0]);
-      this.$emit("visibleDialog", !this.visibleDialog);
+      const returnData = this.items.filter(x => x.selected);
+      this.$emit('productCode', returnData[0]);
+      this.$emit('popupRouteData', returnData[0]);
+      this.$emit('visibleDialog', !this.visibleDialog);
     },
     searchInput(nm, val) {
       this[nm] = val;

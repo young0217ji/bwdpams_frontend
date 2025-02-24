@@ -1,9 +1,12 @@
 <template>
   <div>
     <ol class="page-navigation">
-      <li>{{ $t("MES_CommLang.MES_CommLang_00515") }}</li> <!-- 홈 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00074") }}</li> <!-- 기준정보 -->
-      <li>{{ $t("MES_CommLang.MES_CommLang_00270") }}</li> <!-- 제품기준정보 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00515') }}</li>
+      <!-- 홈 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00074') }}</li>
+      <!-- 기준정보 -->
+      <li>{{ $t('MES_CommLang.MES_CommLang_00270') }}</li>
+      <!-- 제품기준정보 -->
     </ol>
     <v-row ref="searchFilter">
       <v-col :cols="12">
@@ -13,7 +16,8 @@
               <v-col :sm="9" :lg="10">
                 <div class="form-group-wrap">
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00542") }}</label> <!-- 제품그룹명 -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00542') }}</label>
+                    <!-- 제품그룹명 -->
                     <DropDownList
                       ref="cmbProGroup"
                       :style="{ width: '250px' }"
@@ -22,11 +26,12 @@
                       :data-item-key="'id'"
                       :value="value"
                       @change="selectProGroup"
-                      >
-                  </DropDownList>
+                    >
+                    </DropDownList>
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00264") }}</label> <!-- 제품구분 -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00264') }}</label>
+                    <!-- 제품구분 -->
                     <MesSelectBox
                       :enumID="'ProductionType'"
                       :allYN="true"
@@ -35,7 +40,8 @@
                     ></MesSelectBox>
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00259") }}</label> <!-- 제품ID -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00259') }}</label>
+                    <!-- 제품ID -->
                     <InputText
                       ref="productid"
                       :dataNm="'productid'"
@@ -46,7 +52,8 @@
                     />
                   </div>
                   <div class="form-group">
-                    <label>{{ $t("MES_CommLang.MES_CommLang_00260") }}</label> <!-- 제품명 -->
+                    <label>{{ $t('MES_CommLang.MES_CommLang_00260') }}</label>
+                    <!-- 제품명 -->
                     <InputText
                       ref="productName"
                       :dataNm="'productName'"
@@ -64,8 +71,9 @@
                   :size="'medium'"
                   :icon="'search'"
                   @click="searchBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00277") }}</kbutton 
-                > <!-- 조회 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00277') }}</kbutton
+                >
+                <!-- 조회 -->
               </v-col>
             </v-row>
           </CardBody>
@@ -78,7 +86,10 @@
           <CardBody :style="{ width: '100%', height: '100%' }">
             <v-row no-gutters>
               <v-col cols="6" align="left">
-                <CardTitle>{{ $t("MES_CommLang.MES_CommLang_00262") }}</CardTitle> <!-- 제품목록 -->
+                <CardTitle>{{
+                  $t('MES_CommLang.MES_CommLang_00262')
+                }}</CardTitle>
+                <!-- 제품목록 -->
               </v-col>
               <v-col cols="6" align="right">
                 <kbutton
@@ -86,8 +97,9 @@
                   :size="'small'"
                   :icon="'save'"
                   @click="saveBtn"
-                  >{{ $t("MES_CommLang.MES_CommLang_00414") }}</kbutton
-                > <!-- 저장 -->
+                  >{{ $t('MES_CommLang.MES_CommLang_00414') }}</kbutton
+                >
+                <!-- 저장 -->
                 <kbutton
                   :theme-color="'secondary'"
                   :size="'small'"
@@ -157,13 +169,11 @@ import { Card, CardBody, CardTitle } from '@progress/kendo-vue-layout';
 import InputText from '@/components/common/input/InputText';
 import MesSelectBox from '@/components/common/select/MesSelectBox';
 import { Button } from '@progress/kendo-vue-buttons';
-import { DropDownList } from "@progress/kendo-vue-dropdowns";
+import { DropDownList } from '@progress/kendo-vue-dropdowns';
 import WindowPop from '@/components/common/WindowPop';
-
 
 let myTitle;
 let myMenuId;
-
 
 export default {
   mixins: [mixinGlobal, gridHeaderMinin],
@@ -198,7 +208,7 @@ export default {
       productName: '', // 제품명 검색
       ProductionType: '', //제품구분 콤보박스
       productGroupID: '', //제품그룹 콤보박스
-      value : {},
+      value: {},
       productGroup: [],
       columns: [],
       gridHeight: '100px',
@@ -213,13 +223,13 @@ export default {
         rowStat: '', //rowStat 표시 여부
         enumComboBox: [],
         checkBox: [],
-        xOverflowYn : true // true - spread관리 width 그대로 사용, 스크롤바 사용 / false - 전체 넓이 중 비율 사용, 스크롤바 사용 안함
+        xOverflowYn: true, // true - spread관리 width 그대로 사용, 스크롤바 사용 / false - 전체 넓이 중 비율 사용, 스크롤바 사용 안함
       },
       gridHeader: [],
       reSetPage: false,
-      // ubiform 
+      // ubiform
       datasetList: {},
-      paramList: {}
+      paramList: {},
     };
   },
   created() {},
@@ -262,8 +272,8 @@ export default {
 
     //unbo 버튼 클릭
     undoBtn() {
-    this.gridData = this.gridOriData.filter((x) => x.newRow !== true);
-    this.$nuxt.$emit("iccReset");
+      this.gridData = this.gridOriData.filter(x => x.newRow !== true);
+      this.$nuxt.$emit('iccReset');
     },
 
     // 저장
@@ -279,21 +289,27 @@ export default {
 
       const validate = this.mesValidation(this.gridHeader, this.gridData);
       if (!validate.isValidate) {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), validate.msg); /* 알림 */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          validate.msg
+        ); /* 알림 */
         return;
       }
-
 
       if (saveData.length > 0) {
         const res = this.mesPost({
           apiKey: 'mes/common/manage',
-          messagename: 'TxnProductDefinition',
+          messagename:
+            '(?1TransArea)(?2TransProdDefine)(?3TransProdGrpDefine)(?4TransWhouseDefinitio)(?5TransRO_Composition)(?6TransROC_Composition)(?7TransTPPolicy)(?8TransMdlingCofm)(?9TransAvailEqpt)(?10TransSubContUserMap)(?11TransRsnCd)(?12TransDispManagemen)(?13TransDispMngDtl)(?14TransEqptDefine)(?15TransWrkOrdMgmt)(?16TransPrtQtyUp)(?17TransSFUser)(?18TransDept)(?19TransSFMenu)(?20TransSFRole)(?21TransSFRoleMenuMap)(?22TransSFRoleUserMap)(?23TransEnumGrpDefine)(?24TransEnumDefine)(?25TransEnumValue)(?26TransGridDefine)(?27TransGridDtl)(?28TransCustQry)',
           sendParam: saveData,
         }).then(result => {
           this.$nextTick(() => {
             this.getGridData();
             if (result.returncode !== undefined && result.returncode === '0') {
-              this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')); /* 알림, 저장되었습니다. */
+              this.$refs.alertPop.show(
+                this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+                this.$i18n.t('MES_MsgLang.MES_MsgLang_00140')
+              ); /* 알림, 저장되었습니다. */
             } else {
               this.$refs.alertPop.show(
                 'ERROR : ' + result.code,
@@ -303,19 +319,21 @@ export default {
           });
         });
       } else {
-        this.$refs.alertPop.show(this.$i18n.t('MES_CommLang.MES_CommLang_00456'), this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')); /* 알림, 저장할 데이터가 없습니다. */
+        this.$refs.alertPop.show(
+          this.$i18n.t('MES_CommLang.MES_CommLang_00456'),
+          this.$i18n.t('MES_MsgLang.MES_MsgLang_00143')
+        ); /* 알림, 저장할 데이터가 없습니다. */
         return;
       }
     },
     //그리드 데이터 가져오기
     async getGridData() {
-      
       // this.gridOriData = [];
       // this.gridData = [];
-      const {skip=0, take=20} = this.gridPageData;
+      const { skip = 0, take = 20 } = this.gridPageData;
       this.mesGet({
         apiKey: 'mes/common/customquerypaging',
-        queryId: 'GetProductDefinition',
+        queryId: 'GetProdDefine',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           productid: this.productid,
@@ -325,8 +343,7 @@ export default {
           skip: skip,
           take: take,
         },
-      }).then(({list, paging, ...x}) => {
-
+      }).then(({ list, paging, ...x }) => {
         const data = list.map((x, idx) => {
           return {
             ...x,
@@ -338,7 +355,7 @@ export default {
             resizable: true,
           };
         });
-        
+
         //GIRD input v-model초기화, chkbox초기화 위해 추가
         this.$nuxt.$emit('iccReset');
         this.gridPageData = paging;
@@ -346,23 +363,21 @@ export default {
         this.gridData = data;
       });
     },
-    async pageChangeEvent(skip=0, take=20) {
+    async pageChangeEvent(skip = 0, take = 20) {
       this.gridPageData = {
         skip: skip,
-        take: take
-      }
+        take: take,
+      };
       this.reSetPage = false;
       this.getGridData();
-      
     },
     // 제품그룹 콤보 데이터 가져오기
     async getProductGroupData() {
-      
       this.gridOriData = [];
       this.gridData = [];
       this.mesGet({
         apiKey: 'mes/common/getqueryresult',
-        queryId: 'GetProductGroupList',
+        queryId: 'GetProdGrpList',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
         },
@@ -378,9 +393,12 @@ export default {
             resizable: true,
           };
         });
-        for(let i = 0; i < data.length; i++){
-          if(i < data.length){
-            this.productGroup.push({ id : data[i].PRODUCTGROUPID, text : data[i].PRODUCTGROUPNAME });
+        for (let i = 0; i < data.length; i++) {
+          if (i < data.length) {
+            this.productGroup.push({
+              id: data[i].PRODUCTGROUPID,
+              text: data[i].PRODUCTGROUPNAME,
+            });
             this.value = this.productGroup[0];
           }
         }
@@ -436,7 +454,7 @@ export default {
 
       this.gridData = data;
     },
-    selectProGroup(event) { 
+    selectProGroup(event) {
       this.value = event.value;
     },
 
@@ -458,10 +476,10 @@ export default {
         ['ACTIVESTATE']
       );
     },
-    getExcel(){
+    getExcel() {
       this.excelGet({
         apiKey: 'mes/excel/customquery',
-        queryId: 'GetProductDefinition',
+        queryId: 'GetProdDefine',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           productid: this.productid,
@@ -469,15 +487,15 @@ export default {
           ProductionType: this.ProductionType,
           productGroupID: this.$refs['cmbProGroup'].value.id,
           gridid: this.headerParam.gridid,
-          gridqueryversion: "00001",
+          gridqueryversion: '00001',
         },
       });
     },
     getExcelPaging() {
-      const {skip=0, take=20} = this.gridPageData;
+      const { skip = 0, take = 20 } = this.gridPageData;
       this.excelGet({
         apiKey: 'mes/excel/customquerypaging',
-        queryId: 'GetProductDefinition',
+        queryId: 'GetProdDefine',
         sendParam: {
           plantid: this.$auth.$state.user.plantId,
           productid: this.productid,
@@ -485,7 +503,7 @@ export default {
           ProductionType: this.ProductionType,
           productGroupID: this.$refs['cmbProGroup'].value.id,
           gridid: this.headerParam.gridid,
-          gridqueryversion: "00001",
+          gridqueryversion: '00001',
           skip: skip,
           take: take,
         },
@@ -495,42 +513,42 @@ export default {
       this.datasetList = {
         dataset_1: [
           {
-            name: "aa",
-            tel: "232323",
-            team: "eeee",
-            position: "34234",
+            name: 'aa',
+            tel: '232323',
+            team: 'eeee',
+            position: '34234',
           },
         ],
         dataset_2: [
           {
-            name: "aa",
-            tel: "232323",
-            team: "eeee",
-            position: "34234",
+            name: 'aa',
+            tel: '232323',
+            team: 'eeee',
+            position: '34234',
           },
           {
-            name: "bb",
-            tel: "232323",
-            team: "eeee",
-            position: "34234",
+            name: 'bb',
+            tel: '232323',
+            team: 'eeee',
+            position: '34234',
           },
           {
-            name: "cc",
-            tel: "232323",
-            team: "eeee",
-            position: "34234",
+            name: 'cc',
+            tel: '232323',
+            team: 'eeee',
+            position: '34234',
           },
           {
-            name: "dd",
-            tel: "232323",
-            team: "eeee",
-            position: "34234",
+            name: 'dd',
+            tel: '232323',
+            team: 'eeee',
+            position: '34234',
           },
-        ]
-      }
+        ],
+      };
       this.paramList = {
-        POSITION: 1
-      }
+        POSITION: 1,
+      };
 
       this.mesGet({
         apiKey: 'mes/common/getqueryresult',
@@ -540,11 +558,10 @@ export default {
           plantid: this.$auth.$state.user.plantId,
         },
       }).then(res => {
-        this.datasetList = { dataset_3: res, ...this.datasetList }
+        this.datasetList = { dataset_3: res, ...this.datasetList };
         this.$refs.windowPop.show(this.datasetList, this.paramList);
       });
-
-    }
+    },
   },
 };
 
@@ -552,6 +569,6 @@ const defaultData = {};
 </script>
 <style>
 .dropdown-menu {
-    min-width: 1rem !important;
+  min-width: 1rem !important;
 }
 </style>
